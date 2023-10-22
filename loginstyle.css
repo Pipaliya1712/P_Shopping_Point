@@ -1,0 +1,55 @@
+.box{
+    width: 95vw;
+    padding: 20px 0px;
+    background-color: #998780;
+    justify-content: center;
+    display: flex;
+    margin: 0 0 10px 0;
+}
+.inner_box{
+    width: 30vw;
+}
+.m-18-0{
+    margin: 18px 0;
+}
+input{
+    width: 100%;
+}
+button{
+    width: 100%;
+}
+.normal{
+    font-size: smaller;
+    font-weight: bolder;
+}
+.normals{
+    font-size: smaller;
+}
+.abnormal{
+    font-size: x-large;
+    font-weight: bolder;
+}
+.Verify_btn{
+    background: #231610;
+    color: #998780;
+    border: 0px solid;
+    padding: 12px;
+    cursor: pointer;
+}
+.Verify_btn:hover{
+    font-weight: bolder;
+}
+
+input{
+    border: 1px solid;
+    padding: 3px 6px;
+    border-radius: 1px;
+}
+a{
+    text-decoration: none;
+    font-weight: bolder;
+    color: #552d89;
+}
+.a:hover{
+    border-bottom: 1px solid #552d89;
+}

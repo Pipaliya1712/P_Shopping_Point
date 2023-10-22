@@ -22,7 +22,7 @@
 }
 
 .center_logo{
-    margin-right: 10%;
+    margin-right: 11.4%;
 }
 
 nav ul li:hover{
@@ -78,3 +78,11 @@ nav ul li:hover{
 .Shop_Collection_btn:hover{
     font-weight: bolder;
 }
+
+.footer{
+    background-color: #231610;
+    color: white;
+    font-size: smaller;
+    padding: 25px 0px;
+}
+
