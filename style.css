@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .navbar{
@@ -12,7 +13,7 @@
     height: 55px;
     font-size: 14px;
     list-style: none;
-    padding: 10px 60px;
+    margin: 8px 2.5%;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -30,4 +31,50 @@ nav ul li:hover{
     transition: 0.3s;
     padding: 10px 0;
     border-bottom: 1px solid black;
+    font-weight: bolder;
+}
+
+.nav_extand{
+    background-color: #50312594;
+    margin: 0 2.5%;
+}
+
+.model_img{
+    padding:30px 177px 0px 151px;
+    height: 92.5vh;
+}
+
+.right {
+    width: 50%;
+}
+
+.right li{
+    list-style: none;
+}
+
+#small{
+    font-size: larger;
+    /* font-weight: 900; */
+}
+
+.big{
+    font-size: xxx-large;
+    font-weight: bold;
+}
+
+.left{
+    width: 50%;
+}
+
+.Shop_Collection_btn{
+    width: 20%;
+    padding: 13px;
+    background: #231610;
+    color: #998780;
+    border: 0px solid;
+    cursor: pointer;
+}
+
+.Shop_Collection_btn:hover{
+    font-weight: bolder;
 }

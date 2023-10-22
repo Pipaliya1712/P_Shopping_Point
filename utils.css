@@ -7,6 +7,18 @@
 .jcc{
     justify-content: center;
 }
+.aic{
+    align-items: center;
+}
+.f-c{
+    flex-direction: column;
+}
+.f1{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.f2{
+    font-family: 'Roboto', sans-serif;
+}
 .first{
     width: 25%;
 }
