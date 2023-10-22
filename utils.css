@@ -16,13 +16,19 @@
 .f1{
     font-family: 'Roboto Condensed', sans-serif;
 }
+.m-{
+    margin-bottom: -20px;
+}
 .f2{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 .m-2{
     margin: 4px 0;
 }
-.link{
+.ml15{
+    margin-left: 15px;
+}
+a{
     text-decoration: none;
     color: black;
 }
@@ -31,4 +37,7 @@
 }
 .second{
     width: 15%;
+}
+.o5{
+    opacity: 0.5;
 }

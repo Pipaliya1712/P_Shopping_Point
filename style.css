@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
+::selection{
+    color: white;
+    background: #231610;
+}
 .navbar{
     display: flex;
     align-items: center;
@@ -52,9 +55,12 @@ nav ul li:hover{
     list-style: none;
 }
 
-#small{
-    font-size: larger;
-    /* font-weight: 900; */
+.small{
+    font-size: medium;
+}
+
+.smalle{
+    font-size: small;
 }
 
 .big{
@@ -62,8 +68,15 @@ nav ul li:hover{
     font-weight: bold;
 }
 
+.bige{
+    font-weight: bolder;
+    font-size: large;
+}
+
 .left{
     width: 50%;
+    display: flex;
+    justify-content: center;
 }
 
 .Shop_Collection_btn{
@@ -85,4 +98,23 @@ nav ul li:hover{
     font-size: smaller;
     padding: 25px 0px;
 }
+
+.blazer_img{
+    height: 53vh;
+}
+
+.blazer{
+margin: 25px 10px;
+}
+
+.section1{
+    width: 80vw;
+}
+
+.prize_font{
+    font-weight: bolder;
+    font-size: smaller;
+    opacity: 0.7;
+}
+
 
