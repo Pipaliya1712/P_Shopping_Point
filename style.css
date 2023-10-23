@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -80,8 +81,7 @@ nav ul li:hover{
 }
 
 .Shop_Collection_btn{
-    width: 20%;
-    padding: 13px;
+    padding: 13px 25px;
     background: #231610;
     color: #998780;
     border: 0px solid;
@@ -92,11 +92,16 @@ nav ul li:hover{
     font-weight: bolder;
 }
 
-.footer{
+.endf{
     background-color: #231610;
     color: white;
     font-size: smaller;
     padding: 25px 0px;
+}
+
+.startf{
+    background-color: #998780;
+    width: 95%;
 }
 
 .blazer_img{
@@ -117,4 +122,7 @@ margin: 25px 10px;
     opacity: 0.7;
 }
 
-
+.svg{
+    width: 15px;
+    margin-right: 7px;
+}
