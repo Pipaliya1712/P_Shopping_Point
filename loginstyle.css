@@ -1,10 +1,10 @@
 .box{
-    width: 95vw;
+    width: 94vw;
     padding: 20px 0px;
     background-color: #998780;
     justify-content: center;
     display: flex;
-    margin: 0 0 10px 0;
+    margin: 50px 0px;
 }
 .inner_box{
     width: 30vw;
@@ -13,9 +13,6 @@
     margin: 18px 0;
 }
 input{
-    width: 100%;
-}
-button{
     width: 100%;
 }
 .normal{
@@ -30,14 +27,16 @@ button{
     font-weight: bolder;
 }
 .Verify_btn{
+    width: 100%;
     background: #231610;
     color: #998780;
     border: 0px solid;
     padding: 12px;
     cursor: pointer;
+    font-weight: bold;
 }
 .Verify_btn:hover{
-    font-weight: bolder;
+    color: #80716c;
 }
 
 input{
@@ -45,11 +44,11 @@ input{
     padding: 3px 6px;
     border-radius: 1px;
 }
-a{
+.linkl{
     text-decoration: none;
     font-weight: bolder;
     color: #552d89;
 }
-.a:hover{
+.linkl:hover{
     border-bottom: 1px solid #552d89;
 }

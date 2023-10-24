@@ -86,10 +86,11 @@ nav ul li:hover{
     color: #998780;
     border: 0px solid;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .Shop_Collection_btn:hover{
-    font-weight: bolder;
+    color: #80716c;
 }
 
 .endf{
@@ -102,6 +103,30 @@ nav ul li:hover{
 .startf{
     background-color: #998780;
     width: 95%;
+    padding: 100px 0px 50px 0px;
+}
+
+.fnav{
+    width: 30vw;
+    list-style: none;
+    font-size: small;
+}
+
+.hover:hover{
+    opacity: 1;
+}
+
+.svgsm{
+    width: 31px;
+    padding: 8px;
+    margin: 0px 9px;
+    background-color: white;
+    border: 0px solid white;
+    border-radius: 2px;
+}
+
+.svgsm:hover{
+    background-color: #998780;
 }
 
 .blazer_img{
