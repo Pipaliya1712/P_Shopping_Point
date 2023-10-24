@@ -1,0 +1,46 @@
+.container{
+    height: 85vh;
+    background-position: center;
+    background-size: 100%;
+    background-attachment: fixed ;
+    background-image: url("Men_Blazer.jpg");
+    width: 94%;
+} 
+.lefta{
+    width: 50%;
+    padding: 0px 130px 0px 0px;
+    color: white;
+}
+.righta{
+    width: 50%;
+    color: white;
+}
+.bigm{
+    font-size: 22px;
+    line-height: 26px;
+}
+.sul{
+    border: 1.5px solid white;
+    width: 56px;
+    margin-top: 25px;
+}
+.dullbc{
+    backdrop-filter: brightness(0.6);
+    height: 100%;
+    width: 100%;
+    padding: 170px 140px;
+}
+.lefta2{
+    width: 37.5%;
+    background-color: #50312594;
+    padding: 0px 65px;
+}
+.blazer_on{
+    width: 37.5%;
+    background-color: aqua;
+    background-position: center;
+    background-size: 100%;
+}
+.mtb{
+    margin: 10px 0px;
+}

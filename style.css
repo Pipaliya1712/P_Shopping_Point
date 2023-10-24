@@ -99,8 +99,7 @@ nav ul li:hover{
     font-size: smaller;
     padding: 25px 0px;
 }
-
-.startf{
+.startf{ 
     background-color: #998780;
     width: 95%;
     padding: 100px 0px 50px 0px;
@@ -151,3 +150,16 @@ margin: 25px 10px;
     width: 15px;
     margin-right: 7px;
 }
+.text{
+    margin: 50px 0px;
+}
+.Ftext{
+    border-bottom: 2px solid black;
+    margin-bottom: 40px; 
+    height: 65px;
+}
+.textaline{
+    width: 60%; 
+    text-align: center;
+ }
+
