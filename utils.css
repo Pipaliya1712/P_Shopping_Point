@@ -31,8 +31,14 @@
 .ml15{
     margin: 8px 0px 0px 15px;
 }
+.ml30{
+    margin: 8px 0px 0px 30px;
+}
 .mtb50{
     margin: 50px 0px;
+}
+.mb50{
+    margin-bottom: 50px;
 }
 .lsn{
     list-style: none;
