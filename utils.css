@@ -31,6 +31,9 @@
 .ml15{
     margin-left: 15px;
 }
+.mtb50{
+    margin: 50px 0px;
+}
 a{
     text-decoration: none;
     color: black;
@@ -50,6 +53,22 @@ a{
 .xx{
     font-size: xx-large;
 }
+.f36{
+    font-size: 36px;
+}
+.f22{
+    font-size: 22px;
+}
+.f14{
+    font-size: 14px;
+}
 .fb{
     font-weight: bold;
+}
+.aimg{
+    background-position: center;
+    background-size: 100%;
+}
+.tac{
+    text-align: center;
 }

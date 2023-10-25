@@ -129,15 +129,11 @@ nav ul li:hover{
 }
 
 .blazer_img{
-    height: 53vh;
+    height: 48vh;
 }
 
 .blazer{
-margin: 25px 10px;
-}
-
-.section1{
-    width: 80vw;
+    margin: 25px 9px;
 }
 
 .prize_font{
@@ -163,3 +159,29 @@ margin: 25px 10px;
     text-align: center;
  }
 
+ .section{
+    width: 74vw;
+ }
+ .container{
+    height: 85vh;
+    background-position: center;
+    background-size: 100%;
+    background-attachment: fixed ;
+    background-image: url("Men_Blazer.jpg");
+    width: 95%;
+    color: white;
+}
+.dullbc{
+    backdrop-filter: brightness(0.6);
+    height: 100%;
+    width: 100%;
+    padding: 170px 140px;
+}
+.bcnew{
+    background-image : linear-gradient(90deg,#998780 55%,white 55%);
+}
+.twoimg{
+    min-width: 49.25%; 
+    min-height: 100%; 
+    background-image: url(men.jpg);
+}
