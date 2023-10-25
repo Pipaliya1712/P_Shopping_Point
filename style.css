@@ -195,3 +195,19 @@ nav ul li:hover{
     width: 49.25%;
     margin: 0px 0px 9px 0px;
 }
+.befor-hover{
+    position: relative;
+}
+.befor-hover img{
+    width: 100%;
+}
+.show-oh-hover{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: all 0.7s ease;
+}
+.show-oh-hover:hover{
+    opacity: 1;
+}
