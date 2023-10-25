@@ -180,8 +180,18 @@ nav ul li:hover{
 .bcnew{
     background-image : linear-gradient(90deg,#998780 55%,white 55%);
 }
-.twoimg{
-    min-width: 49.25%; 
-    min-height: 100%; 
-    background-image: url(men.jpg);
+.menwomen{
+    background-color: rgba(255, 255, 255, 0.75);
+    bottom: 30px;
+    position: relative;
+    margin: -23px 20px;
+    padding: 5px 0px;
+}
+.btwo:hover .menwomen{
+    background-color: white;
+    transition: 0.3s;
+}
+.btwo{
+    width: 49.25%;
+    margin: 0px 0px 9px 0px;
 }
