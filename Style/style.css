@@ -157,17 +157,16 @@ nav ul li:hover{
 .textaline{
     width: 60%; 
     text-align: center;
- }
-
- .section{
-    width: 74vw;
- }
- .container{
+}
+.section{
+   width: 74vw;
+}
+.container{
     height: 85vh;
     background-position: center;
     background-size: 100%;
     background-attachment: fixed ;
-    background-image: url("Men_Blazer.jpg");
+    background-image: url("../Photo/Men_Blazer.jpg");
     width: 95%;
     color: white;
 }
