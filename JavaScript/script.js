@@ -4,3 +4,7 @@ for(let i=0;i<buyblazer.length;i++){
         window.open('../buyblazer.html' , '_self');
     });
 }
+
+function add_to_card_slid(){
+    document.getElementById('slid').classList.toggle('active');
+}
