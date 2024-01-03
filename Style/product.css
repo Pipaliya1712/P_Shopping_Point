@@ -1,8 +1,48 @@
 .w75{
-    margin: 0 12.25% 0 12.25%;
+    margin: 0 14% 0 14%;
     /* background-color: red; */
 }
 .le{
     margin-left: 50px;
     /* background-color: green; */
+}
+.m12{
+    margin-bottom: 12px;
+}
+.pml15{
+    margin-left: 15px;
+}
+.mb50{
+    margin-bottom: 50px;
+}
+.fs13_5{
+    font-size: 13.5px;
+}
+
+.befor{
+    position: relative;
+}
+
+.btnp{
+    padding: 2px 7px;
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+
+.total_item{
+    padding: 3px 7px 2.5px;
+    border: 1px solid rgba(0,0,0,0.5);
+    margin: 0px -5px;
+}
+
+.ex_add_to_cart{
+    background-color: #50312594;
+    color: white;
+    padding: 2px 20px;
+    margin-left: 20px;
+}
+
+.ex_add_to_cart:hover{
+    color: rgba(255, 255, 255, 0.7);
 }

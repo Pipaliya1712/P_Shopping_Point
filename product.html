@@ -21,42 +21,166 @@
             <ul class="navbar center_logo"><a href="/#"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
             <ul class="navbar second">
                 <li><b>SEARCH</b></li>
-                <li><b>$0.00</b></li>
+                <li><b>$</b><b id="total_shopping">0</b><b>.00</b></li>
                 <li><b><a class="link" href="login.html">LOG IN</a></b></li>
             </ul>
         </nav>
     </header>
     <hr class="o5">
     <main class="mtb50">
-        <div class="w75 flex">
-            <img src="Photo/4f.jpg" alt="IMG">
-            <div class="le">
-                <div class="smalle f1">MEN</div>
-                <div class="xx fb f2">T-Shirt Name 10</div>
-                <div>
-                    <span class="bige f2">$33.00 – $36.00</span>
-                    <span class="small f1"> & Free Shipping</span>
+        <div class="w75">
+            <div class="flex mb50">
+                <div class="befor">
+                    <a href="/#">
+                        <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/4f.jpg" alt="IMG">
+                        <img class="aimg show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/4b.jpg" alt="IMG">   
+                    </a>
                 </div>
-                <div class="small f1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus interdum eros. In blandit velit a lacus laoreet dictum. Maecenas vel vulputate nulla. Ut nec enim vel tortor aliquet varius.</div>
-                <div class="small f1">
-                    <span>SKU: N/A </span>
-                    <span>Category: <b>Men</b></span>
+                <div class="le">
+                    <div class="smalle f2 m12"><a href="men.html">MEN</a></div>
+                    <div class="xx fb f2 m12">T-Shirt Name 10</div>
+                    <div>
+                        <span class="bige f2">$33.00 – $36.00</span>
+                        <span  class="fs13_5 f2 o7"> & Free Shipping</span>
+                    </div>
+                    <div  class="fs13_5 f2 m12 o7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus interdum eros. In blandit velit a lacus laoreet dictum. Maecenas vel vulputate nulla. Ut nec enim vel tortor aliquet varius.</div>
+                    <hr class="o5 m12">
+                    <div class="m12 o7">
+                        <button class="btnp fs13_5 f2" onclick="subtraction()">-</button>
+                        <span class="total_item fs13_5 f2" id="total_item">1</span>
+                        <button class="btnp fs13_5 f2" onclick="addition()">+</button>
+                        <button class="btnp fs13_5 f3 ex_add_to_cart" onclick="cart_update()">Add to cart</button>
+                    </div>
+                    <hr class="o5 m12">
+                    <div  class="fs13_5 f2 m12">
+                        <span class="o7">SKU: N/A </span>
+                        <span class="o7 pml15">Category: </span><span><a href="men.html">Men</a></span>
+                    </div>
+                    <hr class="o5 m12">
+                    <div class="f2 fb m12">Description</div>
+                    <hr class="o5 m12">
+                    <div  class="fs13_5 f2 m12">ABOUT THE PRODUCT</div>
+                    <div  class="fs13_5 f2 m12 o7">Our T-Shirts are lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</div>
+                    <div  class="fs13_5 f2 o7 pml15">100% Cotton</div>
+                    <div  class="fs13_5 f2 o7 pml15">260gsm</div>
+                    <div  class="fs13_5 f2 m12 o7 pml15">Breathable Fabric</div>
+                    <hr class="o5 m12">
+                    <div  class="fs13_5 f2 m12">SIZE & FIT</div>
+                    <div  class="fs13_5 f2 o7 pml15">Model is wearing size M and is 6'1"</div>
+                    <div  class="fs13_5 f2 m12 o7 pml15">Standard fit for a relaxed, easy feel</div>
+                    <hr class="o5 m12">
+                    <div  class="fs13_5 f2 m12">FREE DELIVERY & RETURNS</div>
+                    <div  class="fs13_5 f2 m12 o7">Free standard delivery on orders over $60</div>
+                    <div  class="fs13_5 f2 o7 pml15">You can return your order for any reason, free of charge, within 30 days</div>
+                    <div  class="fs13_5 f2 o7 pml15">We also offer a Free-of-Charge shipping label</div>
                 </div>
-                <div class="f2 fb">Description</div>
-                <div class="small f1 fb">ABOUT THE PRODUCT</div>
-                <div class="small f1">Our T-Shirts are lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</div>
-                <div class="small f1">100% Cotton</div>
-                <div class="small f1">260gsm</div>
-                <div class="small f1">Breathable Fabric</div>
-                <div class="small f1 fb">SIZE & FIT</div>
-                <div class="small f1">Model is wearing size M and is 6'1"</div>
-                <div class="small f1">Standard fit for a relaxed, easy feel</div>
-                <div class="small f1">FREE DELIVERY & RETURNS</div>
-                <div class="small f1 fb">Free standard delivery on orders over $60</div>
-                <div class="small f1">You can return your order for any reason, free of charge, within 30 days</div>
-                <div class="small f1">We also offer a Free-of-Charge shipping label</div>
+            </div>
+            <div class="xx fb f2 m12">Related products</div>
+            <div class="flex jcc">
+                <div class="flex mb50 jcb" >
+                    <div style="width: 24%;">
+                        <div>
+                            <div class="befor-hover">
+                                <a href="/#">
+                                    <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/1f.jpg" alt="IMG">
+                                    <img class="aimg show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/1b.jpg" alt="IMG">   
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ml30">
+                            <div class="smalle f2 o7">MEN</div>
+                            <div class="bige f2"><a href="/#">Formal Blazer</a></div>
+                            <div class="prize_font f2">$33.00 – $36.00</div>
+                        </div>
+                    </div>
+                    <div style="width: 24%;">
+                        <div class="befor-hover">
+                            <a href="/#">
+                                <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/2f.jpg" alt="IMG">
+                                <img class="aimg show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/2b.jpg" alt="IMG">   
+                            </a>
+                        </div>
+                        <div class="ml30">
+                            <div class="smalle f2 o7">WOMEN</div>
+                            <div class="bige f2"><a href="/#">Formal Blazer</a></div>
+                            <div class="prize_font f2">$33.00 – $36.00</div>
+                        </div>
+                    </div>
+                    <div style="width: 24%;">
+                        <div class="befor-hover">
+                            <a href="/#">
+                                <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/3f.jpg" alt="IMG">
+                                <img class="aimg show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/3b.jpg" alt="IMG">   
+                            </a>
+                        </div>
+                        <div class="ml30">
+                            <div class="smalle f2 o7">MEN</div>
+                            <div class="bige f2"><a href="/#">Formal Blazer</a></div>
+                            <div class="prize_font f2">$33.00 – $36.00</div>
+                        </div>
+                    </div>
+                    <div style="width: 24%;">
+                        <div class="befor-hover">
+                            <a href="/#">
+                                <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/4f.jpg" alt="IMG">
+                                <img class="aimg show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/4b.jpg" alt="IMG">   
+                            </a>
+                        </div>
+                        <div class="ml30">
+                            <div class="smalle f2 o7">WOMEN</div>
+                            <div class="bige f2"><a href="/#">Formal Blazer</a></div>
+                            <div class="prize_font f2">$33.00 – $36.00</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
+    <footer>
+        <div class="flex aic jcc">
+            <div class="startf flex aic jcc f-c">
+                <div>
+                    <span class="f3 bige" >Subscribe To Get Offers In Your Inbox</span>
+                </div>
+                <div>
+                    <span class="f3 o7" style="font-size: 13.5px;" >Enter your registered email and get upto <b>75%</b> discount.</span>
+                </div>
+                <div>
+                    <span class="f3 o7" style="font-size: 13.5px;" >Enjoy your shopping with us.</span>
+                </div>
+                <div style="margin: 30px 0px 60px 0px;">
+                    <input style="width: 30vw; padding: 7px; margin-right: 5px;" class="f2" type="text" placeholder="Your email address...">
+                    <button class="Shop_Collection_btn" style="padding: 10.3px 28px !important;">Subscribe</button>
+                </div>
+                <div>
+                    <ul class="flex jcb f2 fnav" style="margin: 5px 0px 35px 0px;">
+                        <li> <a class="hover o7" href="buyblazer.html">BUY BLAZER</li></a>
+                        <li> <a class="hover o7" href="women.html">WOMEN</li></a>
+                        <li> <a class="hover o7" href="men.html">MEN</li></a>
+                        <li> <a class="hover o7" href="about.html">ABOUT</li></a>
+                        <li> <a class="hover o7" href="contact.html">CONTACT</a></li>
+                    </ul> 
+                </div>
+                <div class="flex aic jcc">
+                    <div>
+                        <a href="/#"><span><img class="svgsm" src="svg/facebook-176-svgrepo-com.svg" alt="Mail"></span> </a>
+                    </div>
+                    <div>
+                        <a href="/#"><span><img class="svgsm" src="svg/twitter-154-svgrepo-com.svg" alt="Mail"></span> </a>
+                    </div>
+                    <div>
+                        <a href="/#"><span><img class="svgsm" src="svg/instagram-167-svgrepo-com.svg" alt="Mail"></span> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex aic jcc endf">
+            <div class="f2">
+                Copyright &copy; 2023 P_Shopping_Point | Powered by P Shopping Store
+            </div>
+        </div>
+    </footer>
 </body>
+<script src="JavaScript/script.js"></script>
+<script src="JavaScript/product.js"></script>
 </html>

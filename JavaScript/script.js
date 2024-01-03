@@ -5,6 +5,5 @@ for(let i=0;i<buyblazer.length;i++){
     });
 }
 
-function add_to_card_slid(){
-    document.getElementById('slid').classList.toggle('active');
-}
+
+
