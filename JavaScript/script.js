@@ -5,12 +5,6 @@ for(let i=0;i<buyblazer.length;i++){
     });
 }
 
-localStorage.setItem("gender","P");
-localStorage.setItem("cloth","P");
-localStorage.setItem("prize","P");
-localStorage.setItem("link1","P");
-localStorage.setItem("link2","P");
-
 let product_name = [] ;
 let product_img = [] ;
 product_show = (index) => {
