@@ -52,3 +52,20 @@ input{
 .linkl:hover{
     border-bottom: 1px solid #552d89;
 }
+@media (max-width : 550px){
+    .normal{
+        margin: 5px;
+    }
+    .normal div input,.special{
+        width: 90vw !important;
+    }
+    .inner_box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .inner_box hr{
+        width: 90vw;
+    }
+}
