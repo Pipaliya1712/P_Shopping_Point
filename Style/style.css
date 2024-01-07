@@ -27,9 +27,8 @@
 }
 
 .center_logo{
-    margin-right: 12.59%;
-}
-
+    text-align: center;
+} 
 nav ul li:hover{
     opacity: 0.75;
     cursor: pointer;
