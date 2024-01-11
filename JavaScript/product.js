@@ -1,6 +1,6 @@
 let item_count = document.getElementById('total_item');
 
-subtraction = () => {
+let subtraction = () => {
     if(item_count.innerText == "1"){
         alert("You can't select less then 1 item");
     }
@@ -9,7 +9,7 @@ subtraction = () => {
     }
 }
 
-addition = () => {
+let addition = () => {
     if(item_count.innerText >= "5"){
         alert("You can't select more then 5 item");
     }
@@ -19,7 +19,7 @@ addition = () => {
 }
 
 let cart = document.getElementById("total_shopping");
-cart_update = () =>{
+let cart_update = () =>{
     cart.innerText = parseInt(cart.innerText) +  item_count.innerText*33;
 }
 
@@ -32,7 +32,7 @@ change_details[0].children[1].children[2].children[0].innerText = localStorage.g
 
 let product_name = [] ;
 let product_img = [] ;
-product_show = (index) => {
+let product_show = (index) => {
     let product = document.getElementsByClassName("related");
     for(let i=0;i<3;i++){
         product_name[i]=product[0].children[index].children[1].children[i].innerText;
@@ -67,4 +67,16 @@ if(change_details[0].children[1].children[0].innerText == "WOMEN"){
     related[0].children[3].children[0].children[0].children[0].src = "Photo/4w.webp";
     related[0].children[3].children[0].children[0].children[1].src = "Photo/4w.webp";
     related[0].children[3].children[1].children[0].innerText = "WOMEN"
+}
+
+let open_nav = () => {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("close").style.display = "block";
+    document.getElementById("fullnav").style.display = "block";
+
+}
+let close_nav = () =>{
+    document.getElementById("menu").style.display = "block";
+    document.getElementById("close").style.display = "none";
+    document.getElementById("fullnav").style.display = "none";
 }

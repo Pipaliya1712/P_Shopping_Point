@@ -11,7 +11,7 @@
     color: white;
     background: #231610;
 }
-.navbar{
+.navbar, .navbar_login{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,7 +29,7 @@
 .center_logo{
     text-align: center;
 } 
-nav ul li:hover{
+.li:hover{
     opacity: 0.75;
     cursor: pointer;
     transition: 0.3s;
@@ -212,6 +212,37 @@ nav ul li:hover{
 #Subscribe{
     margin: 30px 0px 60px 0px;
 }
+.snavbar{
+    display: none ;
+}
+#menu, #close{
+    height: 38px;
+    right: 2.1%;
+    top: 18.5px;
+    position: absolute;
+    width: 38px;
+    cursor: pointer;
+    z-index: 22;
+}
+#close{
+    display: none;
+}
+#fullnav{
+    background-color: #50312594;
+    margin: 14px 2.5%;
+    padding: 50px 0px;
+    display: none;
+}
+.fullnav_inside{
+    font-size: 14px;
+    list-style: none;
+    font-family: 'Roboto Condensed', sans-serif;
+    width: 100%;
+    text-align: center;
+}
+.fullnav_inside li{
+    padding: 10px;
+}
 @media (max-width : 700px){
     #Subscribe{
         display: flex;
@@ -232,5 +263,14 @@ nav ul li:hover{
     }
     .fnav{
         width: 80vw;
+    }
+}
+@media (max-width : 1050px){
+    .navbar{
+        display: none;
+    }
+    .snavbar{
+        display: block;
+        margin: 14px 0px;
     }
 }
