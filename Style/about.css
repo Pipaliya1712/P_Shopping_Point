@@ -7,6 +7,22 @@
     display: flex;
     justify-content: center;
 }
+.acontainer{
+    height: 85%;
+    background-position: center;
+    background-size: 100%;
+    background-attachment: fixed ;
+    background-image: url("../Photo/Men_Blazer.jpg");
+    width: 95%;
+    color: white;
+    background-repeat: no-repeat;
+}
+.adullbc{
+    backdrop-filter: brightness(0.6);
+    height: auto;
+    width: 100%;
+    padding: 15.2% 9.8%;
+}
 .righta{
     width: 50%;
     color: white;
@@ -32,8 +48,19 @@
     background-size: auto;
     background-repeat: no-repeat;
 }
+.top_bot{
+    margin: 0px 3%;
+    background-color: #50312594;
+    padding: 15px 65px;
+}
 .mtb{
     margin: 10px 0px;
+}
+.v932{
+    display: none;
+}
+.v758{
+    display: none;
 }
 @media (max-width : 1195px){
     .lefta2{
@@ -42,17 +69,68 @@
     .blazer_on{
         width: 47%;
     }
+    .righta{
+        display: none;
+    }
+    .lefta{
+        width: 100%;
+    }
 }
 
-@media (max-width : 932px){
+@media (max-width : 932px) and (min-width: 615px){
+    .blazer_on{
+        height: 100%;
+    }
+    .v932{
+        display: block;
+    }
+    .iv932{
+        display: none;
+    }
+}
+@media(max-width: 758px) and (min-width:615px){
+    .iv758{
+        display: none;
+    }
+    .v758{
+        display: block;
+    }
+}
+@media(max-width: 615px){
     .text_img{
         flex-direction: column;
         align-items: center;
     }
     .lefta2{
-        width:94%;
+        width: 94%;
+        padding: 0px 10px;
     }
     .blazer_on{
         width: 94%;
+    }
+}
+@media(max-width:893px){
+    .lefta{
+        padding: 0px;
+    }
+}
+@media(max-aspect-ratio: 2){
+    .acontainer{
+        background-attachment: initial;
+    }
+}
+@media( max-width:715px ){
+    .adullbc{
+        padding: 15px 15px;
+    }
+}
+@media(max-width : 476px){
+    .acontainer{
+        background-image: url("../Photo/men.jpg");
+    }
+}
+@media(max-width : 303px){
+    .acontainer{
+        display: none;
     }
 }

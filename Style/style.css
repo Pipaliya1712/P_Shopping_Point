@@ -151,10 +151,11 @@
 .Ftext{
     border-bottom: 2px solid black;
     margin-bottom: 40px; 
-    height: 65px;
 }
 .textaline{
-    width: 60%; 
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 902.4px; 
     text-align: center;
 }
 .section{
