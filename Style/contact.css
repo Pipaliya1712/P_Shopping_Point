@@ -3,9 +3,9 @@
     box-shadow: 0px 7px 15px 0px #998780;
 }
 .contant{
-    width: 82vw;
+    width: 1233.28px;
     background-color: #998780;
-    margin-left: 2.5vw;
+    margin: 0% 3%;
 }
 .leftcontant{
     margin-left: 132px;
@@ -15,15 +15,70 @@
     margin: 7px 0px;
 }
 .rightbox{
-    margin: 35px;
+    margin: 2.35vw;
 }
 .inputtag{
     margin: 5px;
     padding: 5px;
 }
 .boder{
-    margin: 0px 0px 0px 2.5vw;
+    margin: 0px 0px 0px 3%;
     height: 50px;
-    width: 52vw;
+    width: 782.08px;
     background-color: #998780;
+}
+.v831{
+    display: none;
+}
+@media(max-width:1326px){
+    .contant{
+        width: 94%;
+
+    }
+    .leftcontant{
+        margin-left: 9vw;
+        margin-right: 1vw;
+    }
+}
+@media(max-width:831px){
+    .boder{
+        display: none;
+    }
+    .iv831{
+        display: none;
+    }
+    .v831{
+        display: block;
+    }
+    .fname{
+        width: 100% !important;
+    }
+    .leftcontant{
+        margin-left: 3vw;
+    }
+}
+@media(max-width:667px){
+    .contant{
+        flex-direction: column;
+    }
+    .v831{
+        display: none;
+    }
+    .iv831{
+        display: block;
+    }
+    .fname{
+        width: 49% !important;
+    }
+}
+@media(max-width:460px){
+    .iv831{
+        display: none;
+    }
+    .v831{
+        display: block;
+    }
+    .fname{
+        width: 100% !important;
+    }
 }
