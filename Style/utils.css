@@ -88,3 +88,11 @@ a{
 .tac{
     text-align: center;
 }
+@media(max-width: 336px){
+    .ml30{
+        margin: 6px 0px 0px 10px;
+    }
+    .xx{
+        font-size: 25.6px;
+    }
+}

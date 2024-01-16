@@ -21,7 +21,7 @@
             <ul class="navbar center_logo"><a href="/#"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
             <ul class="navbar second">
                 <li class="li"><b>SEARCH</b></li>
-                <li class="li"><b>$0.00</b></li>
+                <li><b>$<span class="total_shopping">0</span>.00</b></li>
                 <li class="li"><b><a class="link" href="login.html">LOG IN</a></b></li>
             </ul>
         </nav>
@@ -37,7 +37,7 @@
                     <li><a href="about.html">ABOUT</a></li> <hr>
                     <li><a href="contact.html">CONTACT</a></li> <hr>
                     <li><b>SEARCH</b></li> <hr>
-                    <li><b>$0.00</b></li> <hr>
+                    <li><b>$<span class="total_shopping">0</span>.00</b></li> <hr>
                     <li><b><a class="link" href="login.html">LOG IN</a></b></li>
                 </ul>
             </div>
@@ -45,8 +45,8 @@
     </header>
     <hr class="o5">
     <main class="mtb50">
-        <div class="w75">
-            <div class="flex mb50 change">
+        <div class=" flex aic f-c">
+            <div class="flex mb50 change jcc w">
                 <div class="befor" style="width: 100%;">
                     <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/4f.jpg" alt="IMG">
                     <img class="aimg show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/4b.jpg" alt="IMG">
@@ -90,10 +90,12 @@
                     <div  class="fs13_5 f2 o7 pml15">We also offer a Free-of-Charge shipping label</div>
                 </div>
             </div>
+        </div>
+        <div class="flex f-c aic jcc">
             <div class="xx fb f2 m12">Related products</div>
-            <div class="flex jcc">
-                <div class="flex mb50 jcb related" >
-                    <div style="width: 24%;">
+            <div class="flex jcc w f-c">
+                <div class="flex mb50 jcb related" style="width: 100%;" >
+                    <div class="w24">
                         <div class="befor-hover" onclick="product_show(0)">
                             <a href="product.html">
                                 <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/1f.jpg" alt="IMG">
@@ -106,7 +108,7 @@
                             <div class="prize_font f2">$33.00 – $36.00</div>
                         </div>
                     </div>
-                    <div style="width: 24%;">
+                    <div class="w24">
                         <div class="befor-hover" onclick="product_show(1)">
                             <a href="product.html">
                                 <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/2f.jpg" alt="IMG">
@@ -119,7 +121,7 @@
                             <div class="prize_font f2">$33.00 – $36.00</div>
                         </div>
                     </div>
-                    <div style="width: 24%;">
+                    <div class="w24 iv767">
                         <div class="befor-hover" onclick="product_show(2)">
                             <a href="product.html">
                                 <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/3f.jpg" alt="IMG">
@@ -132,7 +134,35 @@
                             <div class="prize_font f2">$33.00 – $36.00</div>
                         </div>
                     </div>
-                    <div style="width: 24%;">
+                    <div class="w24 iv767">
+                        <div class="befor-hover" onclick="product_show(3)">
+                            <a href="product.html">
+                                <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/4f.jpg" alt="IMG">
+                                <img class="aimg show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/4b.jpg" alt="IMG">   
+                            </a>
+                        </div>
+                        <div class="ml30">
+                            <div class="smalle f2 o7">MEN</div>
+                            <div class="bige f2" onclick="product_show(3)"><a href="product.html">Formal Blazer</a></div>
+                            <div class="prize_font f2">$33.00 – $36.00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb50 jcb relaed v767" style="width: 100%;" >
+                    <div class="w24">
+                        <div class="befor-hover" onclick="product_show(2)">
+                            <a href="product.html">
+                                <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/3f.jpg" alt="IMG">
+                                <img class="aimg show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/3b.jpg" alt="IMG">   
+                            </a>
+                        </div>
+                        <div class="ml30">
+                            <div class="smalle f2 o7">MEN</div>
+                            <div class="bige f2" onclick="product_show(2)"><a href="product.html">Formal Blazer</a></div>
+                            <div class="prize_font f2">$33.00 – $36.00</div>
+                        </div>
+                    </div>
+                    <div class="w24">
                         <div class="befor-hover" onclick="product_show(3)">
                             <a href="product.html">
                                 <img class="aimg" style="margin: 0px 0px -4px 0px;" src="Photo/4f.jpg" alt="IMG">

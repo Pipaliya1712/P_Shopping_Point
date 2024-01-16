@@ -18,9 +18,10 @@ let addition = () => {
     }
 }
 
-let cart = document.getElementById("total_shopping");
+let cart = document.getElementsByClassName("total_shopping");
 let cart_update = () =>{
-    cart.innerText = parseInt(cart.innerText) +  item_count.innerText*33;
+    cart[0].innerText = parseInt(cart[0].innerText) +  item_count.innerText*33;
+    cart[1].innerText = parseInt(cart[1].innerText) +  item_count.innerText*33;
 }
 
 let change_details = document.getElementsByClassName("change");
@@ -55,6 +56,7 @@ let product_show = (index) => {
 
 if(change_details[0].children[1].children[0].innerText == "WOMEN"){
     let related = document.getElementsByClassName("related");
+    let relaed = document.getElementsByClassName("relaed");
     related[0].children[0].children[0].children[0].children[0].src = "Photo/1w.avif";
     related[0].children[0].children[0].children[0].children[1].src = "Photo/1w.avif";
     related[0].children[0].children[1].children[0].innerText = "WOMEN"
@@ -67,6 +69,12 @@ if(change_details[0].children[1].children[0].innerText == "WOMEN"){
     related[0].children[3].children[0].children[0].children[0].src = "Photo/4w.webp";
     related[0].children[3].children[0].children[0].children[1].src = "Photo/4w.webp";
     related[0].children[3].children[1].children[0].innerText = "WOMEN"
+    relaed[0].children[0].children[0].children[0].children[0].src = "Photo/3w.jpg";
+    relaed[0].children[0].children[0].children[0].children[1].src = "Photo/3w.jpg";
+    relaed[0].children[0].children[1].children[0].innerText = "WOMEN"
+    relaed[0].children[1].children[0].children[0].children[0].src = "Photo/4w.webp";
+    relaed[0].children[1].children[0].children[0].children[1].src = "Photo/4w.webp";
+    relaed[0].children[1].children[1].children[0].innerText = "WOMEN"
 }
 
 let open_nav = () => {
