@@ -244,6 +244,12 @@
 .fullnav_inside li{
     padding: 10px;
 }
+.wm24{
+    width: 24%;
+}
+.v700{
+    display: none;
+}
 @media (max-width : 700px){
     #Subscribe{
         display: flex;
@@ -256,6 +262,15 @@
         width: 80vw !important;
         margin-bottom: 8px;
     }
+    .wm24{
+        width: 49%;
+    }
+    .iv700{
+        display: none;
+    }
+    .v700{
+        display: flex;
+    }
 }
 @media (max-width : 550px){
     footer ul{
@@ -264,6 +279,11 @@
     }
     .fnav{
         width: 80vw;
+    }
+}
+@media(max-width:426px){
+    .big{
+        font-size: xx-large;
     }
 }
 @media (max-width : 1050px){
