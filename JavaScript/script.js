@@ -5,6 +5,13 @@ for(let i=0;i<buyblazer.length;i++){
     });
 }
 
+let openmen = () => {
+    window.open('../men.html' , '_self');
+}
+let openwomen = () => {
+    window.open('../women.html' , '_self');
+}
+
 let product_name = [] ;
 let product_img = [] ;
 let product_show = (index) => {

@@ -88,11 +88,32 @@ a{
 .tac{
     text-align: center;
 }
+.bige{
+    font-weight: bolder;
+    font-size: large;
+}
 @media(max-width: 336px){
     .ml30{
         margin: 6px 0px 0px 10px;
     }
     .xx{
         font-size: 25.6px;
+    }
+}
+@media(max-width: 380px){
+    .ml15{
+        margin: 6px 0px 0px 1px;
+    }
+    .xx{
+        font-size: 25.6px;
+    }
+    .bige{
+        font-size: medium;
+    }
+    .mtb50{
+        margin: 25px 0px;
+    }
+    .mb50{
+        margin-bottom: 25px !important;
     }
 }
