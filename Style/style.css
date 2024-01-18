@@ -140,9 +140,6 @@
     width: 15px;
     margin-right: 7px;
 }
-.text{
-    margin: 50px 0px;
-}
 .Ftext{
     border-bottom: 2px solid black;
     margin-bottom: 40px; 
@@ -157,19 +154,20 @@
    width: 74vw;
 }
 .container{
-    height: 85vh;
+    height: 85%;
     background-position: center;
     background-size: 100%;
     background-attachment: fixed ;
     background-image: url("../Photo/Men_Blazer.jpg");
-    width: 95%;
+    width: 94%;
     color: white;
+    background-repeat:no-repeat ;
 }
 .dullbc{
     backdrop-filter: brightness(0.6);
-    height: 100%;
+    height: auto;
     width: 100%;
-    padding: 170px 140px;
+    padding: 15.2% 9.8%;
 }
 .bcnew{
     background-image : linear-gradient(90deg,#998780 55%,white 55%);
@@ -187,8 +185,6 @@
 }
 .btwo{
     width: 49.25%;
-}
-.btwo img,.btwo div{
     cursor: pointer;
 }
 .befor-hover{
@@ -267,6 +263,9 @@
 }
 .w1137{
     width: 1137px;
+}
+.mv767{
+    display: none;
 }
 @media(max-width : 426px){
     .big{
@@ -359,6 +358,9 @@
     .bsi851 div div{
         margin: 25px 0px;
     }
+    .m0{
+        margin: 0 !important;
+    }
 }
 @media (max-width : 1050px){
     .navbar{
@@ -372,5 +374,60 @@
 @media(max-width: 1227.25px){
     .w1137{
         width: 94%;
+    }
+}
+@media(max-width : 476px){
+    .container{
+        background-image: url("../Photo/men.jpg");
+    }
+    .btwoc{
+        flex-direction: column;
+    }
+    .btwo{
+        width: 100%;
+    }
+    .bm20{
+        margin-bottom: 25px;
+    }
+}
+@media(max-width : 303px){
+    .container{
+        display: none;
+        margin: 0px;
+    }
+}
+@media(max-aspect-ratio: 2){
+    .container{
+        background-attachment: initial;
+    }
+}
+@media( max-width:872px ){
+    .dullbc{
+        padding: 15px 15px;
+    }
+}
+@media(max-width:767px){
+    .mv767{
+        display: block;
+    }
+    .mv767 div{
+        width: 100% !important;
+    }
+    .imv767{
+        display: none !important; 
+    }
+    .mv767 div img{
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 490px !important;
+    }
+    .mv767 div div div{
+        width: 100% !important;
+        margin: 20px !important;
+    }
+}
+@media(max-width:521px){
+    .mv767 div img{
+        width: 100% !important;
     }
 }

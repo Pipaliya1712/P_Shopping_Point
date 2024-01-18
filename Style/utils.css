@@ -117,3 +117,9 @@ a{
         margin-bottom: 25px !important;
     }
 }
+@media(max-width:592px){
+    .f36{
+        font-size: x-large;
+        line-height: 30px !important;
+    }
+}
