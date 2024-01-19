@@ -17,13 +17,14 @@ let product_show = (index) => {
     localStorage.setItem("link2",product_img[1]);
 }
 let product_show2 = (index) => {
+    console.log("object")
     let product = document.getElementsByClassName("product_class");
     for(let i=0;i<3;i++){
-        product_name[i]=product[1].children[index].children[1].children[i].innerText;
+        product_name[i]=product[2].children[index].children[1].children[i].innerText;
         console.log(product_name[i]);
     }
     for(let i=0;i<2;i++){
-        product_img[i]=product[1].children[index].children[0].children[0].children[i].src;
+        product_img[i]=product[2].children[index].children[0].children[0].children[i].src;
         console.log(product_img[i]);
     } 
     localStorage.setItem("gender",product_name[0]);
