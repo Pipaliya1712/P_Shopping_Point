@@ -120,6 +120,7 @@
 }
 
 .svgsm:hover{
+    cursor: pointer;
     background-color: #998780;
 }
 
@@ -143,6 +144,9 @@
 .Ftext{
     border-bottom: 2px solid black;
     margin-bottom: 40px; 
+}
+.text{
+    margin: 50px 0px;
 }
 .textaline{
     margin-left: 3%;
