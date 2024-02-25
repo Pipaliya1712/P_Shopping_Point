@@ -1,6 +1,11 @@
-const time = document.querySelector(".time");
+const topMsg = document.querySelector(".top");
 setTimeout(()=>{
-    time.style.display = "none";
+    topMsg.style.display = "none";
+},1000)
+
+const bottom = document.querySelector(".bottom");
+setTimeout(()=>{
+    bottom.style.display = "none";
 },5000)
 
 const showPass = () => {

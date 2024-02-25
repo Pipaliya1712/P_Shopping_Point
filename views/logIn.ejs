@@ -16,9 +16,9 @@
     </header>
     <hr class="o5">
     <main class="flex aic jcc f-c f2">
-        <div class="box">
+        <form class="box" method="post">
             <div class="inner_box">
-                <div class="time"><%= locals.Sign_up %></div>
+                <div class="time top"><%= locals.Sign_up %></div>
                 <div class="abnormal m-18-0">
                     Log-In
                 </div>
@@ -27,7 +27,7 @@
                         Phone number <br>
                     </div>
                     <div>
-                        <input style="width: 460px; padding: 7px;" type="tel" pattern="[0-9]{10}" required name="phone" placeholder="Mobile Number">
+                        <input style="width: 460px; padding: 7px;" type="tel" value="<%= locals.phone %>" pattern="[0-9]{10}" required name="phone" placeholder="Mobile Number">
                     </div>
                 </div>
                 <div class="m-18-0 normal">
@@ -47,21 +47,21 @@
                     </div>
                 </div>
                 <div class="special" style="margin: 18px 0px 0px 0px;">
-                    <button class="Verify_btn">Log In</button>
+                    <button class="Verify_btn" type="submit">Log In</button>
                 </div>
                 <div class="normals m-18-0 flex special">
-                    <div style="margin: 2px 5px 0px 0px;"><input type="checkbox" name="" id=""></div>
+                    <div style="margin: 2px 5px 0px 0px;"><input type="checkbox"></div>
                     <div>
                         Keep me signed in.<br>
                     </div>
                 </div>
-                <div class="time"><%= locals.message %></div>
+                <div class="time bottom"><%= locals.message %></div>
                 <hr>
                 <div class="m-18-0 normals special">
                     New to P Shopping Point? <a class="linkl" href="signUp">Sign Up</a>
                 </div>
             </div>
-        </div>
+        </form>
     </main>
     <footer>
         <div class="flex aic jcc">

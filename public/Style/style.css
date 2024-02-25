@@ -37,7 +37,14 @@
     border-bottom: 1px solid black;
     font-weight: bolder;
 }
-
+.logout{
+    cursor: pointer;
+    background: transparent;
+    border: 0px;
+    font-weight: bold;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 14px;
+}
 .nav_extand{
     background-color: #50312594;
     margin: 0 2.5%;

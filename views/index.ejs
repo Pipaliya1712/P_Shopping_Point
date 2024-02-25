@@ -19,9 +19,24 @@
             </ul>
             <ul class="navbar center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
             <ul class="navbar second">
-                <li class="li"><b>SEARCH</b></li>
+                <% if(locals.profile) { %>
+                <li class="li"><b>
+                    <img style="width: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                </b></li>
                 <li class="li"><b>$0.00</b></li>
-                <li class="li"><b><a class="link" href="login">LOG IN</a></b></li>
+                <% } else { %>
+                    <li class="li"><b></b></li>
+                    <li class="li"><b></b></li>
+                <% } %>
+                <% if( locals.action == "LOG IN" ){ %>
+                <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
+                <% } else { %>
+                <li class="li"><b>
+                    <form method="post" action="/logout">
+                        <button type="submit" class="logout"><%= locals.action %></button>
+                    </form>
+                </b></li>
+                <% } %>
             </ul>
         </nav>
         <nav class="snavbar">
@@ -30,14 +45,26 @@
             <img id="close" onclick="close_nav()" src="svg/close-outline.svg" alt="CLOSE">
             <div id="fullnav">
                 <ul class="fullnav_inside flex jcc f-c">
-                    <li><a href="buyblazer">BUY BLAZER</a></li> <hr>
-                    <li><a href="women">WOMEN</a></li> <hr>
-                    <li><a href="men">MEN</a></li> <hr>
-                    <li><a href="about">ABOUT</a></li> <hr>
-                    <li><a href="contact">CONTACT</a></li> <hr>
-                    <li><b>SEARCH</b></li> <hr>
-                    <li><b>$0.00</b></li> <hr>
-                    <li><b><a class="link" href="login">LOG IN</a></b></li>
+                    <li><a href="buyblazer">BUY BLAZER</a></li><hr>
+                    <li><a href="women">WOMEN</a></li><hr>
+                    <li><a href="men">MEN</a></li><hr>
+                    <li><a href="about">ABOUT</a></li><hr>
+                    <li><a href="contact">CONTACT</a></li><hr>
+                    <% if(locals.profile) { %>
+                    <li class="li"><b>
+                        <img style="width: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                    </b></li><hr>
+                    <li class="li"><b>$0.00</b></li><hr>
+                    <% }  %>
+                    <% if( locals.action == "LOG IN" ){ %>
+                    <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
+                    <% } else { %>
+                    <li class="li"><b>
+                        <form method="post" action="/logout">
+                            <button type="submit" class="logout"><%= locals.action %></button>
+                        </form>
+                    </b></li>
+                    <% } %>
                 </ul>
             </div>
         </nav>

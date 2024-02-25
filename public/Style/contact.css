@@ -10,6 +10,10 @@
 .leftcontant{
     margin-left: 132px;
 }
+.textArea{
+    width: 90%; 
+    padding: 5px; 
+}
 .svg-text{
     font-size: smaller;
     margin: 7px 0px;
@@ -54,6 +58,9 @@
     .iv831{
         display: none;
     }
+    .textArea{
+        width: 100%;
+    }
     .v831{
         display: block;
     }
@@ -71,6 +78,9 @@
     .v831{
         display: none;
     }
+    .textArea{
+        width: 90%;
+    }
     .iv831{
         display: block;
     }
@@ -81,6 +91,9 @@
 @media(max-width:460px){
     .iv831{
         display: none;
+    }
+    .textArea{
+        width: 100%;
     }
     .v831{
         display: block;
