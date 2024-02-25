@@ -1,15 +1,20 @@
 let buyblazer = document.getElementsByClassName("buyblazer");
 for(let i=0;i<buyblazer.length;i++){
     buyblazer[i].addEventListener('click' , e = () => {
-        window.open('../buyblazer.html' , '_self');
+        window.open('buyblazer' , '_self');
     });
 }
 
+let time = document.querySelector(".time");
+setTimeout(()=>{
+    time.style.display = "none";
+},5000)
+
 let openmen = () => {
-    window.open('../men.html' , '_self');
+    window.open('men' , '_self');
 }
 let openwomen = () => {
-    window.open('../women.html' , '_self');
+    window.open('women' , '_self');
 }
 
 let product_name = [] ;

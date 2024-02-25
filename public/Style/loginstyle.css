@@ -1,5 +1,5 @@
 .box{
-    width: 94vw;
+    width: 94%;
     padding: 20px 0px;
     background-color: #998780;
     justify-content: center;
@@ -9,11 +9,15 @@
 .inner_box{
     width: 460px;
 }
+.time{
+    color: #231610;
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
 .m-18-0{
     margin: 18px 0;
-}
-input{
-    width: 100%;
 }
 .normal{
     font-size: smaller;
@@ -52,12 +56,20 @@ input{
 .linkl:hover{
     border-bottom: 1px solid #552d89;
 }
+.showPassword{
+    margin-top: -20px;
+    font-size: 13px;
+    font-weight: bolder;
+}
 @media (max-width : 550px){
     .normal{
         margin: 5px;
     }
     .normal div input,.special{
         width: 90vw !important;
+    }
+    .showPassword{
+        margin-top: -6px;
     }
     .inner_box{
         display: flex;

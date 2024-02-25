@@ -11,12 +11,12 @@
 <body>
     <header>
         <nav class="flex aic jcc">
-            <ul class="navbar_login"><a href="index.html"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
+            <ul class="navbar_login"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
         </nav>
     </header>
     <hr class="o5">
     <main class="flex aic jcc f-c f2">
-        <div class="box">
+        <form class="box" method="post">
             <div class="inner_box">
                 <div class="abnormal m-18-0">
                     Create Account
@@ -26,7 +26,7 @@
                         Your name <br>
                     </div>
                     <div>
-                        <input style="width: 460px; padding: 7px; margin-right: 5px;" type="text" placeholder="First and last name">
+                        <input style="width: 460px; padding: 7px;" type="text" name="name" required placeholder="First and last name">
                     </div>
                 </div>
                 <div class="normal m-18-0">
@@ -34,15 +34,15 @@
                         Mobile Number <br>
                     </div>
                     <div>
-                        <input style="width: 460px; padding: 7px; margin-right: 5px;" type="text" placeholder="Mobile Number">
+                        <input style="width: 460px; padding: 7px;" type="tel"  pattern="[0-9]{10}" required name="phone" placeholder="Mobile Number">
                     </div>
                 </div>
                 <div class="normal m-18-0">
                     <div class="m-2">
-                        Email (Optional) <br>
+                        Email <br>
                     </div>
                     <div>
-                        <input style="width: 460px; padding: 7px; margin-right: 5px;" type="email" name="" id="">
+                        <input style="width: 460px; padding: 7px;" placeholder="Email" type="email" name="email">
                     </div>
                 </div>
                 <div class="m-18-0 normal">
@@ -50,24 +50,27 @@
                         Password <br>
                     </div>
                     <div>
-                        <input style="width: 460px; padding: 7px; margin-right: 5px;" type="password" placeholder="At least 8 character" id=""> <br>
-                    </div>
-                    <div class="m-2" style="font-weight: normal;">
-                        Password must be at least 8 character 
+                        <input style="width: 460px; padding: 7px;" class="pass" type="password" minlength="8" placeholder="At least 8 character" name="password"> <br>
                     </div>
                 </div>
-                <div class="normals special">
-                    To verify your number, we will send you a text message with a temporary code. Message and data rates may apply.
+                <div class="flex showPassword">
+                    <div class="m-2">
+                        <input type="checkbox" onclick="showPass()">
+                    </div>
+                    <div>
+                        Show Password    
+                    </div>
                 </div>
                 <div class="m-18-0 special">
-                    <button class="Verify_btn">Verify mobile number</button>
+                    <button class="Verify_btn" type="submit">Sign Up</button>
                 </div>
+                <div class="time"><%= locals.message %></div>
                 <hr>
                 <div class="m-18-0 normals special">
-                    Alrady have Account? <a class="linkl" href="signUp.html">Sign in</a>
+                    Alrady have Account? <a class="linkl" href="logIn">Log In</a>
                 </div>
             </div>
-        </div>
+        </form>
     </main>
     <footer>
         <div class="flex aic jcc">
@@ -78,27 +81,27 @@
                     <span class="f3 o7" style="font-size: 15px;" >Enjoy your shopping with us.</span>
                 </div>
                 <div id="Subscribe">
-                    <input style="width: 460px; padding: 7px; margin-right: 5px;" class="f2" type="text" placeholder="Your email address...">
+                    <input style="width: 460px; padding: 7px;" class="f2" type="text" placeholder="Your email address...">
                     <button class="Shop_Collection_btn" style="padding: 10.3px 28px !important;">Subscribe</button>
                 </div>
                 <div>
                     <ul class="flex jcb f2 fnav" style="margin: 5px 0px 35px 0px;">
-                        <li> <a class="hover o7" href="buyblazer.html">BUY BLAZER</li></a>
-                        <li> <a class="hover o7" href="women.html">WOMEN</li></a>
-                        <li> <a class="hover o7" href="men.html">MEN</li></a>
-                        <li> <a class="hover o7" href="about.html">ABOUT</li></a>
-                        <li> <a class="hover o7" href="contact.html">CONTACT</a></li>
+                        <li> <a class="hover o7" href="buyblazer">BUY BLAZER</li></a>
+                        <li> <a class="hover o7" href="women">WOMEN</li></a>
+                        <li> <a class="hover o7" href="men">MEN</li></a>
+                        <li> <a class="hover o7" href="about">ABOUT</li></a>
+                        <li> <a class="hover o7" href="contact">CONTACT</a></li>
                     </ul> 
                 </div>
                 <div class="flex aic jcc"> 
                     <div>
-                        <img class="svgsm" onclick="window.open('/#', '_self')" src="svg/facebook-176-svgrepo-com.svg" alt="Mail">
+                        <img class="svgsm" onclick="window.open('/', '_self')" src="svg/facebook-176-svgrepo-com.svg" alt="Mail">
                     </div>
                     <div>
-                        <img class="svgsm" onclick="window.open('/#', '_self')" src="svg/twitter-154-svgrepo-com.svg" alt="Mail">
+                        <img class="svgsm" onclick="window.open('/', '_self')" src="svg/twitter-154-svgrepo-com.svg" alt="Mail">
                     </div>
                     <div>
-                        <img class="svgsm" onclick="window.open('/#', '_self')" src="svg/instagram-167-svgrepo-com.svg" alt="Mail">
+                        <img class="svgsm" onclick="window.open('/', '_self')" src="svg/instagram-167-svgrepo-com.svg" alt="Mail">
                     </div>
                 </div>
             </div>
@@ -108,4 +111,5 @@
         </div>
     </footer>
 </body>
+<script src="JavaScript/login.js"></script>
 </html>

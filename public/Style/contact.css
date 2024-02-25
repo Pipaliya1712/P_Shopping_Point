@@ -30,6 +30,13 @@
 .v831{
     display: none;
 }
+.time{
+    color: #231610;
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-weight: bolder;
+    margin-left: 10px;
+}
 @media(max-width:1326px){
     .contant{
         width: 94%;

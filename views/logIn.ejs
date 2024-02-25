@@ -11,39 +11,43 @@
 <body>
     <header>
         <nav class="flex aic jcc">
-            <ul class="navbar_login"><a href="index.html"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
+            <ul class="navbar_login"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
         </nav> 
     </header>
     <hr class="o5">
     <main class="flex aic jcc f-c f2">
         <div class="box">
             <div class="inner_box">
+                <div class="time"><%= locals.Sign_up %></div>
                 <div class="abnormal m-18-0">
-                    Sign-In
+                    Log-In
                 </div>
                 <div class="normal m-18-0">
                     <div class="m-2">
-                        Email or mobile phone number <br>
+                        Phone number <br>
                     </div>
                     <div>
-                        <input style="width: 460px; padding: 7px;" type="text" placeholder="">
+                        <input style="width: 460px; padding: 7px;" type="tel" pattern="[0-9]{10}" required name="phone" placeholder="Mobile Number">
                     </div>
                 </div>
                 <div class="m-18-0 normal">
-                    <div class="flex aic jcb m-2">
-                        <div>
-                            Password <br>
-                        </div>
-                        <div>
-                            <a class="linkl" href="/#">Forgot password</a>
-                        </div>
+                    <div class="m-2">
+                        Password <br>
                     </div>
                     <div>
-                        <input style="width: 460px; padding: 7px;" type="password" placeholder="" id=""> <br>
+                        <input style="width: 460px; padding: 7px;" class="pass" type="password" placeholder="Password" name="password"> <br>
+                    </div>
+                </div>
+                <div class="flex showPassword">
+                    <div class="m-2">
+                        <input type="checkbox" onclick="showPass()">
+                    </div>
+                    <div>
+                        Show Password    
                     </div>
                 </div>
                 <div class="special" style="margin: 18px 0px 0px 0px;">
-                    <button class="Verify_btn">Sign In</button>
+                    <button class="Verify_btn">Log In</button>
                 </div>
                 <div class="normals m-18-0 flex special">
                     <div style="margin: 2px 5px 0px 0px;"><input type="checkbox" name="" id=""></div>
@@ -51,9 +55,10 @@
                         Keep me signed in.<br>
                     </div>
                 </div>
+                <div class="time"><%= locals.message %></div>
                 <hr>
                 <div class="m-18-0 normals special">
-                    New to P Shopping Point? <a class="linkl" href="login.html">Log In</a>
+                    New to P Shopping Point? <a class="linkl" href="signUp">Sign Up</a>
                 </div>
             </div>
         </div>
@@ -72,22 +77,22 @@
                 </div>
                 <div>
                     <ul class="flex jcb f2 fnav" style="margin: 5px 0px 35px 0px;">
-                        <li> <a class="hover o7" href="buyblazer.html">BUY BLAZER</li></a>
-                        <li> <a class="hover o7" href="women.html">WOMEN</li></a>
-                        <li> <a class="hover o7" href="men.html">MEN</li></a>
-                        <li> <a class="hover o7" href="about.html">ABOUT</li></a>
-                        <li> <a class="hover o7" href="contact.html">CONTACT</a></li>
+                        <li> <a class="hover o7" href="buyblazer">BUY BLAZER</li></a>
+                        <li> <a class="hover o7" href="women">WOMEN</li></a>
+                        <li> <a class="hover o7" href="men">MEN</li></a>
+                        <li> <a class="hover o7" href="about">ABOUT</li></a>
+                        <li> <a class="hover o7" href="contact">CONTACT</a></li>
                     </ul> 
                 </div>
                 <div class="flex aic jcc">
                     <div>
-                        <img class="svgsm" onclick="window.open('/#', '_self')" src="svg/facebook-176-svgrepo-com.svg" alt="Mail">
+                        <img class="svgsm" onclick="window.open('/', '_self')" src="svg/facebook-176-svgrepo-com.svg" alt="Mail">
                     </div>
                     <div>
-                        <img class="svgsm" onclick="window.open('/#', '_self')" src="svg/twitter-154-svgrepo-com.svg" alt="Mail">
+                        <img class="svgsm" onclick="window.open('/', '_self')" src="svg/twitter-154-svgrepo-com.svg" alt="Mail">
                     </div>
                     <div>
-                        <img class="svgsm" onclick="window.open('/#', '_self')" src="svg/instagram-167-svgrepo-com.svg" alt="Mail">
+                        <img class="svgsm" onclick="window.open('/', '_self')" src="svg/instagram-167-svgrepo-com.svg" alt="Mail">
                     </div>
                 </div>
             </div>
@@ -97,4 +102,5 @@
         </div>
     </footer>
 </body>
+<script src="JavaScript/login.js"></script>
 </html>
