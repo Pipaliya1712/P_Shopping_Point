@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <link href="/Style/style.css" rel="stylesheet">
+    <link href="/Style/utils.css" rel="stylesheet">
+    <link href="/Style/loginstyle.css" rel="stylesheet"> 
+</head>
+<body>
+    <header> 
+        <nav class="flex jcb">
+            <ul class="navbar first">
+                <li class="li"><a href="buyblazer">BUY BLAZER</a></li>
+                <li class="li"><a href="women">WOMEN</a></li>
+                <li class="li"><a href="men">MEN</a></li>
+                <li class="li"><a href="about">ABOUT</a></li>
+                <li class="li"><a href="contact">CONTACT</a></li>
+            </ul>
+            <ul class="navbar center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
+            <ul class="navbar second">
+                <% if(locals.profile) { %>
+                <li class="li"><b>
+                    <img style="width: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                </b></li>
+                <li class="li"><b>$0.00</b></li>
+                <% } else { %>
+                    <li class="li"><b></b></li>
+                    <li class="li"><b></b></li>
+                <% } %>
+                <% if( locals.action == "LOG IN" ){ %>
+                <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
+                <% } else { %>
+                <li class="li"><b>
+                    <form method="post" action="/logout">
+                        <button type="submit" class="logout"><%= locals.action %></button>
+                    </form>
+                </b></li>
+                <% } %>
+            </ul>
+        </nav>
+        <nav class="snavbar">
+            <ul class="center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
+            <img id="menu" onclick="open_nav()" src="svg/menu-outline.svg" alt="MENU">
+            <img id="close" onclick="close_nav()" src="svg/close-outline.svg" alt="CLOSE">
+            <div id="fullnav">
+                <ul class="fullnav_inside flex jcc f-c">
+                    <li><a href="buyblazer">BUY BLAZER</a></li> <hr>
+                    <li><a href="women">WOMEN</a></li> <hr>
+                    <li><a href="men">MEN</a></li> <hr>
+                    <li><a href="about">ABOUT</a></li> <hr>
+                    <b><li><a href="contact">CONTACT</a></li> <hr></b>
+                    <% if(locals.profile) { %>
+                    <li class="li"><b>
+                        <img style="width: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                    </b></li><hr>
+                    <li class="li"><b>$0.00</b></li><hr>
+                    <% }  %>
+                    <% if( locals.action == "LOG IN" ){ %>
+                    <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
+                    <% } else { %>
+                    <li class="li"><b>
+                        <form method="post" action="/logout">
+                            <button type="submit" class="logout"><%= locals.action %></button>
+                        </form>
+                    </b></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <hr class="o5">
+    <main class="flex aic jcc f-c f2">
+        <form class="box" method="post">
+            <div class="inner_box">
+                <!-- <div class="time top"></div> -->
+                <div class="abnormal m-18-0">
+                    Edit Details
+                </div>
+                <div class="normal m-18-0">
+                    <div class="m-2">
+                        Profile Picture <br>
+                    </div>
+                    <div>
+                        <input style="width: 460px; padding: 7px; background-color: white;" type="file" name="profilePic" placeholder="Select Picture">
+                    </div>
+                </div>
+                <div class="normal m-18-0">
+                    <div class="m-2">
+                        Name <br>
+                    </div>
+                    <div>
+                        <input style="width: 460px; padding: 7px;" type="text" name="name" placeholder="User Name">
+                    </div>
+                </div>
+                <div class="normal m-18-0">
+                    <div class="m-2">
+                        Email<br>
+                    </div>
+                    <div>
+                        <input style="width: 460px; padding: 7px;" type="email" name="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="normal m-18-0">
+                    <div class="m-2">
+                        Phone number <br>
+                    </div>
+                    <div>
+                        <input style="width: 460px; padding: 7px;" type="tel" value="<%= locals.phone %>" pattern="[0-9]{10}" required name="phone" placeholder="Mobile Number">
+                    </div>
+                </div>
+                <div class="m-18-0 normal">
+                    <div class="m-2">
+                        Password <br>
+                    </div>
+                    <div>
+                        <input style="width: 460px; padding: 7px;" class="pass" type="password" placeholder="Password" name="password"> <br>
+                    </div>
+                </div>
+                <div class="flex showPassword">
+                    <div class="m-2">
+                        <input type="checkbox" onclick="showPass()">
+                    </div>
+                    <div>
+                        Show Password    
+                    </div>
+                </div>
+                <div class="special" style="margin: 18px 0px 0px 0px;">
+                    <button class="Verify_btn" type="submit">Edit</button>
+                </div>
+                <!-- <div class="time bottom"><%= locals.message %></div> -->
+            </div>
+        </form>
+    </main>
+    <footer>
+        <div class="flex aic jcc">
+            <div class="startf flex aic jcc f-c">
+                <div style="text-align: center;">
+                    <span class="f3 bige" >Subscribe To Get Offers In Your Inbox</span><br>
+                    <span class="f3 o7" style="font-size: 15px;" >Enter your registered email and get upto <b>75%</b> discount.</span><br>
+                    <span class="f3 o7" style="font-size: 15px;" >Enjoy your shopping with us.</span>
+                </div>
+                <div id="Subscribe">
+                    <input style="width: 460px; padding: 7px; margin-right: 5px;" class="f2" type="text" placeholder="Your email address...">
+                    <button class="Shop_Collection_btn " style="padding: 10.3px 28px !important;">Subscribe</button>
+                </div>
+                <div>
+                    <ul class="flex jcb f2 fnav" style="margin: 5px 0px 35px 0px;">
+                        <li> <a class="hover o7" href="buyblazer">BUY BLAZER</li></a>
+                        <li> <a class="hover o7" href="women">WOMEN</li></a>
+                        <li> <a class="hover o7" href="men">MEN</li></a>
+                        <li> <a class="hover o7" href="about">ABOUT</li></a>
+                        <li> <a class="hover o7" href="contact">CONTACT</a></li>
+                    </ul> 
+                </div>
+                <div class="flex aic jcc">
+                    <div>
+                        <img class="svgsm" onclick="window.open('/', '_self')" src="svg/facebook-176-svgrepo-com.svg" alt="Mail">
+                    </div>
+                    <div>
+                        <img class="svgsm" onclick="window.open('/', '_self')" src="svg/twitter-154-svgrepo-com.svg" alt="Mail">
+                    </div>
+                    <div>
+                        <img class="svgsm" onclick="window.open('/', '_self')" src="svg/instagram-167-svgrepo-com.svg" alt="Mail">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="endf f2" style="text-align: center;">
+            Copyright &copy; 2023 P_Shopping_Point | Powered by P Shopping Store
+        </div>
+    </footer>
+</body>
+<script src="JavaScript/edit.js"></script>
+</html>

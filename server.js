@@ -55,6 +55,13 @@ const authentication = async (req,res,next) => {
     else next();
 }
 
+app.get("/profile" , (req,res)=>{
+    res.render("profile",{action:"LOG IN"})
+})
+app.get("/edit" , (req,res)=>{
+    res.render("edit",{action:"LOG IN"})
+})
+
 app.get("/contact",async (req,res)=>{
     let profile = false,action = "LOG IN";
     const {token} = req.cookies;

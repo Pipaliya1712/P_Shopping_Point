@@ -1,0 +1,101 @@
+.box{
+    height: 350px;
+    background-color: #998780;
+    width: 94%;
+    display: flex;
+    margin: -150px 0;
+    position: absolute;
+    left: 3%;
+    z-index: -1;
+}
+.information{
+    width: 752px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0px 0px 15px 0px #998780;
+    margin: 200px auto 50px;
+    border-radius: 50px;
+}
+.temp{
+    border: 1px solid black;
+    border-radius: 999px;
+    margin: -100px auto 0;
+    height: 200px;
+    overflow: hidden;
+    background-color: white;
+}
+.profilePic{
+    height: 200px;
+    aspect-ratio: 1;
+    transition: transform 0.3s ease-in-out;
+}
+.profilePic:hover{
+    transform: scale(1.2);
+}
+.user{
+    margin: 20px auto;
+    font-size: 30px;
+    font-weight: bold;
+}
+.details{
+    margin: 30px 0 50px 0;
+    justify-content: space-evenly;
+    display: flex;
+}
+.fb{
+    font-weight: bold;
+}
+.edit{
+    background: transparent;
+    border: none;
+    border-radius: 1005px;
+    margin: 0px auto 20px;
+    transition: 0.3s;
+    padding: 4px;
+    cursor: pointer;
+}
+.editTextWrapper{
+    display: none;
+    position: relative;
+}
+.editText{
+    background-color: #f0f0f0;
+    margin: auto;
+    border: 1px solid black;
+    padding: 0px 2px;
+    font-family: monospace;   
+    position: absolute;
+    bottom: 20px;
+    left: 405px;
+}
+.edit:hover{
+    background-color: #f0f0f0;
+}
+.edit:hover ~ .editTextWrapper{
+    display:block;
+}
+@media (max-width: 800px) {
+    .information{
+        width: 399px;
+    }
+    .editText{
+        left: 220px;
+    }
+    .details{
+        flex-direction: column;
+        margin-left: 50px;
+    }
+    .pad{
+        margin-top: 10px;
+    }
+}
+@media (max-width: 424px) {
+    .editTextWrapper{
+        display: none;
+    }
+    .information{
+        width: 94%;
+    }
+}
