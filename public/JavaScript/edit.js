@@ -15,3 +15,8 @@ const showPass = () => {
     if(pass.type === "password") pass.type = "text";
     else pass.type = "password";
 }
+
+const bottom = document.querySelector(".bottom");
+setTimeout(()=>{
+    bottom.style.display = "none";
+},5000)

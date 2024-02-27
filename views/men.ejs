@@ -21,7 +21,11 @@
             <ul class="navbar second">
                 <% if(locals.profile) { %>
                 <li class="li"><b>
-                    <img style="width: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                    <% if(locals.file == "") { %>
+                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="src/profile-circle-svgrepo-com.src" alt="Profile">
+                    <%} else {%>
+                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
+                    <%} %>
                 </b></li>
                 <li class="li"><b>$0.00</b></li>
                 <% } else { %>
@@ -52,7 +56,11 @@
                     <li><a href="contact">CONTACT</a></li> <hr>
                     <% if(locals.profile) { %>
                     <li class="li"><b>
-                        <img style="width: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                        <% if(locals.file == "") { %>
+                            <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                        <%} else {%>
+                            <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
+                        <%} %>
                     </b></li><hr>
                     <li class="li"><b>$0.00</b></li><hr>
                     <% }  %>

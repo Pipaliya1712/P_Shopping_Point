@@ -22,7 +22,11 @@
             <ul class="navbar second">
                 <% if(locals.profile) { %>
                 <li class="li"><b>
-                    <img style="width: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                    <% if(locals.file == "") { %>
+                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="src/profile-circle-svgrepo-com.src" alt="Profile">
+                    <%} else {%>
+                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
+                    <%} %>
                 </b></li>
                 <li class="li"><b>$0.00</b></li>
                 <% } else { %>
@@ -53,7 +57,11 @@
                     <b><li><a href="contact">CONTACT</a></li> <hr></b>
                     <% if(locals.profile) { %>
                     <li class="li"><b>
-                        <img style="width: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                        <% if(locals.file == "") { %>
+                            <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                        <%} else {%>
+                            <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
+                        <%} %>
                     </b></li><hr>
                     <li class="li"><b>$0.00</b></li><hr>
                     <% }  %>
@@ -72,7 +80,7 @@
     </header>
     <hr class="o5">
     <main class="flex aic jcc f-c f2">
-        <form class="box" method="post">
+        <form class="box" method="post" enctype="multipart/form-data">
             <div class="inner_box">
                 <!-- <div class="time top"></div> -->
                 <div class="abnormal m-18-0">
@@ -83,7 +91,7 @@
                         Profile Picture <br>
                     </div>
                     <div>
-                        <input style="width: 460px; padding: 7px; background-color: white;" type="file" name="profilePic" placeholder="Select Picture">
+                        <input accept="image/*" style="width: 460px; padding: 7px; background-color: white;" type="file" name="file" placeholder="Select Picture">
                     </div>
                 </div>
                 <div class="normal m-18-0">
@@ -129,7 +137,7 @@
                 <div class="special" style="margin: 18px 0px 0px 0px;">
                     <button class="Verify_btn" type="submit">Edit</button>
                 </div>
-                <!-- <div class="time bottom"><%= locals.message %></div> -->
+                <div style="margin-top: 10px;" class="time bottom"><%= locals.message %></div>
             </div>
         </form>
     </main>
