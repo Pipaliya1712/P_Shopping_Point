@@ -23,7 +23,7 @@
                 <% if(locals.profile) { %>
                 <li class="li"><b>
                     <% if(locals.file == "") { %>
-                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="src/profile-circle-svgrepo-com.src" alt="Profile">
+                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
                     <%} else {%>
                         <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                     <%} %>
@@ -136,7 +136,9 @@
                         <div class="inputtag f2">
                             <button class="Shop_Collection_btn" type="submit" style="padding: 13px 25px !important;">Send</button>
                         </div>
-                        <div class="time"><%= locals.message %></div>
+                        <% if(locals.message){ %>
+                            <div class="time"><%= locals.message %></div>
+                        <% } %>
                     </form>
                 </div>
             </div>

@@ -23,7 +23,7 @@
                 <% if(locals.profile) { %>
                 <li class="li"><b>
                     <% if(locals.file == "") { %>
-                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="src/profile-circle-svgrepo-com.src" alt="Profile">
+                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
                     <%} else {%>
                         <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                     <%} %>
@@ -90,6 +90,11 @@
                 <div> 
                     <div class="f2 fb">Email :</div>
                     <div class="f2"><%= locals.email %></div>
+                    <% if(locals.isverified) { %>
+                        <div style="color: green; font-size: 15px;" class="f2">Email is <b>verified</b> </div>
+                    <%} else { %>
+                        <div style="color: red; font-size: 15px;" class="f2">Email is <a href="emailverification" style="color: red; text-decoration: underline; cursor: pointer;"><b>not verified</b></a></div>
+                    <%} %>
                 </div>
                 <div class="pad">
                     <div class="f2 fb">Phone :</div>

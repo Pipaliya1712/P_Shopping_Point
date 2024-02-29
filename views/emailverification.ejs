@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>profile</title>
+    <title>emailverification</title>
     <link href="/Style/style.css" rel="stylesheet">
     <link href="/Style/utils.css" rel="stylesheet">
     <link href="/Style/loginstyle.css" rel="stylesheet"> 
@@ -80,66 +80,78 @@
     </header>
     <hr class="o5">
     <main class="flex aic jcc f-c f2">
-        <form class="box" method="post" enctype="multipart/form-data">
+        <div class="box" style="margin-bottom: -50px; padding-bottom: 0px;">
             <div class="inner_box">
-                <!-- <div class="time top"></div> -->
                 <div class="abnormal m-18-0">
-                    Edit Details
+                    Email Verification
                 </div>
                 <div class="normal m-18-0">
-                    <div class="m-2">
-                        Profile Picture <br>
-                    </div>
-                    <div>
-                        <input accept="image/*" style="width: 460px; padding: 7px; background-color: white;" type="file" name="file" placeholder="Select Picture">
+                    <div class="m-2 emailText">
+                        Email : <%= locals.email %><br>
+                        <form action="/sendotp" method="post">
+                            <% if(locals.resend===1 || locals.OTPmessage==="OTP Sent Successfully") {%>
+                                <div class="flex">
+                                    <button class="otpButton or" style="display: none;" type="submit">Resend OTP</button>
+                                    <% if(locals.resend===0 || locals.OTPmessage==="OTP Sent Successfully") {%>
+                                        <% if(locals.message){ %>
+                                            <script>document.querySelector(".or").style.display = "block";</script>
+                                        <%} else {%>
+                                            <div class="du">Resend OTP</div>
+                                            <div style="margin-left: 5px;" class="after">After</div>
+                                            <div class="timer" style="margin-left: 5px;"></div>
+                                            <script>
+                                                const timer = document.querySelector(".timer");
+                                                const currTime = Date.now()
+                                                let display_time = 5;
+                                                timer.innerText = display_time +" seconds";
+                                                const otpTimer = setInterval(()=>{ 
+                                                    display_time  = 5 -  Math.floor((Date.now()-currTime)/1000)
+                                                    timer.innerText = display_time +" seconds";
+                                                    if(display_time==-1){
+                                                        clearInterval(otpTimer);
+                                                        document.querySelector(".du").style.display = "none";
+                                                        document.querySelector(".or").style.display = "block";
+                                                        document.querySelector(".after").style.display = "none";
+                                                        timer.style.display = "none";
+                                                    }
+                                                },1000)
+                                            </script>
+                                        <%}%>
+                                    <%}%>
+                                </div>
+                            <%} else{%>
+                                <button class="otpButton" type="submit">Send OTP</button>
+                            <%}%>
+                        </form>
+                        <% if(locals.OTPmessage==="Email is invalid") {%>
+                            <div class="time" style="color: red; margin-bottom: 0px; font-size: 13px;"><%= locals.OTPmessage %></div>
+                        <%} else if(locals.OTPmessage==="OTP Sent Successfully") {%>
+                            <div class="time" style="color: green; margin-bottom: 0px; font-size: 13px;"><%= locals.OTPmessage %></div>
+                        <%} %>
                     </div>
                 </div>
+            </div>
+        </div>
+        <form class="box addbox" method="post" action="/emailverification">
+            <div class="inner_box">
                 <div class="normal m-18-0">
-                    <div class="m-2">
-                        Name <br>
-                    </div>
-                    <div>
-                        <input style="width: 460px; padding: 7px;" type="text" name="name" placeholder="User Name">
-                    </div>
-                </div>
-                <div class="normal m-18-0">
-                    <div class="m-2">
-                        Email<br>
-                    </div>
-                    <div>
-                        <input style="width: 460px; padding: 7px;" type="email" name="email" placeholder="Email">
-                    </div>
-                </div>
-                <div class="normal m-18-0">
-                    <div class="m-2">
-                        Phone number <br>
-                    </div>
-                    <div>
-                        <input style="width: 460px; padding: 7px;" type="tel" value="<%= locals.phone %>" pattern="[0-9]{10}" name="phone" placeholder="Mobile Number">
-                    </div>
-                </div>
-                <div class="m-18-0 normal">
-                    <div class="m-2">
-                        Password <br>
-                    </div>
-                    <div>
-                        <input style="width: 460px; padding: 7px;" class="pass" type="password" placeholder="Password" name="password"> <br>
-                    </div>
-                </div>
-                <div class="flex showPassword">
-                    <div class="m-2">
-                        <input type="checkbox" onclick="showPass()">
-                    </div>
-                    <div>
-                        Show Password    
-                    </div>
+                    <% if(locals.OTPmessage==="OTP Sent Successfully") { %>
+                        <div class="m-2">
+                            OTP<br>
+                        </div>
+                        <div class="sendOTP">
+                            <input style="width: 460px; padding: 7px;" type="text" name="otp" minlength="6" maxlength="6">
+                        </div>
+                    <%}%>
                 </div>
                 <div class="special" style="margin: 18px 0px 0px 0px;">
-                    <button class="Verify_btn" type="submit">Edit</button>
+                    <% if(locals.OTPmessage==="OTP Sent Successfully") { %>
+                        <button class="Verify_btn" type="submit">Edit</button>
+                    <%}%>
                 </div>
-                <% if(locals.message){ %>
-                    <div style="margin-top: 10px;" class="time bottom"><%= locals.message %></div>
-                <% } %>
+                <% if(locals.message) {%>
+                <div class="time bottom"><%= locals.message %></div>
+                <%}%>
             </div>
         </form>
     </main>

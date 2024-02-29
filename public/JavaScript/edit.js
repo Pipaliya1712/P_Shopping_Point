@@ -17,6 +17,8 @@ const showPass = () => {
 }
 
 const bottom = document.querySelector(".bottom");
-setTimeout(()=>{
-    bottom.style.display = "none";
-},5000)
+if(bottom){ 
+    setTimeout(()=>{
+        bottom.style.display = "none";
+    },5000)
+}

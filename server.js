@@ -7,6 +7,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 import cookieParser from "cookie-parser";
 import multer from "multer";
+import nodemailer from "nodemailer";
 
 dotene.config();
 
@@ -34,17 +35,21 @@ const userSchema = new mongoose.Schema({
     email:String,
     password:String,
     isLogin:Boolean,
+    isverified:{
+        type:Boolean,
+        default:false
+    },
     file:String
 })
 
 const UserMsg = mongoose.model("UserMsg",messageSchema);
 const User = mongoose.model("User", userSchema)
 
-const userName = async (req) => {
+const data = async (req,res) => {
     const {token} = req.cookies;
-    const decoded = jwt.verify(token,"parth");
+    const decoded = jwt.verify(token, "parth");
     const user = await User.findById(decoded._id);
-    return user.name;
+    return user;
 }
 
 const storage = multer.diskStorage({
@@ -52,7 +57,10 @@ const storage = multer.diskStorage({
         cb(null,"public/Uploads");                   //path name will change
     },
     filename:async (req,file,cb) => {
-        cb(null,Date.now()+'-'+await userName(req));
+        const user = await data(req);
+        const currentdate = new Date();
+        const fileName = currentdate.getDate() + "-"+ (currentdate.getMonth()+1)  + "-" + currentdate.getFullYear() + "-"  + currentdate.getHours() + "-"  + currentdate.getMinutes() + "-" + currentdate.getSeconds()+'-'+user.name;
+        cb(null,fileName);
     },
 });
 
@@ -68,12 +76,12 @@ const auth = async(req,res) => {
     return profile
 }
 
-const data = async (req,res) => {
-    const {token} = req.cookies;
-    const decoded = jwt.verify(token, "parth");
-    const user = await User.findById(decoded._id);
-    return user;
-}
+const isVerified = async (req,res,next) => {
+    const {isverified} = await data(req,res);
+    if(isverified) res.redirect("/");
+    else next(); 
+
+} 
 
 const authentication = async (req,res,next) => {
     const {token} = req.cookies;
@@ -87,10 +95,82 @@ const authnot = async (req,res,next) => {
     else res.redirect("/");
 }
 
+let OTP ;
+
+const sendMail = async (name,email,req,res,file) => {
+    OTP = Math.floor(Math.random() * 900000) + 100000;
+
+    const transporter = nodemailer.createTransport({
+        host:'smtp.gmail.com',
+        service:"gmail",
+        port:587,
+        secure:false,
+        requireTLS:true,
+        auth:{
+            user:"parthpipaliya1112@gmail.com",
+            pass:"yixtqrmfmuxjfxiq"
+        }
+    })
+
+    console.log(email);
+    const mailOptions = {
+        from:"parthpipaliya1112@gmail.com",
+        to:email,
+        subject:"Verify your Email",
+        html:`<div style="margin: 0px; padding: 0px; background-color: #998780; display: flex; height: 100vh;">
+                <div style="width: 650px; height: 263px; border: 1px solid black; background-color: white; margin: auto;">
+                    <div style="margin: 15px; font-size: 25px; font-weight: bolder; font-family: system-ui; ">P Shopping Point</div>
+                    <hr style="margin: 0px;">
+                    <div style="font-size: 25px; font-weight: bolder; font-family: system-ui; margin: 20px;">
+                        Verify your email address
+                    </div>
+                    <div  style="font-size: 16px; font-family: system-ui; margin: 20px;">
+                        You need to verify your email address to continue using your P Shopping Point account. Enter the following code to verify your email address:
+                    </div>
+                    <div style="font-size: 25px; font-weight: bolder; font-family: system-ui; margin: 20px;">
+                        ${OTP}
+                    </div>
+                </div>
+            </div>`
+    }
+    transporter.sendMail(mailOptions, (err,info)=>{
+        if(err) {
+            console.log(err);
+            return res.render("emailverification",{action:"LOG OUT",profile: true,file,email,OTPmessage: "Email is invalid",resend:0})
+        }
+        else {
+            console.log("Email has been sent :" , info.response);
+            return res.render("emailverification",{action:"LOG OUT",profile: true,email,file,OTPmessage: "OTP Sent Successfully",resend:0})
+        }
+    });
+}
+
+app.post("/sendotp", async(req,res)=>{
+    const {file,email,name} = await data(req,res);
+    sendMail(name,email,req,res,file);
+})
+
+app.post("/emailverification", async(req,res)=>{
+    const {otp} = req.body; 
+    let {email,file,isverified,_id} = await data(req,res);
+    if(otp == OTP){
+        await User.findByIdAndUpdate({_id},{$set:{
+            isverified: true 
+        }})
+        return res.redirect("profile")
+    }
+    res.render("emailverification",{action:"LOG OUT",profile: true,file,email,message: "OTP incorrect",OTPmessage: "OTP Sent Successfully",resend:1})
+})
+
+app.get("/emailverification", authnot,isVerified, async (req,res) => {
+    const {file,email} = await data(req,res);
+    res.render("emailverification",{action:"LOG OUT",profile: true,file,email,resend:0})
+})
+
 app.get("/profile" ,authnot, async (req,res)=>{
     const user = await data(req,res);
-    const {email,name,file,phone} = user
-    res.render("profile",{action:"LOG OUT",profile: true,email,phone,file,name})
+    const {email,name,file,phone,isverified} = user
+    res.render("profile",{action:"LOG OUT",profile: true,email,phone,file,name,isverified})
 })
 
 app.get("/edit" ,authnot, async (req,res)=>{
@@ -100,12 +180,17 @@ app.get("/edit" ,authnot, async (req,res)=>{
 
 app.post("/edit", upload.single('file') ,async(req,res)=>{
     const user = await data(req,res);
-    const {password,name,email,phone} = req.body;
+    const {password,name,isverified,email,phone} = req.body;
+    if(user.email != email && email != "") {
+        await User.findByIdAndUpdate({_id : user._id},{$set:{
+            isverified:false
+        }})
+    }
     const isMatch = await bcrypt.compare(password,user.password);
     if(!isMatch){
         return res.render("edit",{message:"Incorrect password",action:"LOG OUT",profile: true,file: user.file})
     }
-    const updatedUser = await User.findByIdAndUpdate({_id : user._id},{$set:{
+    await User.findByIdAndUpdate({_id : user._id},{$set:{
         name : name || user.name,
         file : req.file ? req.file.filename :  user.file,
         email : email || user.email,
@@ -188,6 +273,13 @@ app.post("/signup",authentication,async(req,res)=>{
 
     if(user){
         res.render("signUp",{message: "Phone number is already registered"});
+        return;
+    }
+
+    let uniqueEmail = await User.findOne({email});
+
+    if(uniqueEmail){
+        res.render("signUp",{message: "Email is already registered"});
         return;
     }
 

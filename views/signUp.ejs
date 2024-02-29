@@ -51,7 +51,7 @@
                         Password <br>
                     </div>
                     <div>
-                        <input style="width: 460px; padding: 7px;" class="pass" type="password" minlength="8" placeholder="At least 8 character" name="password"> <br>
+                        <input style="width: 460px; padding: 7px;" class="pass" type="password" minlength="8" required placeholder="At least 8 character" name="password"> <br>
                     </div>
                 </div>
                 <div class="flex showPassword">
@@ -65,7 +65,9 @@
                 <div class="m-18-0 special">
                     <button class="Verify_btn" type="submit">Sign Up</button>
                 </div>
-                <div class="time bottom"><%= locals.message %></div>
+                <% if(locals.message){ %>
+                    <div class="time bottom"><%= locals.message %></div>
+                <% } %>
                 <hr>
                 <div class="m-18-0 normals special">
                     Alrady have Account? <a class="linkl" href="logIn">Log In</a>

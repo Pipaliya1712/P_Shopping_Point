@@ -6,6 +6,10 @@
     display: flex;
     margin: 50px 0px;
 }
+.addbox{
+    margin-top: 29px !important;
+    padding-top: 0px !important;
+}
 .inner_box{
     width: 460px;
 }
@@ -61,12 +65,45 @@ input{
     font-size: 13px;
     font-weight: bolder;
 }
+.sendOTP{
+    display: flex;
+    justify-content: space-between;
+}
+.emailText{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+}
+.otpButton{
+    font-size: 15px;
+    height: 23.2px;
+    border: none; 
+    background: transparent; 
+    font-weight: bold; 
+    cursor: pointer;
+}
+.otpButton:hover{
+    text-decoration: underline;
+}
 @media (max-width : 550px){
     .normal{
         margin: 5px;
     }
+    .otpButton{
+        width: auto;
+    }
+    .addbox{
+        margin-top: 39px !important;
+    }
+    .sendOTP{
+        flex-direction: column;
+    }
     .normal div input,.special{
         width: 90vw !important;
+    }
+    .emailText{
+        width: 90vw;
     }
     .showPassword{
         margin-top: -6px;
