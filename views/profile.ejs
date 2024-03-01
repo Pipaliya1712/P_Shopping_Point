@@ -56,11 +56,15 @@
                     <li><a href="about">ABOUT</a></li> <hr>
                     <b><li><a href="contact">CONTACT</a></li> <hr></b>
                     <% if(locals.profile) { %>
-                    <li class="li"><b>
-                        <img style="width: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
-                    </b></li><hr>
-                    <li class="li"><b>$0.00</b></li><hr>
-                    <% }  %>
+                        <li class="li"><b>
+                            <% if(locals.file == "") { %>
+                                <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                            <%} else {%>
+                                <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
+                            <%} %>
+                        </b></li><hr>
+                        <li class="li"><b>$0.00</b></li><hr>
+                        <% }  %>
                     <% if( locals.action == "LOG IN" ){ %>
                     <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
                     <% } else { %>
@@ -82,7 +86,7 @@
                 <% if(locals.file == "") { %>
                 <img class="profilePic" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
                 <%} else {%>
-                <img class="profilePic" src="Uploads/<%= locals.file %>" alt="Profile">
+                <img class="profilePic" src="Uploads/<%=locals.file%>" alt="Profile">
                 <%} %>
             </div>
             <div class="f2 user"><%= locals.name %></div>

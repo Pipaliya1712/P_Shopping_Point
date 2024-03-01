@@ -1,4 +1,4 @@
-import  express  from "express";
+import express  from "express";
 import dotene from "dotenv";
 import mongoose from "mongoose";
 import bodyparser from "body-parser"
@@ -44,6 +44,8 @@ const userSchema = new mongoose.Schema({
 
 const UserMsg = mongoose.model("UserMsg",messageSchema);
 const User = mongoose.model("User", userSchema)
+
+//fuctions............................................................................................................
 
 const data = async (req,res) => {
     const {token} = req.cookies;
@@ -97,28 +99,78 @@ const authnot = async (req,res,next) => {
 
 let OTP ;
 
-const sendMail = async (name,email,req,res,file) => {
+const emailTransporter = () => {
     OTP = Math.floor(Math.random() * 900000) + 100000;
 
-    const transporter = nodemailer.createTransport({
-        host:'smtp.gmail.com',
-        service:"gmail",
-        port:587,
-        secure:false,
-        requireTLS:true,
-        auth:{
-            user:"parthpipaliya1112@gmail.com",
-            pass:"yixtqrmfmuxjfxiq"
-        }
-    })
+    return {
+        trans: {
+            host:'smtp.gmail.com',
+            service:"gmail",
+            port:587,
+            secure:false,
+            requireTLS:true,
+            auth:{
+                user:"parthpipaliya1112@gmail.com",
+                pass:"yixtqrmfmuxjfxiq"
+            }
+        },
+        otp: OTP
+    }
+}
 
+
+
+const sendMailForgot = async(email,res) => {
+    const emailtrans = emailTransporter();
+    OTP = emailtrans.otp;
+
+    const transporter = nodemailer.createTransport(emailtrans.trans);
+
+    const mailOptions = {
+        from:"parthpipaliya1112@gmail.com",
+        to:email,
+        subject:"Verify your Email",
+        html:`<div style="margin: 0px; padding: 0px; background-color: #998780; display: flex; height: 100vh;">
+                <div style="width: 650px; border: 1px solid black; background-color: white; margin: auto;">
+                    <div style="margin: 15px; font-size: 25px; font-weight: bolder; font-family: system-ui; ">P Shopping Point</div>
+                    <hr style="margin: 0px;">
+                    <div style="font-size: 25px; font-weight: bolder; font-family: system-ui; margin: 20px;">
+                        Reset the password 
+                    </div>
+                    <div  style="font-size: 16px; font-family: system-ui; margin: 20px;">
+                        Enter the following code to reset password: <br>
+                        Ans if your Email is not verify then it verify automatically.
+                    </div>
+                    <div style="font-size: 25px; font-weight: bolder; font-family: system-ui; margin: 20px;">
+                        ${OTP}
+                
+                        /div>
+                </div>
+            </div>`
+    }
+    transporter.sendMail(mailOptions, (err,info)=>{
+        if(err) {
+            console.log(err);
+        }
+        else {
+            console.log("Email has been sent :" , info.response);
+            return res.render("forgotPassword",{email,OTPmessage: "OTP Sent Successfully",resend:0})
+        }
+    });
+}
+
+const sendMail = async (name,email,req,res,file) => {
+    const emailtrans = emailTransporter();
+    OTP = emailtrans.otp;
+
+    const transporter = nodemailer.createTransport(emailtrans.trans);
     console.log(email);
     const mailOptions = {
         from:"parthpipaliya1112@gmail.com",
         to:email,
         subject:"Verify your Email",
         html:`<div style="margin: 0px; padding: 0px; background-color: #998780; display: flex; height: 100vh;">
-                <div style="width: 650px; height: 263px; border: 1px solid black; background-color: white; margin: auto;">
+                <div style="width: 650px; border: 1px solid black; background-color: white; margin: auto;">
                     <div style="margin: 15px; font-size: 25px; font-weight: bolder; font-family: system-ui; ">P Shopping Point</div>
                     <hr style="margin: 0px;">
                     <div style="font-size: 25px; font-weight: bolder; font-family: system-ui; margin: 20px;">
@@ -144,6 +196,42 @@ const sendMail = async (name,email,req,res,file) => {
         }
     });
 }
+
+// routes.............................................................................................................................
+
+app.get("/forgotPassword",authentication,(req,res)=>{
+    res.render("forgotPassword");
+})
+
+app.post("/forgotPasswoerd",async (req,res)=>{
+    const {email,otp} = req.body;
+    const e = Object.keys(req.body)[0]
+    if((email) || (e && e!="otp" && e!="email")){
+        console.log("1")
+        console.log(e);
+        const user = await User.findOne({email: email ? email : e});
+        if(user){
+            const {email} = user;
+            sendMailForgot(email,res);
+        }
+        else{
+            res.render("forgotPassword",{OTPmessage:"Email is invalid"}); 
+        }
+    }
+    else{
+        const email = Object.keys(req.body)[1]
+        const {isverified,_id} = await User.findOne({email});
+        if(otp == OTP){ 
+            if(!isverified){ 
+                await User.findByIdAndUpdate({_id},{$set:{
+                    isverified: true 
+                }})
+            }
+            return res.redirect("resetPassword");
+        } 
+        res.render("forgotPassword",{email,message:"OTP incorrect",OTPmessage: "OTP Sent Successfully"})
+    }
+})
 
 app.post("/sendotp", async(req,res)=>{
     const {file,email,name} = await data(req,res);
@@ -181,6 +269,26 @@ app.get("/edit" ,authnot, async (req,res)=>{
 app.post("/edit", upload.single('file') ,async(req,res)=>{
     const user = await data(req,res);
     const {password,name,isverified,email,phone} = req.body;
+    const befoEmail = user.email;
+    const befoPhone = user.phone;
+    await User.findByIdAndUpdate({_id : user._id},{$set:{
+        email : "",
+        phone : "",
+    }})
+    if((befoEmail != email && email != "") || (befoPhone != phone && phone != "")){
+        let conEmail; 
+        let conPhone;
+        console.log(befoEmail, befoPhone)
+        if(email) conEmail = await User.findOne({email});
+        if(phone) conPhone = await User.findOne({phone});
+        if(conEmail || conPhone){
+            await User.findByIdAndUpdate({_id : user._id},{$set:{
+                email : befoEmail,
+                phone : befoPhone
+            }})
+            return res.render("edit",{message:"User is exist",action:"LOG OUT",profile: true,file: user.file})
+        }
+    }
     if(user.email != email && email != "") {
         await User.findByIdAndUpdate({_id : user._id},{$set:{
             isverified:false
@@ -192,7 +300,7 @@ app.post("/edit", upload.single('file') ,async(req,res)=>{
     }
     await User.findByIdAndUpdate({_id : user._id},{$set:{
         name : name || user.name,
-        file : req.file ? req.file.filename :  user.file,
+        file : req.file ? req.file.filename : user.file,
         email : email || user.email,
         phone : phone || user.phone,
     }})
