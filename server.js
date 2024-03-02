@@ -143,8 +143,7 @@ const sendMailForgot = async(email,res) => {
                     </div>
                     <div style="font-size: 25px; font-weight: bolder; font-family: system-ui; margin: 20px;">
                         ${OTP}
-                
-                        /div>
+                    </div>
                 </div>
             </div>`
     }
@@ -199,6 +198,20 @@ const sendMail = async (name,email,req,res,file) => {
 
 // routes.............................................................................................................................
 
+app.post("/changePassword",async (req,res)=> {
+    const {pass1, pass2} = req.body;
+    if(pass1!=pass2) res.render("changePassword",{message: "Both password can't match"});
+    else{
+        const {email} = req.cookies;
+        const decoded = jwt.verify(email, "parth");
+        const user = await User.findOneAndUpdate({email:decoded.email},{$set:{
+            password: await bcrypt.hash(pass2,10)
+        }});
+        res.cookie("email",null,{expires:new Date(Date.now())});
+        res.redirect("login")
+    }
+})
+
 app.get("/forgotPassword",authentication,(req,res)=>{
     res.render("forgotPassword");
 })
@@ -207,8 +220,6 @@ app.post("/forgotPasswoerd",async (req,res)=>{
     const {email,otp} = req.body;
     const e = Object.keys(req.body)[0]
     if((email) || (e && e!="otp" && e!="email")){
-        console.log("1")
-        console.log(e);
         const user = await User.findOne({email: email ? email : e});
         if(user){
             const {email} = user;
@@ -227,7 +238,9 @@ app.post("/forgotPasswoerd",async (req,res)=>{
                     isverified: true 
                 }})
             }
-            return res.redirect("resetPassword");
+            const token = jwt.sign({email}, "parth");
+            res.cookie("email",token,{httpOnly:true,expires: new Date(Date.now() + (60000 * 15))});
+            return res.render("changePassword");
         } 
         res.render("forgotPassword",{email,message:"OTP incorrect",OTPmessage: "OTP Sent Successfully"})
     }
@@ -455,6 +468,10 @@ app.get("/women",async (req,res)=>{
 app.post("/logout",(req,res) => {
     res.cookie("token",null,{expires:new Date(Date.now() )});
     res.redirect("/");
+})
+
+app.get("*" , (req,res) => {
+    res.render("")
 })
 
 
