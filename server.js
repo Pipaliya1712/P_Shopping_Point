@@ -471,7 +471,7 @@ app.post("/logout",(req,res) => {
 })
 
 app.get("*" , (req,res) => {
-    res.render("")
+    res.render("random")
 })
 
 
