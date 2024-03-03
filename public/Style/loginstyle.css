@@ -70,7 +70,6 @@ input{
     justify-content: space-between;
 }
 .emailText{
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 15px;

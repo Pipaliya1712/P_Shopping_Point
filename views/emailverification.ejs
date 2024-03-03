@@ -10,61 +10,34 @@
 </head>
 <body>
     <header> 
-        <nav class="flex jcb">
-            <ul class="navbar first">
-                <li class="li"><a href="buyblazer">BUY BLAZER</a></li>
-                <li class="li"><a href="women">WOMEN</a></li>
-                <li class="li"><a href="men">MEN</a></li>
-                <li class="li"><a href="about">ABOUT</a></li>
-                <li class="li"><a href="contact">CONTACT</a></li>
-            </ul>
-            <ul class="navbar center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
-            <ul class="navbar second">
-                <% if(locals.profile) { %>
-                <li class="li"><b>
-                    <% if(locals.file == "") { %>
-                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
-                    <%} else {%>
-                        <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
-                    <%} %>
-                </b></li>
-                <li class="li"><b>$0.00</b></li>
-                <% } else { %>
-                    <li class="li"><b></b></li>
-                    <li class="li"><b></b></li>
-                <% } %>
-                <% if( locals.action == "LOG IN" ){ %>
-                <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
-                <% } else { %>
-                <li class="li"><b>
-                    <form method="post" action="/logout">
-                        <button type="submit" class="logout"><%= locals.action %></button>
-                    </form>
-                </b></li>
-                <% } %>
-            </ul>
-        </nav>
-        <nav class="snavbar">
-            <ul class="center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
-            <img id="menu" onclick="open_nav()" src="svg/menu-outline.svg" alt="MENU">
-            <img id="close" onclick="close_nav()" src="svg/close-outline.svg" alt="CLOSE">
-            <div id="fullnav">
-                <ul class="fullnav_inside flex jcc f-c">
-                    <li><a href="buyblazer">BUY BLAZER</a></li> <hr>
-                    <li><a href="women">WOMEN</a></li> <hr>
-                    <li><a href="men">MEN</a></li> <hr>
-                    <li><a href="about">ABOUT</a></li> <hr>
-                    <b><li><a href="contact">CONTACT</a></li> <hr></b>
+        <% if(locals.navbar==1){ %>
+            <nav class="flex aic jcc">
+                <ul class="navbar_login"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
+            </nav> 
+        <%} else if (locals.navbar==0){ %>
+            <nav class="flex jcb">
+                <ul class="navbar first">
+                    <li class="li"><a href="buyblazer">BUY BLAZER</a></li>
+                    <li class="li"><a href="women">WOMEN</a></li>
+                    <li class="li"><a href="men">MEN</a></li>
+                    <li class="li"><a href="about">ABOUT</a></li>
+                    <li class="li"><a href="contact">CONTACT</a></li>
+                </ul>
+                <ul class="navbar center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
+                <ul class="navbar second">
                     <% if(locals.profile) { %>
                     <li class="li"><b>
                         <% if(locals.file == "") { %>
-                            <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                            <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
                         <%} else {%>
-                            <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
+                            <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                         <%} %>
-                    </b></li><hr>
-                    <li class="li"><b>$0.00</b></li><hr>
-                    <% }  %>
+                    </b></li>
+                    <li class="li"><b>$0.00</b></li>
+                    <% } else { %>
+                        <li class="li"><b></b></li>
+                        <li class="li"><b></b></li>
+                    <% } %>
                     <% if( locals.action == "LOG IN" ){ %>
                     <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
                     <% } else { %>
@@ -75,8 +48,41 @@
                     </b></li>
                     <% } %>
                 </ul>
-            </div>
-        </nav>
+            </nav>
+            <nav class="snavbar">
+                <ul class="center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
+                <img id="menu" onclick="open_nav()" src="svg/menu-outline.svg" alt="MENU">
+                <img id="close" onclick="close_nav()" src="svg/close-outline.svg" alt="CLOSE">
+                <div id="fullnav">
+                    <ul class="fullnav_inside flex jcc f-c">
+                        <li><a href="buyblazer">BUY BLAZER</a></li> <hr>
+                        <li><a href="women">WOMEN</a></li> <hr>
+                        <li><a href="men">MEN</a></li> <hr>
+                        <li><a href="about">ABOUT</a></li> <hr>
+                        <b><li><a href="contact">CONTACT</a></li> <hr></b>
+                        <% if(locals.profile) { %>
+                        <li class="li"><b>
+                            <% if(locals.file == "") { %>
+                                <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                            <%} else {%>
+                                <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
+                            <%} %>
+                        </b></li><hr>
+                        <li class="li"><b>$0.00</b></li><hr>
+                        <% }  %>
+                        <% if( locals.action == "LOG IN" ){ %>
+                        <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
+                        <% } else { %>
+                        <li class="li"><b>
+                            <form method="post" action="/logout">
+                                <button type="submit" class="logout"><%= locals.action %></button>
+                            </form>
+                        </b></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </nav>
+        <%}%>
     </header>
     <hr class="o5">
     <main class="flex aic jcc f-c f2">

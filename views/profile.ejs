@@ -93,7 +93,7 @@
             <div class="details">
                 <div> 
                     <div class="f2 fb">Email :</div>
-                    <div class="f2"><%= locals.email %></div>
+                    <div class="f2" style="overflow: hidden; text-overflow: ellipsis; font-size: 15px;"><%= locals.email %></div>
                     <% if(locals.isverified) { %>
                         <div style="color: green; font-size: 15px;" class="f2">Email is <b>verified</b> </div>
                     <%} else { %>

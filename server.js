@@ -99,6 +99,10 @@ const authnot = async (req,res,next) => {
 
 let OTP ;
 
+let globleUser = {};
+
+let updateEmail = "";
+
 const emailTransporter = () => {
     OTP = Math.floor(Math.random() * 900000) + 100000;
 
@@ -117,8 +121,6 @@ const emailTransporter = () => {
         otp: OTP
     }
 }
-
-
 
 const sendMailForgot = async(email,res) => {
     const emailtrans = emailTransporter();
@@ -158,7 +160,7 @@ const sendMailForgot = async(email,res) => {
     });
 }
 
-const sendMail = async (name,email,req,res,file) => {
+const sendMail = async (name,email,req,res,file,act) => {
     const emailtrans = emailTransporter();
     OTP = emailtrans.otp;
 
@@ -187,11 +189,11 @@ const sendMail = async (name,email,req,res,file) => {
     transporter.sendMail(mailOptions, (err,info)=>{
         if(err) {
             console.log(err);
-            return res.render("emailverification",{action:"LOG OUT",profile: true,file,email,OTPmessage: "Email is invalid",resend:0})
+            return res.render("emailverification",{navbar:act,action:"LOG OUT",profile: true,file,email,OTPmessage: "Email is invalid",resend:0})
         }
         else {
             console.log("Email has been sent :" , info.response);
-            return res.render("emailverification",{action:"LOG OUT",profile: true,email,file,OTPmessage: "OTP Sent Successfully",resend:0})
+            return res.render("emailverification",{navbar:act,action:"LOG OUT",profile: true,email,file,OTPmessage: "OTP Sent Successfully",resend:0})
         }
     });
 }
@@ -247,26 +249,39 @@ app.post("/forgotPasswoerd",async (req,res)=>{
 })
 
 app.post("/sendotp", async(req,res)=>{
-    const {file,email,name} = await data(req,res);
-    sendMail(name,email,req,res,file);
+    const {token} = req.cookies;
+    if(token){
+        const {file,name} = await data(req,res);
+        sendMail(name,updateEmail,req,res,file,0);
+    }
+    else
+        sendMail(globleUser.name,globleUser.email,req,res,globleUser.file,1);
 })
 
 app.post("/emailverification", async(req,res)=>{
     const {otp} = req.body; 
-    let {email,file,isverified,_id} = await data(req,res);
-    if(otp == OTP){
-        await User.findByIdAndUpdate({_id},{$set:{
-            isverified: true 
-        }})
-        return res.redirect("profile")
+    const {token} = req.cookies;
+    if(token){
+        let {file,isverified,_id} = await data(req,res);
+        if(otp == OTP){
+            await User.findByIdAndUpdate({_id},{$set:{
+                isverified: true ,
+                email:updateEmail
+            }})
+            return res.redirect("profile")
+        }
+        res.render("emailverification",{navbar:0,action:"LOG OUT",profile: true,file,updateEmail,message: "OTP incorrect",OTPmessage: "OTP Sent Successfully",resend:1})
     }
-    res.render("emailverification",{action:"LOG OUT",profile: true,file,email,message: "OTP incorrect",OTPmessage: "OTP Sent Successfully",resend:1})
-})
-
-app.get("/emailverification", authnot,isVerified, async (req,res) => {
-    const {file,email} = await data(req,res);
-    res.render("emailverification",{action:"LOG OUT",profile: true,file,email,resend:0})
-})
+    else{
+        if(otp==OTP){
+            const {name,email,password,phone} = globleUser;
+            await User.create({name,phone,email,password,isLogin:false,isverified:true,file:""});
+            globleUser={};
+            return res.redirect("login")
+        }
+        res.render("emailverification",{navbar:1,email:globleUser.email,message: "OTP incorrect",OTPmessage: "OTP Sent Successfully",resend:1})
+    }
+}) 
 
 app.get("/profile" ,authnot, async (req,res)=>{
     const user = await data(req,res);
@@ -280,32 +295,26 @@ app.get("/edit" ,authnot, async (req,res)=>{
 })
 
 app.post("/edit", upload.single('file') ,async(req,res)=>{
-    const user = await data(req,res);
+    let user = await data(req,res);
     const {password,name,isverified,email,phone} = req.body;
-    const befoEmail = user.email;
-    const befoPhone = user.phone;
-    await User.findByIdAndUpdate({_id : user._id},{$set:{
-        email : "",
-        phone : "",
-    }})
-    if((befoEmail != email && email != "") || (befoPhone != phone && phone != "")){
+    if((user.email != email && email != "") || (user.phone != phone && phone != "")){
+        const befoEmail = user.email;
+        const befoPhone = user.phone;
+        await User.findByIdAndUpdate({_id : user._id},{$set:{
+            email : "",
+            phone : "",
+        }})
         let conEmail; 
         let conPhone;
-        console.log(befoEmail, befoPhone)
         if(email) conEmail = await User.findOne({email});
         if(phone) conPhone = await User.findOne({phone});
+        await User.findByIdAndUpdate({_id : user._id},{$set:{
+            email : befoEmail,
+            phone : befoPhone
+        }})
         if(conEmail || conPhone){
-            await User.findByIdAndUpdate({_id : user._id},{$set:{
-                email : befoEmail,
-                phone : befoPhone
-            }})
             return res.render("edit",{message:"User is exist",action:"LOG OUT",profile: true,file: user.file})
         }
-    }
-    if(user.email != email && email != "") {
-        await User.findByIdAndUpdate({_id : user._id},{$set:{
-            isverified:false
-        }})
     }
     const isMatch = await bcrypt.compare(password,user.password);
     if(!isMatch){
@@ -314,9 +323,13 @@ app.post("/edit", upload.single('file') ,async(req,res)=>{
     await User.findByIdAndUpdate({_id : user._id},{$set:{
         name : name || user.name,
         file : req.file ? req.file.filename : user.file,
-        email : email || user.email,
-        phone : phone || user.phone,
-    }})
+        phone : phone || user.phone
+    }}) 
+    const {file} = await data(req,res);
+    if(email){
+        updateEmail = email;
+        return res.render("emailverification",{navbar:0,action:"LOG OUT",profile: true,file,email,resend:0})
+    }
     res.redirect("profile");
 })
 
@@ -363,6 +376,7 @@ app.get("/about",async (req,res)=>{
     if(profile) action = "LOG OUT";
     res.render("about",{action,profile,file: user ? user.file : ""});
 })
+
 app.get("/buyblazer",async (req,res)=>{
     const {token} = req.cookies;
     let user;
@@ -374,6 +388,7 @@ app.get("/buyblazer",async (req,res)=>{
     if(profile) action = "LOG OUT";
     res.render("buyblazer", {action,profile,file: user ? user.file : ""});
 })
+
 app.get("/", async(req,res)=>{
     const {token} = req.cookies;
     let user;
@@ -385,9 +400,11 @@ app.get("/", async(req,res)=>{
     if(profile) action = "LOG OUT";
     res.render("",{action,profile,file: user ? user.file : ""});
 })
+
 app.get("/signup",authentication,(req,res)=>{
     res.render("signUp");
 })
+
 app.post("/signup",authentication,async(req,res)=>{
     const {name,phone,email,password} = req.body;
     let user = await User.findOne({phone});
@@ -405,9 +422,14 @@ app.post("/signup",authentication,async(req,res)=>{
     }
 
     const hpass = await bcrypt.hash(password,10);
+    globleUser = {
+        name,
+        phone,
+        email,
+        password:hpass
+    }
 
-    user = await User.create({name,phone,email,password:hpass,isLogin:false,file:""});
-    res.redirect("logIn");
+    res.render("emailverification",{navbar:1,email});
 })
 
 app.get("/men",async (req,res)=>{
@@ -421,6 +443,7 @@ app.get("/men",async (req,res)=>{
     if(profile) action = "LOG OUT";
     res.render("men",{action,profile,file: user ? user.file : ""});
 })
+
 app.get("/product",async (req,res)=>{
     const {token} = req.cookies;
     let user;
@@ -432,9 +455,11 @@ app.get("/product",async (req,res)=>{
     if(profile) action = "LOG OUT";
     res.render("product",{action,profile,file: user ? user.file : ""});
 })
+
 app.get("/login",authentication,(req,res)=>{
     res.render("logIn");
 })
+
 app.post("/login",authentication, async (req,res)=>{
     const { phone, password } = req.body;
     
@@ -453,6 +478,7 @@ app.post("/login",authentication, async (req,res)=>{
     res.redirect("/");
 
 })
+
 app.get("/women",async (req,res)=>{
     const {token} = req.cookies;
     let user;
@@ -473,7 +499,6 @@ app.post("/logout",(req,res) => {
 app.get("*" , (req,res) => {
     res.render("random")
 })
-
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is runnig on port ${process.env.PORT}`);
