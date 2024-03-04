@@ -85,6 +85,17 @@ input{
 .otpButton:hover{
     text-decoration: underline;
 }
+.file::file-selector-button{
+    font-weight: bolder;
+    background-color: #231610;
+    color: #998780;
+    border-radius: 2px;
+    border: 1px solid black;
+}
+.file::file-selector-button:hover{
+    cursor: pointer;
+    color: #80716c;
+}
 @media (max-width : 550px){
     .normal{
         margin: 5px;

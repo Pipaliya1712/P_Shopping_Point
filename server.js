@@ -1,5 +1,5 @@
 import express  from "express";
-import dotene from "dotenv";
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 import bodyparser from "body-parser"
 import path from "path";
@@ -9,7 +9,7 @@ import cookieParser from "cookie-parser";
 import multer from "multer";
 import nodemailer from "nodemailer";
 
-dotene.config();
+dotenv.config();
 
 const app = express();
 
@@ -218,7 +218,7 @@ app.get("/forgotPassword",authentication,(req,res)=>{
     res.render("forgotPassword");
 })
 
-app.post("/forgotPasswoerd",async (req,res)=>{
+app.post("/forgotPassword",async (req,res)=>{
     const {email,otp} = req.body;
     const e = Object.keys(req.body)[0]
     if((email) || (e && e!="otp" && e!="email")){
