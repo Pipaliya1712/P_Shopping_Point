@@ -1,4 +1,5 @@
 import {User} from "../models/userModel.js"
+import {Cart} from "../models/cartMode.js";
 import express  from "express";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
@@ -7,7 +8,8 @@ import {sendMail,
         sendMailForgot,
         data,
         auth,
-        OTP
+        OTP,
+        cart_total
     } from "../functions/helper.js"
 
 const app = express();
@@ -30,13 +32,15 @@ const randomUrl = (req,res) => {
 const womenGet = async (req,res)=>{
     const {token} = req.cookies;
     let user;
+    let cart_data = [0,0];;
     if(token){
         user = await data(req,res);
+        cart_data = await cart_total(req,res);
     }
     const profile = await auth(req,res);
     let action = "LOG IN";
     if(profile) action = "LOG OUT";
-    res.render("women",{action,profile,file: user ? user.file : ""});
+    res.render("women",{action,profile,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1]});
 }
 
 const logInPost =  async (req,res)=>{
@@ -95,11 +99,13 @@ const signUpGet = (req,res)=>{
 const contactPost = async (req,res)=>{
     const {token} = req.cookies;
     let user;
+    let cart_data = [0,0];;
     if(token){
         user = await data(req,res);
+        cart_data = await cart_total(req,res);
     }
     else{
-        return res.render("contact",{message:"please Login first",action:"LOG IN",profile:false})
+        return res.render("contact",{message:"please Login first",action:"LOG IN",profile:false,ct:cart_data[0],cc:cart_data[1]})
     }
     const {fname,lname1,lname2,email,message} = req.body
     const lname = lname1 || lname2;
@@ -107,7 +113,7 @@ const contactPost = async (req,res)=>{
     const profile = await auth(req,res);
     let action = "LOG IN";
     if(profile) action = "LOG OUT";
-    res.render("contact" ,{message:"Message sent successfully",action,profile,file: user ? user.file : ""});
+    res.render("contact" ,{message:"Message sent successfully",action,profile,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1]});
 }
 
 const contactGet = async (req,res)=>{
@@ -115,13 +121,15 @@ const contactGet = async (req,res)=>{
     let user;
     let profile = false,action = "LOG IN";
     let email;
+    let cart_data = [0,0];;
     if(token){
         user = await data(req,res);
         email = user.email;
         profile = true;
         action = "LOG OUT"
+        cart_data = await cart_total(req,res);
     }
-    res.render("contact.ejs",{action,profile,email,file: user ? user.file : ""});
+    res.render("contact.ejs",{action,profile,email,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1]});
 }
 
 const producGet = async (req,res)=>{
@@ -129,13 +137,28 @@ const producGet = async (req,res)=>{
     let user;
     let profile = false,action = "LOG IN";
     let email;
+    let cart_data = [0,0];;
     if(token){
         user = await data(req,res);
         email = user.email;
         profile = true;
         action = "LOG OUT"
+        cart_data = await cart_total(req,res);
     }
-    res.render("product.ejs",{action,profile,email,file: user ? user.file : ""});
+    res.render("product.ejs",{action,profile,email,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1]});
+}
+
+const producPost = async(req,res) => {
+    const itam = req.body;
+    const user = await data(req,res);
+    await Cart.create({
+        phone:user.phone,
+        path: itam.path,
+        prize: itam.prize, 
+        gender: itam.gender,
+        quantity: itam.quntity,
+        paymet: false,
+    });
 }
 
 const Get = async (req,res)=>{
@@ -143,13 +166,15 @@ const Get = async (req,res)=>{
     let user;
     let profile = false,action = "LOG IN";
     let email;
+    let cart_data = [0,0];
     if(token){
         user = await data(req,res);
         email = user.email;
         profile = true;
         action = "LOG OUT"
+        cart_data = await cart_total(req,res);
     }
-    res.render("index.ejs",{action,profile,email,file: user ? user.file : ""});
+    res.render("index.ejs",{action,profile,email,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1],ct:cart_data[0],cc:cart_data[1]});
 }
 
 const buyblazerGet = async (req,res)=>{
@@ -157,13 +182,15 @@ const buyblazerGet = async (req,res)=>{
     let user;
     let profile = false,action = "LOG IN";
     let email;
+    let cart_data = [0,0];;
     if(token){
         user = await data(req,res);
         email = user.email;
         profile = true;
         action = "LOG OUT"
+        cart_data = await cart_total(req,res);
     }
-    res.render("buyblazer.ejs",{action,profile,email,file: user ? user.file : ""});
+    res.render("buyblazer.ejs",{action,profile,email,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1],ct:cart_data[0],cc:cart_data[1]});
 }
 
 const menGet = async (req,res)=>{
@@ -171,13 +198,15 @@ const menGet = async (req,res)=>{
     let user;
     let profile = false,action = "LOG IN";
     let email;
+    let cart_data = [0,0];;
     if(token){
         user = await data(req,res);
         email = user.email;
         profile = true;
         action = "LOG OUT"
+        cart_data = await cart_total(req,res);
     }
-    res.render("men.ejs",{action,profile,email,file: user ? user.file : ""});
+    res.render("men.ejs",{action,profile,email,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1]});
 }
 
 const aboutGet = async (req,res)=>{
@@ -185,22 +214,26 @@ const aboutGet = async (req,res)=>{
     let user;
     let profile = false,action = "LOG IN";
     let email;
+    let cart_data = [0,0];;
     if(token){
         user = await data(req,res);
         email = user.email;
         profile = true;
         action = "LOG OUT"
+        cart_data = await cart_total(req,res);
     }
-    res.render("about.ejs",{action,profile,email,file: user ? user.file : ""});
+    res.render("about.ejs",{action,profile,email,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1]});
 }
 
 const editGet = async (req,res)=>{
     const {file} = await data(req,res);
-    res.render("edit",{action:"LOG OUT",profile: true,file})
+    let cart_data = await cart_total(req,res);
+    res.render("edit",{action:"LOG OUT",profile: true,file,ct:cart_data[0],cc:cart_data[1]})
 }
 
 const editPost = async(req,res)=>{
     let user = await data(req,res);
+    let cart_data = await cart_total(req,res);
     const {password,name,isverified,email,phone} = req.body;
     if((user.email != email && email != "") || (user.phone != phone && phone != "")){
         const befoEmail = user.email;
@@ -218,12 +251,12 @@ const editPost = async(req,res)=>{
             phone : befoPhone
         }})
         if(conEmail || conPhone){
-            return res.render("edit",{message:"User is exist",action:"LOG OUT",profile: true,file: user.file})
+            return res.render("edit",{message:"User is exist",action:"LOG OUT",profile: true,file: user.file,ct:cart_data[0],cc:cart_data[1]})
         }
     }
     const isMatch = await bcrypt.compare(password,user.password);
     if(!isMatch){
-        return res.render("edit",{message:"Incorrect password",action:"LOG OUT",profile: true,file: user.file})
+        return res.render("edit",{message:"Incorrect password",action:"LOG OUT",profile: true,file: user.file,ct:cart_data[0],cc:cart_data[1]})
     }
     await User.findByIdAndUpdate({_id : user._id},{$set:{
         name : name || user.name,
@@ -233,15 +266,24 @@ const editPost = async(req,res)=>{
     const {file} = await data(req,res);
     if(email){
         updateEmail = email;
-        return res.render("emailverification",{navbar:0,action:"LOG OUT",profile: true,file,email,resend:0})
+        return res.render("emailverification",{navbar:0,action:"LOG OUT",profile: true,file,email,resend:0,ct:cart_data[0],cc:cart_data[1]})
     }
     res.redirect("profile");
 }
 
 const profileGet =  async (req,res)=>{
     const user = await data(req,res);
+    let cart_data =  await cart_total(req,res);
     const {email,name,file,phone,isverified} = user
-    res.render("profile",{action:"LOG OUT",profile: true,email,phone,file,name,isverified})
+    res.render("profile",{action:"LOG OUT",profile: true,email,phone,file,name,isverified,ct:cart_data[0],cc:cart_data[1]})
+}
+
+const profilePost = async (req,res) => {
+    const user = await data(req,res);
+    await User.deleteOne({_id: user._id});
+    await Cart.deleteMany({phone:user.phone});
+    res.cookie("token",null,{expires:new Date(Date.now())});
+    res.redirect("/");
 }
 
 const emailverificationPost =  async(req,res)=>{
@@ -256,7 +298,8 @@ const emailverificationPost =  async(req,res)=>{
             }})
             return res.redirect("profile")
         }
-        res.render("emailverification",{navbar:0,action:"LOG OUT",profile: true,file,updateEmail,message: "OTP incorrect",OTPmessage: "OTP Sent Successfully",resend:1})
+        let cart_data = await cart_total(req,res);
+        res.render("emailverification",{navbar:0,action:"LOG OUT",profile: true,file,updateEmail,message: "OTP incorrect",OTPmessage: "OTP Sent Successfully",resend:1,ct:cart_data[0],cc:cart_data[1]})
     }
     else{
         if(otp==OTP){
@@ -271,12 +314,14 @@ const emailverificationPost =  async(req,res)=>{
 
 const sendotp =  async(req,res)=>{
     const {token} = req.cookies;
+    let cart_data = [0,0];
     if(token){
         const {file,name} = await data(req,res);
-        sendMail(name,updateEmail,req,res,file,0);
+        cart_data = await cart_total(req,res);
+        sendMail(name,updateEmail,req,res,file,0,cart_data[0],cart_data[1]);
     }
     else
-        sendMail(globleUser.name,globleUser.email,req,res,globleUser.file,1);
+        sendMail(globleUser.name,globleUser.email,req,res,globleUser.file,1,cart_data[0],cart_data[1]);
 }
 
 const forgotPasswoerdPost = async (req,res)=>{
@@ -327,6 +372,46 @@ const changePassword = async (req,res)=> {
     }
 }
 
+const cartGet = async(req,res) => {
+    const {token} = req.cookies;
+    let user;
+    let cart_data = [0,0];;
+    let profile = false,action = "LOG IN";
+    let email;
+    if(token){
+        user = await data(req,res);
+        email = user.email;
+        profile = true;
+        action = "LOG OUT"
+        cart_data = await cart_total(req,res);
+    }
+    const cart_itam = await Cart.find({phone:user.phone})
+    res.render("cart.ejs",{action,profile,email,file: user ? user.file : "",itam:cart_itam,ct:cart_data[0],cc:cart_data[1]});
+}
+
+const cartPost = async (req,res) => {
+    const {id} = req.body;
+    await Cart.findByIdAndDelete({_id:id});
+    res.redirect("cart");
+}
+
+const checkoutGet = async (req,res) => {
+    const {token} = req.cookies;
+    let user;
+    let cart_data = [0,0];;
+    let profile = false,action = "LOG IN";
+    let email;
+    if(token){
+        user = await data(req,res);
+        email = user.email;
+        profile = true;
+        action = "LOG OUT"
+        cart_data = await cart_total(req,res);
+    }
+    const cart_itam = await Cart.find({phone:user.phone})
+    res.render("checkout.ejs",{action,profile,email,file: user ? user.file : "",itam:cart_itam,ct:cart_data[0],cc:cart_data[1]});
+}
+
 export { 
     changePassword,
     forgotPasswoerdGet,
@@ -334,6 +419,7 @@ export {
     sendotp,
     emailverificationPost,
     profileGet,
+    profilePost,
     editPost,
     editGet,
     contactGet,
@@ -346,8 +432,12 @@ export {
     buyblazerGet,
     aboutGet,
     producGet,
+    producPost,
     menGet,
     Get,
     logOut,
-    randomUrl
+    randomUrl,
+    cartGet,
+    cartPost,
+    checkoutGet
     }

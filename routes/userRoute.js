@@ -27,7 +27,7 @@ router.route("/changePassword").post(Controller.changePassword)
 router.route("/forgotPassword").post(Controller.forgotPasswoerdPost).get(authentication,Controller.forgotPasswoerdGet)
 router.route("/sendotp").post(Controller.sendotp)
 router.route("/emailverification").post(Controller.emailverificationPost)
-router.route("/profile").get(authnot,Controller.profileGet)
+router.route("/profile").get(authnot,Controller.profileGet).post(Controller.profilePost)
 router.route('/edit').get(authnot,Controller.editGet).post(upload.single('file'),Controller.editPost)
 router.route("/contact").post(Controller.contactPost).get(Controller.contactGet)
 router.route("/about").get(Controller.aboutGet)
@@ -35,10 +35,12 @@ router.route("/buyblazer").get(Controller.buyblazerGet)
 router.route("/").get(Controller.Get);
 router.route("/signup").post(authentication,Controller.signUpPost).get(authentication,Controller.signUpGet)
 router.route("/men").get(Controller.menGet)
-router.route("/product").get(Controller.producGet)
+router.route("/product").get(Controller.producGet).post(Controller.producPost)
 router.route("/login").post(authentication,Controller.logInPost).get(authentication,Controller.logInGet)
 router.route("/women").get(Controller.womenGet)
 router.route("/logout").post(Controller.logOut);
+router.route("/cart").get(authnot,Controller.cartGet).post(Controller.cartPost);
+router.route("/checkout").get(authnot,Controller.checkoutGet)
 router.route("*").get(Controller.randomUrl);
 
 

@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P Shopping Point About</title>
+    <title>checkOut</title>
     <link rel="stylesheet" href="Style/style.css">
-    <link rel="stylesheet" href="Style/utils.css">
-    <link rel="stylesheet" href="Style/about.css">
+    <link rel="stylesheet" href="Style/utils.css">    
+    <link rel="stylesheet" href="Style/cart.css">
 </head>
 <body>
-    <header> 
+    <header style="margin-bottom: 90px;" class="mb20"> 
         <nav class="flex jcb">
             <ul class="navbar first">
                 <li class="li"><a href="buyblazer">BUY BLAZER</a></li>
                 <li class="li"><a href="women">WOMEN</a></li>
                 <li class="li"><a href="men">MEN</a></li>
-                <b><li class="li"><a href="about">ABOUT</a></li></b>
+                <li class="li"><a href="about">ABOUT</a></li>
                 <li class="li"><a href="contact">CONTACT</a></li>
             </ul>
             <ul class="navbar center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
@@ -57,7 +57,7 @@
                     <li><a href="buyblazer">BUY BLAZER</a></li><hr>
                     <li><a href="women">WOMEN</a></li><hr>
                     <li><a href="men">MEN</a></li><hr>
-                    <b><li><a href="about">ABOUT</a></li><hr></b>
+                    <li><a href="about">ABOUT</a></li><hr>
                     <li><a href="contact">CONTACT</a></li><hr>
                     <% if(locals.profile) { %>
                     <li class="li"><b>
@@ -86,69 +86,67 @@
                 </ul>
             </div>
         </nav>
+        <hr class="o5">
     </header>
-    <hr class="o5">
+    
     <main>
-        <div class="flex jcc">
-            <div class="textaline flex aic jcc f-c text">
-                <span class="big f3 Ftext">
-                    About
-                </span>
-                <span class="small f2">
-                    <b>Want to get in touch? We'd like to hear from you. Hear's how you can reach us...</b>
-                </span>
-                <span class="f3" style="font-size: smaller; margin: 10px 0px 0px 0px;">
-                    P Shopping Point is a diversified group with majority business interests in Textile & Apparel sectors and a presence across varying segments such as Consumer Care, Realty and Engineering in national and international markets.
-                </span>
-            </div>
+
+        <div class="xx f2" style="margin-left: 12.5%; margin-bottom: 50px;">
+            Checkout
         </div>
-        <div class="flex jcc">
-            <div class="acontainer">
-                <div class="flex adullbc">
-                    <div class="lefta flex f-c">
-                        <span class="smalle f2" style="margin-bottom: 15px;">THE MISSION</span>
-                        <span class="fb f2" style="font-size: 35px; line-height: 40px;">At the heart of everything, we set out to offer the best quality.</span>
-                        <div class="sul"></div>
+    
+        <div class="n596" style="margin-bottom: 20px;">
+            <li class="f2 flex jcc aic">
+                <ul class="listwith"><a href="cart">1. SHOPPING CART</a></ul> <div class="arrow"> > </div>
+                <ul class="list"><a href="checkout">2. CHECKOUT DETAILS</a></ul> <div class="arrow"> > </div>
+                <ul class="listwith">3. ORDER COMPLETE</ul>
+            </li>
+        </div>
+    
+        <div class="flex aic jcc f2" style="margin-bottom: 50px;">
+            <form class="form">
+                <div>
+                    <div style="margin-bottom: 20px;">
+                        <b style="border-bottom: 2px solid black;">Customer information</b>
                     </div>
-                    <div class="righta flex f-c f2 bigm">
-                        <span style="margin-bottom: 20px;"></span>
+                    <div style="margin-bottom: 20px;">
+                        <input class="w1 p" type="Email" name="email" required placeholder="Email address *">
                     </div>
+                    <div style="margin-bottom: 20px;">
+                        <b style="border-bottom: 2px solid black;">Billing details</b>
+                    </div>
+                    <div style="margin-bottom: 20px; text-align: center;">
+                        <input class="w2 p" type="text" name="fname" required placeholder="First name *">             
+                        <input class="w2 p" placeholder="Last name *" type="text" name="lname" required >
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <input class="w1 p" type="text" name="cname" placeholder="Company name">
+                    </div>
+                    <select name="country" class="country w1 p" style="margin-bottom: 20px;" onchange="loadState()">
+                        <option selected disabled="disabled">--Select country--</option>
+                    </select>
+                    <div style="margin-bottom: 20px;">
+                        <input class="w3 p" type="text" name="city" required placeholder="Town / City *">
+                        <select name="state" class="state w3 p">
+                            <option selected disabled="disabled">--Select state--</option>
+                        </select>
+                        <input class="w3 p" placeholder="ZIP Code *" type="tel"  pattern="[0-9]+" name="zip" required >
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <input class="w1 p" type="tel"  pattern="[0-9]+" required name="phone" placeholder="Mobile Number *">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <b style="border-bottom: 2px solid black;"  >Additional information</b>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <input class="w1 p" type="text" name="note" placeholder="Notes about your order, e.g. special notes for delivery.">
+                    </div>
+                    <button class="pro_btn" style="width: 570px;">Place Order $<%= locals.ct %>.00</button>
                 </div>
-            </div>
-        </div>
-        <div class="flex jcc">
-            <div class="textaline flex aic jcc f-c text">
-                <span class="big f3 Ftext">
-                    How it started?
-                </span>
-                <span class="f3" style="font-size: smaller;">
-                    Want to get in touch? We'd like to hear from you. Hear's how you can reach us...
-                </span>
-            </div>
-        </div>
-        <div style="margin: 0px 0px 100px 0px;">
-            <div class="v758 fb f2 xx top_bot" style="line-height: 37px;">
-                Vel mauris molestie dignissim
-            </div>
-            <div class="text_img">
-                <div class="lefta2 flex jcc f-c">
-                    <div class="xx fb f2 mtb iv758" style="line-height: 37px;">
-                        Vel mauris molestie dignissim
-                    </div>
-                    <div class="bige f2 mtb">
-                        Proin eu ante vel mauris molestie dignissim non eget nunc. Integer ac massa orci. Suspendisse vulputate semper nunc eget rhoncus.
-                    </div>
-                    <div class="smalle f2 mtb iv932">
-                        Praesent vel faucibus ligula. Sed sit amet ipsum eget velit aliquet faucibus. Maecenas et odio id turpis sollicitudin pulvinar sit amet vitae augue. Phasellus nec ultricies arcu. Quisque efficitur tellus sit amet bibendum molestie. Duis id egestas odio. Phasellus lacinia ex quis faucibus tempor. Sed feugia.
-                    </div>
-                </div>
-                <img class="blazer_on" src="Photo/blazer_on.jpeg" alt="">
-            </div>
-            <div class="v932 small f2 top_bot">
-                Praesent vel faucibus ligula. Sed sit amet ipsum eget velit aliquet faucibus. Maecenas et odio id turpis sollicitudin pulvinar sit amet vitae augue. Phasellus nec ultricies arcu. Quisque efficitur tellus sit amet bibendum molestie. Duis id egestas odio. Phasellus lacinia ex quis faucibus tempor. Sed feugia.
-            </div>
+            </form>
         </div>
     </main>
+
     <footer>
         <div class="flex aic jcc">
             <div class="startf flex aic jcc f-c">
@@ -163,10 +161,10 @@
                 </div>
                 <div>
                     <ul class="flex jcb f2 fnav" style="margin: 5px 0px 35px 0px;">
-                        <li> <a class="hover o7" href="buyblazer">BUY T-SHIRT</li></a>
+                        <li> <a class="hover o7" href="buyblazer">BUY BLAZER</li></a>
                         <li> <a class="hover o7" href="women">WOMEN</li></a>
                         <li> <a class="hover o7" href="men">MEN</li></a>
-                        <li><b><a class="hover o7" href="about">ABOUT</li></b></a>
+                        <li> <a class="hover o7" href="about">ABOUT</li></a>
                         <li> <a class="hover o7" href="contact">CONTACT</a></li>
                     </ul> 
                 </div>
@@ -189,4 +187,52 @@
     </footer>
 </body>
 <script src="JavaScript/script.js"></script>
+<script>
+    let config = {
+        cUrl : "https://api.countrystatecity.in/v1/countries",
+        cKey: "T0k2S0tqcWtsSDdTeURUcWJ4OUJlV1N2WlBqaURFZlU5TnpLdkF5eQ=="
+    }
+
+    let country = document.querySelector(".country"),
+        state = document.querySelector(".state")
+
+
+    const loadCountry = () => {
+        let apiEndPoint = config.cUrl
+
+        fetch(apiEndPoint, {headers : {"X-CSCAPI-KEY" : config.cKey}}).
+        then(res => res.json()).
+        then(data => {
+            data.forEach(ctry => {
+                const option = document.createElement("option")
+                option.value = ctry.iso2
+                option.textContent = ctry.name
+                country.appendChild(option);
+
+            });
+        }).
+        catch(err => console.error(err));
+    }
+
+    const loadState = () => {
+        const countryCode = country.value
+        state.innerHTML = `<option selected disabled="disabled">--Select state--</option>`
+
+        fetch(`${config.cUrl}/${countryCode}/states`, {headers : {"X-CSCAPI-KEY" : config.cKey}}).
+        then(res => res.json()).
+        then(data => {
+            data.forEach(st => {
+                const option = document.createElement("option")
+                option.value = st.iso2
+                option.textContent = st.name
+                state.appendChild(option);
+
+            });
+        }).
+        catch(err => console.error(err));
+
+    }
+
+    window.onload = loadCountry
+</script>
 </html>

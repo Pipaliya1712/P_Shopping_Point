@@ -1,7 +1,7 @@
 const topMsg = document.querySelector(".top");
 setTimeout(()=>{
     topMsg.style.display = "none";
-},1000)
+},5000)
 
 const bottom = document.querySelector(".bottom");
 setTimeout(()=>{

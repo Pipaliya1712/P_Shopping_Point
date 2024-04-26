@@ -28,7 +28,11 @@
                         <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                     <%} %>
                 </b></li>
-                <li class="li"><b>$0.00</b></li>
+                <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                    <% if(locals.cc > 0) {%>
+                        <b class="cc"><%= locals.cc %></b>
+                    <%}%>
+                </a></b></li>
                 <% } else { %>
                     <li class="li"><b></b></li>
                     <li class="li"><b></b></li>
@@ -63,7 +67,12 @@
                             <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                         <%} %>
                     </b></li><hr>
-                    <li class="li"><b>$0.00</b></li><hr>
+                    <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                        <% if(locals.cc > 0) {%>
+                            <b class="cc"><%= locals.cc %></b>
+                        <%}%>
+                    </a></b></li>
+                    <hr>
                     <% }  %>
                     <% if( locals.action == "LOG IN" ){ %>
                     <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
@@ -95,13 +104,15 @@
                     </div>
                     <div  class="fs13_5 f2 m12 o7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus interdum eros. In blandit velit a lacus laoreet dictum. Maecenas vel vulputate nulla. Ut nec enim vel tortor aliquet varius.</div>
                     <hr class="o5 m12">
+                    <% if(locals.profile) {%>
                     <div class="m12 o7">
                         <button class="btnp fs13_5 f2" onclick="subtraction()">-</button>
                         <span class="total_item fs13_5 f2" id="total_item">1</span>
                         <button class="btnp fs13_5 f2" onclick="addition()">+</button>
-                        <button class="btnp fs13_5 f3 ex_add_to_cart" onclick="cart_update()">Add to cart</button>
+                        <button class="btnp fs13_5 f3 ex_add_to_cart" onclick="sendData(); add( )">Add to cart</button> <span class="f2 added">Added</span>
                     </div>
                     <hr class="o5 m12">
+                    <% } %>
                     <div  class="fs13_5 f2 m12">
                         <span class="o7">SKU: N/A </span>
                         <span class="o7 pml15">Category: </span><span><a href="men">Men</a></span>
@@ -140,7 +151,7 @@
                         <div class="ml30">
                             <div class="smalle f2 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(0)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$33.00</div>
                         </div>
                     </div>
                     <div class="w24">
@@ -153,7 +164,7 @@
                         <div class="ml30">
                             <div class="smalle f2 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(1)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$45.00</div>
                         </div>
                     </div>
                     <div class="w24 iv767">
@@ -166,7 +177,7 @@
                         <div class="ml30">
                             <div class="smalle f2 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(2)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$40.00</div>
                         </div>
                     </div>
                     <div class="w24 iv767">
@@ -179,7 +190,7 @@
                         <div class="ml30">
                             <div class="smalle f2 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(3)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$34.00</div>
                         </div>
                     </div>
                 </div>
@@ -194,7 +205,7 @@
                         <div class="ml30">
                             <div class="smalle f2 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(2)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$40.00</div>
                         </div>
                     </div>
                     <div class="w24">
@@ -207,7 +218,7 @@
                         <div class="ml30">
                             <div class="smalle f2 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(3)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$34.00</div>
                         </div>
                     </div>
                 </div>

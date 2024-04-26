@@ -27,7 +27,11 @@
                         <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                     <%} %>
                 </b></li>
-                <li class="li"><b>$0.00</b></li>
+                <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                    <% if(locals.cc > 0) {%>
+                        <b class="cc"><%= locals.cc %></b>
+                    <%}%>
+                </a></b></li>
                 <% } else { %>
                     <li class="li"><b></b></li>
                     <li class="li"><b></b></li>
@@ -62,7 +66,12 @@
                             <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                         <%} %>
                     </b></li><hr>
-                    <li class="li"><b>$0.00</b></li><hr>
+                    <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                        <% if(locals.cc > 0) {%>
+                            <b class="cc"><%= locals.cc %></b>
+                        <%}%>
+                    </a></b></li>
+                    <hr>
                     <% }  %>
                     <% if( locals.action == "LOG IN" ){ %>
                     <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
@@ -117,7 +126,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(0)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$33.00</div>
                         </div>
                     </div>
                     <div class="product_class inwm24">
@@ -130,7 +139,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">WOMEN</div>
                             <div class="bige f2" onclick="product_show(1)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$35.00</div>
                         </div>
                     </div>
                     <div class="product_class inwm24 iniv700">
@@ -143,7 +152,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(2)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$34.00</div>
                         </div>
                     </div>
                     <div class="product_class inwm24 iniv700">
@@ -156,7 +165,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">WOMEN</div>
                             <div class="bige f2" onclick="product_show(3)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$40.00</div>
                         </div>
                     </div>
                 </div>
@@ -171,7 +180,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(4)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$34.00</div>
                         </div>
                     </div>
                     <div class="product_class inwm24">
@@ -184,7 +193,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">WOMEN</div>
                             <div class="bige f2" onclick="product_show(5)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$40.00</div>
                         </div>
                     </div>
                 </div>
@@ -247,14 +256,14 @@
                     <div class="product_class inwm24">
                         <div class="befor-hover" onclick="product_show(6)">
                             <a href="product">
-                                <img style="margin: 0px 0px -4px 0px;" src="Photo/2w.avif" alt="IMG">
-                                <img class="show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/2w.avif" alt="IMG">   
+                                <img style="margin: 0px 0px -4px 0px;" src="Photo/4w.webp" alt="IMG">
+                                <img class="show-oh-hover" style="margin: 0px 0px -4px 0px;" src="Photo/4w.webp" alt="IMG">   
                             </a>
                         </div>
                         <div class="ml15">
                             <div class="smalle f1 o7">WOMEN</div>
                             <div class="bige f2" onclick="product_show(6)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$40.00</div>
                         </div>
                     </div>
                     <div class="product_class inwm24">
@@ -267,7 +276,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(7)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$45.00</div>
                         </div>
                     </div>
                     <div class="product_class inwm24 iniv700">
@@ -280,7 +289,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">WOMEN</div>
                             <div class="bige f2" onclick="product_show(8)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$37.00</div>
                         </div>
                     </div>
                     <div class="product_class inwm24 iniv700">
@@ -293,7 +302,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(9)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$40.00</div>
                         </div>
                     </div>
                 </div>
@@ -308,7 +317,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">WOMEN</div>
                             <div class="bige f2" onclick="product_show(10)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$37.00</div>
                         </div>
                     </div>
                     <div class="product_class inwm24">
@@ -321,7 +330,7 @@
                         <div class="ml15">
                             <div class="smalle f1 o7">MEN</div>
                             <div class="bige f2" onclick="product_show(11)"><a href="product">Formal Blazer</a></div>
-                            <div class="prize_font f2">$33.00 – $36.00</div>
+                            <div class="prize_font f2">$40.00</div>
                         </div>
                     </div>
                 </div>

@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P Shopping Point About</title>
+    <title>cart</title>
     <link rel="stylesheet" href="Style/style.css">
     <link rel="stylesheet" href="Style/utils.css">
-    <link rel="stylesheet" href="Style/about.css">
+    <link rel="stylesheet" href="Style/cart.css">
 </head>
 <body>
-    <header> 
+    <header style="margin-bottom: 90px;" class="mb20"> 
         <nav class="flex jcb">
             <ul class="navbar first">
                 <li class="li"><a href="buyblazer">BUY BLAZER</a></li>
                 <li class="li"><a href="women">WOMEN</a></li>
                 <li class="li"><a href="men">MEN</a></li>
-                <b><li class="li"><a href="about">ABOUT</a></li></b>
+                <li class="li"><a href="about">ABOUT</a></li>
                 <li class="li"><a href="contact">CONTACT</a></li>
             </ul>
             <ul class="navbar center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
@@ -27,12 +27,12 @@
                     <%} else {%>
                         <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                     <%} %>
-                </b></li>
+                </b></li>                
                 <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
                     <% if(locals.cc > 0) {%>
                         <b class="cc"><%= locals.cc %></b>
                     <%}%>
-                </a></b></li>
+                    </a></b></li>
                 <% } else { %>
                     <li class="li"><b></b></li>
                     <li class="li"><b></b></li>
@@ -57,7 +57,7 @@
                     <li><a href="buyblazer">BUY BLAZER</a></li><hr>
                     <li><a href="women">WOMEN</a></li><hr>
                     <li><a href="men">MEN</a></li><hr>
-                    <b><li><a href="about">ABOUT</a></li><hr></b>
+                    <li><a href="about">ABOUT</a></li><hr>
                     <li><a href="contact">CONTACT</a></li><hr>
                     <% if(locals.profile) { %>
                     <li class="li"><b>
@@ -86,68 +86,125 @@
                 </ul>
             </div>
         </nav>
+        <hr class="o5">
     </header>
-    <hr class="o5">
     <main>
-        <div class="flex jcc">
-            <div class="textaline flex aic jcc f-c text">
-                <span class="big f3 Ftext">
-                    About
-                </span>
-                <span class="small f2">
-                    <b>Want to get in touch? We'd like to hear from you. Hear's how you can reach us...</b>
-                </span>
-                <span class="f3" style="font-size: smaller; margin: 10px 0px 0px 0px;">
-                    P Shopping Point is a diversified group with majority business interests in Textile & Apparel sectors and a presence across varying segments such as Consumer Care, Realty and Engineering in national and international markets.
-                </span>
-            </div>
+        <div class="xx f2" style="margin-left: 12.5%; margin-bottom: 50px;">
+            Cart
         </div>
-        <div class="flex jcc">
-            <div class="acontainer">
-                <div class="flex adullbc">
-                    <div class="lefta flex f-c">
-                        <span class="smalle f2" style="margin-bottom: 15px;">THE MISSION</span>
-                        <span class="fb f2" style="font-size: 35px; line-height: 40px;">At the heart of everything, we set out to offer the best quality.</span>
-                        <div class="sul"></div>
-                    </div>
-                    <div class="righta flex f-c f2 bigm">
-                        <span style="margin-bottom: 20px;"></span>
-                    </div>
-                </div>
-            </div>
+    
+        <div class="n596">
+            <li class="f2 flex jcc aic">
+                <ul class="list">1. SHOPPING CART</ul> <div class="arrow"> > </div>
+                <ul class="listwith"><a href="checkout">2. CHECKOUT DETAILS</a></ul> <div class="arrow"> > </div>
+                <ul class="listwith">3. ORDER COMPLETE</ul>
+            </li>
         </div>
-        <div class="flex jcc">
-            <div class="textaline flex aic jcc f-c text">
-                <span class="big f3 Ftext">
-                    How it started?
-                </span>
-                <span class="f3" style="font-size: smaller;">
-                    Want to get in touch? We'd like to hear from you. Hear's how you can reach us...
-                </span>
-            </div>
+    
+        <div>
+            <table class="f2 one_table n596">
+                <thead style="margin-bottom: 20px;">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Prize</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(locals.itam.length > 0) {%>
+                        <tr style="height: 6px;" ></tr><td></td></tr>
+                    <%}%>
+                    <% var total = 0; %>
+                    <% for (var i = 0; i <locals.itam.length; i++) { %>
+                        <tr style="text-align: center;">
+                            <td><form method="post"><button class="cancle_btn" type="submit" name="id" value="<%= locals.itam[i]._id %>">X</button></form></td>
+                            <td><img class="cart_img" src="<%= locals.itam[i].path %>" alt="blazer"></td>
+                            <% if(locals.itam[i].gender) {%>
+                                <td>Men</td>
+                            <% } else { %>
+                                <td>Women</td>
+                            <%}%>
+                            <td>$<%= locals.itam[i].prize %>.00</td>
+                            <td><%= locals.itam[i].quantity %></td>
+                            <td>$<%= locals.itam[i].prize * locals.itam[i].quantity %>.00</td>
+                            <% total +=  (locals.itam[i].prize * locals.itam[i].quantity) %>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <table class="f2 one_table d596">
+                <thead style="margin-bottom: 20px;">
+                    <tr>
+                        <th colspan="2"></th>
+                        <th colspan="2">Details</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 13.5px;">
+                    <% if(locals.itam.length > 0) {%>
+                        <tr style="height: 6px;" ></tr><td></td></tr>
+                    <%}%>
+                    <% var total = 0; %>
+                    <% for (var i = 0; i <locals.itam.length; i++) { %>
+                        <tr style="text-align: center;">
+                            <td rowspan="4"><form method="post"><button class="cancle_btn" type="submit" name="id" value="<%= locals.itam[i]._id %>">X</button></form></td>
+                            <td rowspan="4"><img class="cart_img" src="<%= locals.itam[i].path %>" alt="blazer"></td>
+                            <td> <b>Product :</b></td>
+                            <% if(locals.itam[i].gender) {%>
+                                <td>Men</td>
+                            <% } else { %>
+                                <td>Women</td>
+                            <%}%>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td><b>Prize :</b></td>
+                            <td>$<%= locals.itam[i].prize %>.00</td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td><b>Quantity :</b></td>
+                            <td><%= locals.itam[i].quantity %></td>
+                        </tr>
+                        <tr style="text-align: center;">
+                            <td><b>Subtotal :</b></td>
+                            <td>$<%= locals.itam[i].prize * locals.itam[i].quantity %>.00</td>
+                        </tr>
+                        <% if(locals.itam.length-1 > i ) {%>
+                            <tr><td colspan="4"><hr></td></tr>
+                            <tr style="height: 6px;" ></tr><td></td></tr>
+                        <%}%>
+                        <% total +=  (locals.itam[i].prize * locals.itam[i].quantity) %>
+                    <% } %>
+                </tbody>
+            </table>
+            <table class="f2 two_table">
+                <thead style="margin-bottom: 20px;">
+                    <tr>
+                        <th colspan="2">Cart totals</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 6px;" ></tr><td></td></tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>$<%= total %>.00</td>
+                    </tr>
+                    <tr style="height: 6px;" ></tr><td></td></tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                       <td colspan="2"><hr></td>
+                    </tr>
+                    <tr style="height: 6px;" ></tr><td></td></tr>
+                    <tr>
+                        <td colspan="2"><button onclick="checkout()" class="pro_btn">Proceed to checkout</button></td>
+                    </tr>
+                    <tr style="height: 6px;" ></tr><td></td></tr>
+                </tfoot>
+            </table>
         </div>
-        <div style="margin: 0px 0px 100px 0px;">
-            <div class="v758 fb f2 xx top_bot" style="line-height: 37px;">
-                Vel mauris molestie dignissim
-            </div>
-            <div class="text_img">
-                <div class="lefta2 flex jcc f-c">
-                    <div class="xx fb f2 mtb iv758" style="line-height: 37px;">
-                        Vel mauris molestie dignissim
-                    </div>
-                    <div class="bige f2 mtb">
-                        Proin eu ante vel mauris molestie dignissim non eget nunc. Integer ac massa orci. Suspendisse vulputate semper nunc eget rhoncus.
-                    </div>
-                    <div class="smalle f2 mtb iv932">
-                        Praesent vel faucibus ligula. Sed sit amet ipsum eget velit aliquet faucibus. Maecenas et odio id turpis sollicitudin pulvinar sit amet vitae augue. Phasellus nec ultricies arcu. Quisque efficitur tellus sit amet bibendum molestie. Duis id egestas odio. Phasellus lacinia ex quis faucibus tempor. Sed feugia.
-                    </div>
-                </div>
-                <img class="blazer_on" src="Photo/blazer_on.jpeg" alt="">
-            </div>
-            <div class="v932 small f2 top_bot">
-                Praesent vel faucibus ligula. Sed sit amet ipsum eget velit aliquet faucibus. Maecenas et odio id turpis sollicitudin pulvinar sit amet vitae augue. Phasellus nec ultricies arcu. Quisque efficitur tellus sit amet bibendum molestie. Duis id egestas odio. Phasellus lacinia ex quis faucibus tempor. Sed feugia.
-            </div>
-        </div>
+
     </main>
     <footer>
         <div class="flex aic jcc">
@@ -163,10 +220,10 @@
                 </div>
                 <div>
                     <ul class="flex jcb f2 fnav" style="margin: 5px 0px 35px 0px;">
-                        <li> <a class="hover o7" href="buyblazer">BUY T-SHIRT</li></a>
+                        <li> <a class="hover o7" href="buyblazer">BUY BLAZER</li></a>
                         <li> <a class="hover o7" href="women">WOMEN</li></a>
                         <li> <a class="hover o7" href="men">MEN</li></a>
-                        <li><b><a class="hover o7" href="about">ABOUT</li></b></a>
+                        <li> <a class="hover o7" href="about">ABOUT</li></a>
                         <li> <a class="hover o7" href="contact">CONTACT</a></li>
                     </ul> 
                 </div>
@@ -189,4 +246,9 @@
     </footer>
 </body>
 <script src="JavaScript/script.js"></script>
+<script>
+    const checkout= () => {
+        window.location.href = "checkout"; 
+    }
+</script>
 </html>

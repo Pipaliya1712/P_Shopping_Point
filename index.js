@@ -10,6 +10,7 @@ connectDB();
 
 dotenv.config();
 const app = express();
+app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(cookieParser());
 app.use(express.static(path.join(path.resolve(),"public")))

@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv"
 import jwt from "jsonwebtoken"
 import { User } from "../models/userModel.js";
+import {Cart} from "../models/cartMode.js";
 
 const app = express();
 dotenv.config();
@@ -83,10 +84,9 @@ const sendMailForgot = async(email,res) => {
     });
 }
 
-const sendMail = async (name,email,req,res,file,act) => {
+const sendMail = async (name,email,req,res,file,act,ct,cc) => {
     const emailtrans = emailTransporter();
     OTP = emailtrans.otp;
-
     const transporter = nodemailer.createTransport(emailtrans.trans);
     console.log(email);
     const mailOptions = {
@@ -112,13 +112,27 @@ const sendMail = async (name,email,req,res,file,act) => {
     transporter.sendMail(mailOptions, (err,info)=>{
         if(err) {
             console.log(err);
-            return res.render("emailverification",{navbar:act,action:"LOG OUT",profile: true,file,email,OTPmessage: "Email is invalid",resend:0})
+            return res.render("emailverification",{navbar:act,action:"LOG OUT",profile: true,file,email,OTPmessage: "Email is invalid",resend:0,ct,cc})
         }
         else {
             console.log("Email has been sent :" , info.response);
-            return res.render("emailverification",{navbar:act,action:"LOG OUT",profile: true,email,file,OTPmessage: "OTP Sent Successfully",resend:0})
+            return res.render("emailverification",{navbar:act,action:"LOG OUT",profile: true,email,file,OTPmessage: "OTP Sent Successfully",resend:0,ct,cc})
         }
     });
+}
+
+const cart_total = async(req,res) => {
+    const user =await data(req,res);
+    const itam = await Cart.find({phone:user.phone});
+    // console.log(user)
+    let total = 0 ;
+    let count =0;
+    for(let i=0;i<itam.length;i++){
+        total += (itam[i].prize * itam[i].quantity);
+        count += itam[i].quantity;
+    }
+    let cart_data = [total, count];
+    return cart_data;
 }
 
 export {
@@ -126,5 +140,6 @@ export {
     sendMailForgot,
     data,
     auth,
-    OTP
+    OTP,
+    cart_total
 }

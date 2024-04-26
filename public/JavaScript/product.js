@@ -18,11 +18,11 @@ let addition = () => {
     }
 }
 
-let cart = document.getElementsByClassName("total_shopping");
-let cart_update = () =>{
-    cart[0].innerText = parseInt(cart[0].innerText) +  item_count.innerText*33;
-    cart[1].innerText = parseInt(cart[1].innerText) +  item_count.innerText*33;
-}
+// let cart = document.getElementsByClassName("total_shopping");
+// let cart_update = () =>{
+//     cart[0].innerText = parseInt(cart[0].innerText) +  item_count.innerText*33;
+//     cart[1].innerText = parseInt(cart[1].innerText) +  item_count.innerText*33;
+// }
 
 let change_details = document.getElementsByClassName("change");
 change_details[0].children[0].children[0].src = localStorage.getItem("link1");
@@ -60,21 +60,27 @@ if(change_details[0].children[1].children[0].innerText == "WOMEN"){
     related[0].children[0].children[0].children[0].children[0].src = "Photo/1w.avif";
     related[0].children[0].children[0].children[0].children[1].src = "Photo/1w.avif";
     related[0].children[0].children[1].children[0].innerText = "WOMEN"
+    related[0].children[0].children[1].children[2].innerText= "$37.00"
     related[0].children[1].children[0].children[0].children[0].src = "Photo/2w.avif";
     related[0].children[1].children[0].children[0].children[1].src = "Photo/2w.avif";
     related[0].children[1].children[1].children[0].innerText = "WOMEN"
+    related[0].children[1].children[1].children[2].innerText = "$35.00"
     related[0].children[2].children[0].children[0].children[0].src = "Photo/3w.jpg";
     related[0].children[2].children[0].children[0].children[1].src = "Photo/3w.jpg";
     related[0].children[2].children[1].children[0].innerText = "WOMEN"
+    related[0].children[2].children[1].children[2].innerText = "$40.00"
     related[0].children[3].children[0].children[0].children[0].src = "Photo/4w.webp";
     related[0].children[3].children[0].children[0].children[1].src = "Photo/4w.webp";
     related[0].children[3].children[1].children[0].innerText = "WOMEN"
+    related[0].children[3].children[1].children[2].innerText = "$40.00"
     relaed[0].children[0].children[0].children[0].children[0].src = "Photo/3w.jpg";
     relaed[0].children[0].children[0].children[0].children[1].src = "Photo/3w.jpg";
     relaed[0].children[0].children[1].children[0].innerText = "WOMEN"
+    relaed[0].children[0].children[1].children[2].innerText = "$40.00"
     relaed[0].children[1].children[0].children[0].children[0].src = "Photo/4w.webp";
     relaed[0].children[1].children[0].children[0].children[1].src = "Photo/4w.webp";
     relaed[0].children[1].children[1].children[0].innerText = "WOMEN"
+    relaed[0].children[1].children[1].children[2].innerText = "$40.00"
 }
 
 let open_nav = () => {
@@ -87,4 +93,44 @@ let close_nav = () =>{
     document.getElementById("menu").style.display = "block";
     document.getElementById("close").style.display = "none";
     document.getElementById("fullnav").style.display = "none";
+}
+
+function sendData() {
+    const data = {
+        path:localStorage.getItem("link1"),
+        prize:parseInt(localStorage.getItem("prize")[1]+localStorage.getItem("prize")[2]),
+        gender: localStorage.getItem("gender") == "WOMEN" ? false : true,
+        quntity: parseInt(item_count.innerText),
+        payment: false,
+    };
+
+    fetch('/product', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Data sent successfully:', data);
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
+const add = () => {
+    const added = document.getElementsByClassName("added")[0];
+    added.style.display = "contents";
+    setTimeout(()=>{
+        added.style.display = "none";
+    },1000)
+    location.reload();
 }

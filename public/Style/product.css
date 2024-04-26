@@ -40,13 +40,18 @@
     margin: 0px -5px 0px -4.5px 
 }
 .ex_add_to_cart{
-    background-color: #50312594;
+    background-color: #503125;
     color: white;
     padding: 2px 20px;
     margin-left: 20px;
 }
 .ex_add_to_cart:hover{
     color: rgba(255, 255, 255, 0.7);
+}
+.added{
+    font-size: small;
+    opacity: 0.7;
+    display: none;
 }
 @media (max-width:1151px){
     .w{

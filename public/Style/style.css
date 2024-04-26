@@ -278,6 +278,13 @@
 .mv767{
     display: none;
 }
+.cc{
+    border: 1px solid black;
+    border-radius: 99px;
+    padding: 0 5px;
+    background: black;
+    color: white;
+}
 @media(max-width : 426px){
     .big{
         font-size: xx-large;

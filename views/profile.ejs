@@ -28,7 +28,11 @@
                         <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                     <%} %>
                 </b></li>
-                <li class="li"><b>$0.00</b></li>
+                <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                    <% if(locals.cc > 0) {%>
+                        <b class="cc"><%= locals.cc %></b>
+                    <%}%>
+                </a></b></li>
                 <% } else { %>
                     <li class="li"><b></b></li>
                     <li class="li"><b></b></li>
@@ -63,7 +67,12 @@
                                 <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                             <%} %>
                         </b></li><hr>
-                        <li class="li"><b>$0.00</b></li><hr>
+                        <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                            <% if(locals.cc > 0) {%>
+                                <b class="cc"><%= locals.cc %></b>
+                            <%}%>
+                        </a></b></li>
+                        <hr>
                         <% }  %>
                     <% if( locals.action == "LOG IN" ){ %>
                     <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
@@ -109,6 +118,7 @@
             <div class="editTextWrapper">
                 <div class="editText">Edit</div>
             </div>
+            <div class="delete f2"><b class="inside_delete" onclick="display_pop_up()">Delete</b> account</div>
         </div>
     </main>
     <footer>
@@ -149,6 +159,23 @@
             Copyright &copy; 2023 P_Shopping_Point | Powered by P Shopping Store
         </div>
     </footer>
+    <div class="blur" onclick="remove_pop_up()">
+        <form method="post" class="pop_up f2">
+            <div style="margin-bottom:15px ;">Are you sure you wish to end your journey along with us?</div>
+            <input class="Shop_Collection_btn" type="submit" value="Delete">
+            <button class="Shop_Collection_btn" type="reset">Cancle</button>
+        </form>
+    </div>
 </body>
 <script src="JavaScript/edit.js"></script>
+<script>     
+    const display_pop_up = () => {
+        const blur = document.getElementsByClassName('blur')[0];
+        blur.style.display = "block";
+    }
+    const remove_pop_up = () => {
+        const blur = document.getElementsByClassName('blur')[0];
+        blur.style.display = "none";
+    }
+</script>
 </html>

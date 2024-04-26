@@ -77,6 +77,41 @@
 .edit:hover ~ .editTextWrapper{
     display:block;
 }
+.delete{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.inside_delete{
+    color: red; 
+}
+.inside_delete:hover{
+    cursor: pointer;
+    border-bottom: 1px solid red;
+}
+.blur{
+    cursor: pointer;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.642);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display : none;
+}
+.pop_up{
+    border: 1px solid black;
+    text-align: center;
+    padding: 49px;
+    width: 374.8px;
+    border-radius: 20px;
+    background: #998780;
+    position: fixed;
+    top: 50%;
+    cursor: auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 @media (max-width: 800px) {
     .information{
         width: 399px;

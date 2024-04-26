@@ -28,7 +28,11 @@
                         <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                     <%} %>
                 </b></li>
-                <li class="li"><b>$0.00</b></li>
+                <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                    <% if(locals.cc > 0) {%>
+                        <b class="cc"><%= locals.cc %></b>
+                    <%}%>
+                </a></b></li>
                 <% } else { %>
                     <li class="li"><b></b></li>
                     <li class="li"><b></b></li>
@@ -63,7 +67,12 @@
                             <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                         <%} %>
                     </b></li><hr>
-                    <li class="li"><b>$0.00</b></li><hr>
+                    <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                        <% if(locals.cc > 0) {%>
+                            <b class="cc"><%= locals.cc %></b>
+                        <%}%>
+                    </a></b></li>
+                    <hr>
                     <% }  %>
                     <% if( locals.action == "LOG IN" ){ %>
                     <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>

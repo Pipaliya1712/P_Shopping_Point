@@ -27,7 +27,11 @@
                         <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                     <%} %>
                 </b></li>
-                <li class="li"><b>$0.00</b></li>
+                <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                    <% if(locals.cc > 0) {%>
+                        <b class="cc"><%= locals.cc %></b>
+                    <%}%>
+                </a></b></li>
                 <% } else { %>
                     <li class="li"><b></b></li>
                     <li class="li"><b></b></li>
@@ -62,7 +66,12 @@
                             <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
                         <%} %>
                     </b></li><hr>
-                    <li class="li"><b>$0.00</b></li><hr>
+                    <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                        <% if(locals.cc > 0) {%>
+                            <b class="cc"><%= locals.cc %></b>
+                        <%}%>
+                    </a></b></li>
+                    <hr>
                     <% }  %>
                     <% if( locals.action == "LOG IN" ){ %>
                     <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
@@ -97,7 +106,7 @@
                     <div class="ml30">
                         <div class="smalle f1 o7">WOMEN</div>
                         <div class="bige f2" onclick="product_show(0)"><a href="product">Formal Blazer</a></div>
-                        <div class="prize_font f2">$33.00 – $36.00</div>
+                        <div class="prize_font f2">$37.00</div>
                     </div>
                 </div>
                 <div class="wm24">
@@ -110,7 +119,7 @@
                     <div class="ml30">
                         <div class="smalle f1 o7">WOMEN</div>
                         <div class="bige f2" onclick="product_show(1)"><a href="product">Formal Blazer</a></div>
-                        <div class="prize_font f2">$33.00 – $36.00</div>
+                        <div class="prize_font f2">$35.00</div>
                     </div>
                 </div>
                 <div class="wm24 iv700">
@@ -123,7 +132,7 @@
                     <div class="ml30">
                         <div class="smalle f1 o7">WOMEN</div>
                         <div class="bige f2" onclick="product_show(2)"><a href="product">Formal Blazer</a></div>
-                        <div class="prize_font f2">$33.00 – $36.00</div>
+                        <div class="prize_font f2">$40.00</div>
                     </div>
                 </div>
                 <div class="wm24 iv700">
@@ -136,7 +145,7 @@
                     <div class="ml30">
                         <div class="smalle f1 o7">WOMEN</div>
                         <div class="bige f2" onclick="product_show(3)"><a href="product">Formal Blazer</a></div>
-                        <div class="prize_font f2">$33.00 – $36.00</div>
+                        <div class="prize_font f2">$40.00</div>
                     </div>
                 </div>
             </div>
@@ -151,7 +160,7 @@
                     <div class="ml30">
                         <div class="smalle f1 o7">WOMEN</div>
                         <div class="bige f2" onclick="product_show(2)"><a href="product">Formal Blazer</a></div>
-                        <div class="prize_font f2">$33.00 – $36.00</div>
+                        <div class="prize_font f2">$40.00</div>
                     </div>
                 </div>
                 <div class="wm24">
@@ -164,7 +173,7 @@
                     <div class="ml30">
                         <div class="smalle f1 o7">WOMEN</div>
                         <div class="bige f2" onclick="product_show(3)"><a href="product">Formal Blazer</a></div>
-                        <div class="prize_font f2">$33.00 – $36.00</div>
+                        <div class="prize_font f2">$40.00</div>
                     </div>
                 </div>
             </div>
