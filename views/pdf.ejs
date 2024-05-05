@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" href="Style/utils.css"> 
+    <title>pdf</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    @media print {
+      .hide-on-pdf {
+        display: none !important;
+      }
+    }
+    .bill_btn{
+    padding: 7px 18px;
+    border: 0px solid;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 999px;
+    }
+    .bill_btn:hover{
+        background-color: #9980802b;
+        transition: 0.5s;
+    }
+  </style>
+</head>
+<body">
+  <header style="margin-bottom: 50px;" class="hide-on-pdf mb20"> 
+    <nav class="flex jcb">
+        <ul class="navbar first">
+            <li class="li"><a href="buyblazer">BUY BLAZER</a></li>
+            <li class="li"><a href="women">WOMEN</a></li>
+            <li class="li"><a href="men">MEN</a></li>
+            <li class="li"><a href="about">ABOUT</a></li>
+            <li class="li"><a href="contact">CONTACT</a></li>
+        </ul>
+        <ul class="navbar center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
+        <ul class="navbar second">
+            <% if(locals.profile) { %>
+            <li class="li"><b>
+                <% if(locals.file == "") { %>
+                    <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                <%} else {%>
+                    <img style="width: 34px; height: 34px; margin-top: 5px; border-radius: 999px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
+                <%} %>
+            </b></li>
+            <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                <% if(locals.cc > 0) {%>
+                    <b class="cc"><%= locals.cc %></b>
+                <%}%>
+            </a></b></li>
+            <% } else { %>
+                <li class="li"><b></b></li>
+                <li class="li"><b></b></li>
+            <% } %>
+            <% if( locals.action == "LOG IN" ){ %>
+            <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
+            <% } else { %>
+            <li class="li"><b>
+                <form method="post" action="/logout">
+                    <button type="submit" class="logout"><%= locals.action %></button>
+                </form>
+            </b></li>
+            <% } %>
+        </ul>
+    </nav>
+    <nav class="snavbar">
+        <ul class="center_logo"><a href="/"><img class="logo" src="Photo/Screenshot 2023-10-22 092706.png" alt="P SHOPPING POINT" srcset=""></a></ul>
+        <img id="menu" onclick="open_nav()" src="svg/menu-outline.svg" alt="MENU">
+        <img id="close" onclick="close_nav()" src="svg/close-outline.svg" alt="CLOSE">
+        <div id="fullnav">
+            <ul class="fullnav_inside flex jcc f-c">
+                <li><a href="buyblazer">BUY BLAZER</a></li><hr>
+                <li><a href="women">WOMEN</a></li><hr>
+                <li><a href="men">MEN</a></li><hr>
+                <li><a href="about">ABOUT</a></li><hr>
+                <li><a href="contact">CONTACT</a></li><hr>
+                <% if(locals.profile) { %>
+                <li class="li"><b>
+                    <% if(locals.file == "") { %>
+                        <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="svg/profile-circle-svgrepo-com.svg" alt="Profile">
+                    <%} else {%>
+                        <img style="width: 34px; height: 34px; margin-top: 5px;" onclick="window.open('/profile', '_self')" src="Uploads/<%= locals.file %>" alt="Profile">
+                    <%} %>
+                </b></li><hr>
+                <li class="li"><b><a href="cart">$<%= locals.ct %>.00 
+                    <% if(locals.cc > 0) {%>
+                        <b class="cc"><%= locals.cc %></b>
+                    <%}%>
+                </a></b></li>
+                <hr>
+                <% }  %>
+                <% if( locals.action == "LOG IN" ){ %>
+                <li class="li"><b><a class="link" href="login"><%= locals.action %></a></b></li>
+                <% } else { %>
+                <li class="li"><b>
+                    <form method="post" action="/logout">
+                        <button type="submit" class="logout"><%= locals.action %></button>
+                    </form>
+                </b></li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+    <hr class="o5">
+  </header> 
+  <form class="hide-on-pdf" style="text-align: center;" action="bill" method="post"><button name="itam" value="<%= locals.placedItam[0]._id %>" class="bill_btn">Download</button></form>
+  <div id="lol" style="margin: 20px 40px; font-size: 20px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <div style="margin: 50px 0;">
+      <div style="float: left;">
+          <div><b>Transaction id:</b> <%= locals.placedItam[0]._id %></div>
+          <div><b>Date and Time:</b> <%=locals.placedItam[0].date.getDate()%>-<%=(locals.placedItam[0].date.getMonth() + 1) %>-<%=locals.placedItam[0].date.getFullYear()%>  <%=locals.placedItam[0].date.getHours() %>:<%=locals.placedItam[0].date.getMinutes()%>:<%=locals.placedItam[0].date.getSeconds()%></div>
+      </div>
+      <div style="float: right;">
+          <img style="height: 55px;" src="Photo/Screenshot%202023-10-22%20092706.png" alt="jk">
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    <div style="border-top: 3px solid #998780;"></div>
+    <div style="margin: 20px 0;">
+      <span style="display: inline-block; width: 49%;">
+          <span style="margin-bottom: 10px;"><b>Customer Details: </b></span><br>
+          <span><%= locals.name %></span><br>
+          <span><%= locals.phone %></span><br>
+          <span><%= locals.email %></span><br>
+      </span>
+      <span style="display: inline-block; width: 40%;">
+          <span style="margin-bottom: 10px;"><b>Receiver Details: </b></span><br>
+          <span><%=locals.placedItam[0].fname%> <%=locals.placedItam[0].lname%></span><br>
+          <span><%=locals.placedItam[0].phone%></span><br>
+          <span><%=locals.placedItam[0].email%></span><br>
+      </span>
+    </div>
+    <div style="border-top: 3px solid #998780;"></div>
+    <div>
+      <table style="row-gap: 20px; width: 100%;margin-top: 15px;margin-bottom: 20px;text-align: center;border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Rate</th>
+            <th>Tax</th>
+            <th>Amount</th>
+          </tr>
+          <tr>
+            <td><div style="height: 20px;"></div></td>
+          </tr>
+          <tr>
+            <td colspan="5" style="border-bottom: 3px solid #998780;"></td>
+          </tr>
+        </thead>
+        <% let sum = 0 %>
+        <tbody>
+          <% for(let i=0;i < locals.placedItam[0].product.length;i++) { %>
+          <tr>
+            <td><div style="height: 20px;"></div></td>
+          </tr>
+          <tr>
+            <td>
+              <% if(locals.placedItam[0].product[i].gender) {%>
+                Men
+              <% } else { %>
+                Women
+              <%}%> 
+            </td>
+            <td><%= locals.placedItam[0].product[i].quantity %></td>
+            <td>$<%= locals.placedItam[0].product[i].prize %>.00</td>
+            <td>$00.00</td>
+            <td>$<%= locals.placedItam[0].product[i].prize  * locals.placedItam[0].product[i].quantity %>.00</td>
+            <% sum += (locals.placedItam[0].product[i].prize  * locals.placedItam[0].product[i].quantity)%>
+          </tr>
+          <tr>
+            <td><div style="height: 20px;"></div></td>
+          </tr>
+          <%}%>
+          <tr>
+            <td colspan="5"><hr></td>
+          </tr>
+          <tr>
+            <td><div style="height: 20px;"></div></td>
+          </tr>
+          <tr>
+            <td style="text-align: right;" colspan="4">Subtotal:</td>
+            <td>$<%= sum %>.00</td>
+          </tr>
+          <tr>
+            <td style="text-align: right;" colspan="4">Discount:</td>
+            <td>$00.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="border-top: 3px solid #998780;"></div>
+    <div style="text-align: right;">
+      <div style="margin: 20px 100px 0 0; display: inline-block; padding: 20px 50px; background-color: #998780; font-weight: bold; color: white;">
+          <span style="margin-right:50px;">Total</span>
+          <span>$<%= sum %>.00</span>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top:15px;">
+      Thank you for shopping : )
+    </div>
+    <div style="text-align: right;">
+      <div style="display: inline-block; padding: 20px 50px;">
+        <img width="90px" src="Photo/WhatsApp_Image_2024-05-03_at_6.36.04_PM-removebg-preview.png" alt="sign">
+          <div style="text-align: center;">Seller sign</div>
+      </div>
+    </div>  
+    <hr>
+    <div style="text-align: center; font-size: 15px;">
+      <div>SP Boys hostel, Gulbai takra, EllisBridge, Ahmedabad - 3600001</div>
+      <div>+91-7383-274-687, pshoppingpoint@pshoppingpoint.com</div>
+    </div>
+  </div>
+  <footer class="hide-on-pdf">
+    <div class="flex aic jcc">
+        <div class="startf flex aic jcc f-c">
+            <div style="text-align: center;">
+
+                <span class="f3 bige" >Subscribe To Get Offers In Your Inbox</span><br>
+                <span class="f3 o7" style="font-size: 15px;" >Enter your registered email and get upto <b>75%</b> discount.</span><br>
+                <span class="f3 o7" style="font-size: 15px;" >Enjoy your shopping with us.</span>
+            </div>
+            <div id="Subscribe">
+                <input style="width: 460px; padding: 7px; margin-right: 5px;" class="f2" type="text" placeholder="Your email address...">
+                <button class="Shop_Collection_btn " style="padding: 10.3px 28px !important;">Subscribe</button>
+            </div>
+            <div>
+                <ul class="flex jcb f2 fnav" style="margin: 5px 0px 35px 0px;">
+                    <li> <a class="hover o7" href="buyblazer">BUY BLAZER</li></a>
+                    <li> <a class="hover o7" href="women">WOMEN</li></a>
+                    <li> <a class="hover o7" href="men">MEN</li></a>
+                    <li> <a class="hover o7" href="about">ABOUT</li></a>
+                    <li> <a class="hover o7" href="contact">CONTACT</a></li>
+                </ul> 
+            </div>
+            <div class="flex aic jcc">
+                <div>
+                    <img class="svgsm" onclick="window.open('/', '_self')" src="svg/facebook-176-svgrepo-com.svg" alt="Mail">
+                </div>
+                <div>
+                    <img class="svgsm" onclick="window.open('/', '_self')" src="svg/twitter-154-svgrepo-com.svg" alt="Mail">
+                </div>
+                <div>
+                    <img class="svgsm" onclick="window.open('/', '_self')" src="svg/instagram-167-svgrepo-com.svg" alt="Mail">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="endf f2" style="text-align: center;">
+        Copyright &copy; 2023 P_Shopping_Point | Powered by P Shopping Store
+    </div>
+  </footer>
+</body>
+<script src="JavaScript/script.js"></script>
+</html>

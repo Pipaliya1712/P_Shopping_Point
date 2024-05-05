@@ -1,6 +1,7 @@
 import {User} from "../models/userModel.js"
 import {Cart} from "../models/cartMode.js";
-import express  from "express";
+import {PlaceOrder} from "../models/placeOrderModel.js"
+import express from "express";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
@@ -9,8 +10,13 @@ import {sendMail,
         data,
         auth,
         OTP,
-        cart_total
+        cart_total,
+        get_cs
     } from "../functions/helper.js"
+import ejs from "ejs";
+import pdf from "html-pdf";
+import fs from "fs";
+import path from "path";
 
 const app = express();
 
@@ -281,6 +287,7 @@ const profileGet =  async (req,res)=>{
 const profilePost = async (req,res) => {
     const user = await data(req,res);
     await User.deleteOne({_id: user._id});
+    await PlaceOrder.deleteMany({phonef:user.phone});
     await Cart.deleteMany({phone:user.phone});
     res.cookie("token",null,{expires:new Date(Date.now())});
     res.redirect("/");
@@ -375,7 +382,7 @@ const changePassword = async (req,res)=> {
 const cartGet = async(req,res) => {
     const {token} = req.cookies;
     let user;
-    let cart_data = [0,0];;
+    let cart_data = [0,0];
     let profile = false,action = "LOG IN";
     let email;
     if(token){
@@ -412,6 +419,82 @@ const checkoutGet = async (req,res) => {
     res.render("checkout.ejs",{action,profile,email,file: user ? user.file : "",itam:cart_itam,ct:cart_data[0],cc:cart_data[1]});
 }
 
+const checkoutPost = async (req,res) => {
+    const {phone,fname,lname,note,country,city,state,address,zip,email,cname} = req.body;
+    const user = await data(req,res)
+    const product = [];
+    const cart_itam = await Cart.find({phone:user.phone});
+    for(let i=0;i<cart_itam.length ;i++){
+        if(! cart_itam[i].paymet){
+            let obj = {
+                prize:cart_itam[i].prize,
+                gender:cart_itam[i].gender,
+                quantity:cart_itam[i].quantity
+            }
+            product.push(obj);
+            await Cart.findByIdAndUpdate({_id:cart_itam[i]._id},{$set:{
+                paymet:true
+            }})
+        }
+    }
+    let add_info =await get_cs(country,state);
+    const car = await PlaceOrder.create({phonef:user.phone,phone,date:new Date(),fname,lname,note,country:add_info[0],city,state:add_info[1],address,zip,email,cname,product});
+    res.redirect("placedOrder");
+}
+
+const placedOrderGet = async (req,res) => {
+    const user = await data(req,res);
+    let cart_data = await cart_total(req,res);
+    const {email,name,file,phone,isverified} = user
+    const placedItam = await PlaceOrder.find({phonef:phone})
+    res.render("placedOrder",{action:"LOG OUT",profile:true,email,phone,file,name,isverified,ct:cart_data[0],cc:cart_data[1],placedItam})
+}
+
+const pdfPost = async (req,res) => {
+    const user = await data(req,res);
+    const {itam} = req.body;
+    let cart_data = await cart_total(req,res);
+    const {email,name,file,phone,isverified} = user
+    const placedItam = await PlaceOrder.find({phonef:phone,_id:itam})
+    res.render("pdf",{action:"LOG OUT",profile:true,email,phone,file,name,isverified,ct:cart_data[0],cc:cart_data[1],placedItam})
+}
+
+const bill = async (req, res) => {
+    const filePathName = path.resolve("E:/Project/P_Shopping_Point/views/pdf.ejs");
+
+    const user = await data(req,res);
+    const {itam} = req.body;
+    const {email,name,phone} = user
+    const placedItam = await PlaceOrder.find({phonef:phone,_id:itam})
+
+    const ejsData = await ejs.renderFile(filePathName, { 
+        basePath: 'http://localhost:4000/', 
+        email: email,
+        phone: phone,
+        name: name,
+        placedItam: placedItam
+    });
+
+    const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="http://localhost:4000/$1"`);
+
+    let option = {
+        format: 'A4',
+        orientation: "portrait",
+        border: "10mm"
+    };
+    
+    pdf.create(modifiedHtml, option).toStream((err, stream) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send('Could not create PDF');
+        }
+        const pdf_name = user.name + ".pdf";
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `attachment;filename= ${pdf_name}`);
+        stream.pipe(res);
+    });
+};
+
 export { 
     changePassword,
     forgotPasswoerdGet,
@@ -439,5 +522,9 @@ export {
     randomUrl,
     cartGet,
     cartPost,
-    checkoutGet
+    checkoutGet,
+    checkoutPost,
+    placedOrderGet,
+    bill,
+    pdfPost
     }

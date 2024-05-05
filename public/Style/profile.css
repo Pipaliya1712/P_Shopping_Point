@@ -88,6 +88,12 @@
     cursor: pointer;
     border-bottom: 1px solid red;
 }
+.order{
+    cursor: pointer;
+}
+.order:hover{
+    border-bottom: 1px solid black;
+}
 .blur{
     cursor: pointer;
     position: fixed;

@@ -114,6 +114,7 @@
                     <div class="f2"><%= locals.phone %></div>
                 </div>
             </div>
+            <div class="f2" style="text-align: center; margin-bottom: 20px;"><b class="order" onclick="place()">My Order</b></div>
             <button class="edit" onclick="window.open('/edit', '_self')"><img style="width: 34px;" src="svg/edit-3-svgrepo-com.svg" alt="Edit"></button>
             <div class="editTextWrapper">
                 <div class="editText">Edit</div>
@@ -176,6 +177,9 @@
     const remove_pop_up = () => {
         const blur = document.getElementsByClassName('blur')[0];
         blur.style.display = "none";
+    }
+    const place = () => {
+        window.location.href = 'placedOrder';
     }
 </script>
 </html>

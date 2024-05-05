@@ -6,6 +6,6 @@ const cartSchema = new mongoose.Schema({
     prize: Number, 
     gender: Boolean,
     quantity: Number,
-    paymet: Boolean,
+    paymet: Boolean
 });
 export const Cart = mongoose.model("Cart",cartSchema);

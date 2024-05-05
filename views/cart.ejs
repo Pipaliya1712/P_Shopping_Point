@@ -89,6 +89,15 @@
         <hr class="o5">
     </header>
     <main>
+
+        <% let unpay=0;
+            for (var i = 0; i <locals.itam.length; i++) { 
+                if(! (locals.itam[i].paymet)){
+                    unpay++;
+                }
+            }
+        %>
+
         <div class="xx f2" style="margin-left: 12.5%; margin-bottom: 50px;">
             Cart
         </div>
@@ -96,7 +105,11 @@
         <div class="n596">
             <li class="f2 flex jcc aic">
                 <ul class="list">1. SHOPPING CART</ul> <div class="arrow"> > </div>
-                <ul class="listwith"><a href="checkout">2. CHECKOUT DETAILS</a></ul> <div class="arrow"> > </div>
+                <% if(locals.itam.length > 0 && unpay > 0) {%>
+                    <ul class="listwith"><a href="checkout">2. CHECKOUT DETAILS</a></ul>
+                <%} else {%>
+                    <ul class="listwith" onclick="selectProduct()">2. CHECKOUT DETAILS</ul>
+                <%}%> <div class="arrow"> > </div>
                 <ul class="listwith">3. ORDER COMPLETE</ul>
             </li>
         </div>
@@ -114,24 +127,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% if(locals.itam.length > 0) {%>
+                    <% if(locals.itam.length > 0 && unpay > 0) {%>
                         <tr style="height: 6px;" ></tr><td></td></tr>
                     <%}%>
                     <% var total = 0; %>
                     <% for (var i = 0; i <locals.itam.length; i++) { %>
-                        <tr style="text-align: center;">
-                            <td><form method="post"><button class="cancle_btn" type="submit" name="id" value="<%= locals.itam[i]._id %>">X</button></form></td>
-                            <td><img class="cart_img" src="<%= locals.itam[i].path %>" alt="blazer"></td>
-                            <% if(locals.itam[i].gender) {%>
-                                <td>Men</td>
-                            <% } else { %>
-                                <td>Women</td>
-                            <%}%>
-                            <td>$<%= locals.itam[i].prize %>.00</td>
-                            <td><%= locals.itam[i].quantity %></td>
-                            <td>$<%= locals.itam[i].prize * locals.itam[i].quantity %>.00</td>
-                            <% total +=  (locals.itam[i].prize * locals.itam[i].quantity) %>
-                        </tr>
+                        <% if(!( locals.itam[i].paymet)) { %>
+                            <tr style="text-align: center;">
+                                <td><form method="post"><button class="cancle_btn" type="submit" name="id" value="<%= locals.itam[i]._id %>">X</button></form></td>
+                                <td><img class="cart_img" src="<%= locals.itam[i].path %>" alt="blazer"></td>
+                                <% if(locals.itam[i].gender) {%>
+                                    <td>Men</td>
+                                <% } else { %>
+                                    <td>Women</td>
+                                <%}%>
+                                <td>$<%= locals.itam[i].prize %>.00</td>
+                                <td><%= locals.itam[i].quantity %></td>
+                                <td>$<%= locals.itam[i].prize * locals.itam[i].quantity %>.00</td>
+                                <% total +=  (locals.itam[i].prize * locals.itam[i].quantity) %>
+                            </tr>
+                        <% } %>
                     <% } %>
                 </tbody>
             </table>
@@ -143,38 +158,40 @@
                     </tr>
                 </thead>
                 <tbody style="font-size: 13.5px;">
-                    <% if(locals.itam.length > 0) {%>
+                    <% if(locals.itam.length > 0 && unpay>0) {%>
                         <tr style="height: 6px;" ></tr><td></td></tr>
                     <%}%>
                     <% var total = 0; %>
                     <% for (var i = 0; i <locals.itam.length; i++) { %>
-                        <tr style="text-align: center;">
-                            <td rowspan="4"><form method="post"><button class="cancle_btn" type="submit" name="id" value="<%= locals.itam[i]._id %>">X</button></form></td>
-                            <td rowspan="4"><img class="cart_img" src="<%= locals.itam[i].path %>" alt="blazer"></td>
-                            <td> <b>Product :</b></td>
-                            <% if(locals.itam[i].gender) {%>
-                                <td>Men</td>
-                            <% } else { %>
-                                <td>Women</td>
+                        <% if(! (locals.itam[i].paymet)) { %>
+                            <tr style="text-align: center;">
+                                <td rowspan="4"><form method="post"><button class="cancle_btn" type="submit" name="id" value="<%= locals.itam[i]._id %>">X</button></form></td>
+                                <td rowspan="4"><img class="cart_img" src="<%= locals.itam[i].path %>" alt="blazer"></td>
+                                <td> <b>Product :</b></td>
+                                <% if(locals.itam[i].gender) {%>
+                                    <td>Men</td>
+                                <% } else { %>
+                                    <td>Women</td>
+                                <%}%>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td><b>Prize :</b></td>
+                                <td>$<%= locals.itam[i].prize %>.00</td>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td><b>Quantity :</b></td>
+                                <td><%= locals.itam[i].quantity %></td>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td><b>Subtotal :</b></td>
+                                <td>$<%= locals.itam[i].prize * locals.itam[i].quantity %>.00</td>
+                            </tr>
+                            <% if(locals.itam.length-1 > i ) {%>
+                                <tr><td colspan="4"><hr></td></tr>
+                                <tr style="height: 6px;" ></tr><td></td></tr>
                             <%}%>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><b>Prize :</b></td>
-                            <td>$<%= locals.itam[i].prize %>.00</td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><b>Quantity :</b></td>
-                            <td><%= locals.itam[i].quantity %></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><b>Subtotal :</b></td>
-                            <td>$<%= locals.itam[i].prize * locals.itam[i].quantity %>.00</td>
-                        </tr>
-                        <% if(locals.itam.length-1 > i ) {%>
-                            <tr><td colspan="4"><hr></td></tr>
-                            <tr style="height: 6px;" ></tr><td></td></tr>
-                        <%}%>
-                        <% total +=  (locals.itam[i].prize * locals.itam[i].quantity) %>
+                            <% total +=  (locals.itam[i].prize * locals.itam[i].quantity) %>
+                        <% } %>
                     <% } %>
                 </tbody>
             </table>
@@ -198,7 +215,13 @@
                     </tr>
                     <tr style="height: 6px;" ></tr><td></td></tr>
                     <tr>
-                        <td colspan="2"><button onclick="checkout()" class="pro_btn">Proceed to checkout</button></td>
+                        <td colspan="2">
+                            <% if(locals.itam.length > 0 && unpay > 0) {%>
+                                <button onclick="checkout()" class="pro_btn">Proceed to checkout</button>
+                            <%} else {%>
+                                <button onclick="selectProduct()" class="pro_btn">Proceed to checkout</button>
+                            <%}%>
+                        </td>
                     </tr>
                     <tr style="height: 6px;" ></tr><td></td></tr>
                 </tfoot>
@@ -249,6 +272,12 @@
 <script>
     const checkout= () => {
         window.location.href = "checkout"; 
+    }
+
+    const selectProduct = () => {
+        if(confirm("Please select a product before proceeding to checkout.")){
+            window.location.href = "buyblazer"; 
+        }
     }
 </script>
 </html>

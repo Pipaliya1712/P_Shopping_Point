@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>checkOut</title>
     <link rel="stylesheet" href="Style/style.css">
     <link rel="stylesheet" href="Style/utils.css">    
-    <link rel="stylesheet" href="Style/cart.css">
+    <link rel="stylesheet" href="Style/placedOrder.css">    
+    <title>Document</title>
 </head>
 <body>
-    <header style="margin-bottom: 90px;" class="mb20"> 
+    <header style="margin-bottom: 50px;" class="mb20"> 
         <nav class="flex jcb">
             <ul class="navbar first">
                 <li class="li"><a href="buyblazer">BUY BLAZER</a></li>
@@ -87,73 +87,73 @@
             </div>
         </nav>
         <hr class="o5">
-    </header>
-    
-    <main>
+    </header> 
 
-        <div class="xx f2" style="margin-left: 12.5%; margin-bottom: 50px;">
-            Checkout
-        </div>
-    
-        <div class="n596" style="margin-bottom: 20px;">
-            <li class="f2 flex jcc aic">
-                <ul class="listwith"><a href="cart">1. SHOPPING CART</a></ul> <div class="arrow"> > </div>
-                <ul class="list"><a href="checkout">2. CHECKOUT DETAILS</a></ul> <div class="arrow"> > </div>
-                <ul class="listwith">3. ORDER COMPLETE</ul>
-            </li>
-        </div>
-    
-        <div class="flex aic jcc f2" style="margin-bottom: 50px;">
-            <form class="form" method="post">
-                <div>
-                    <div style="margin-bottom: 20px;">
-                        <b style="border-bottom: 2px solid black;">Customer information</b>
+    <main >
+        <% if(locals.placedItam.length==0){ %>
+            <div class="f2" style="text-align: center;font-size: 20px;font-weight: bold;margin-bottom: 50px;">Please complete your order : )</div>
+        <%}else{%>
+        <% for(let j=locals.placedItam.length-1;j>=0;j--){ %>
+        <div style="margin: 10px 0;">
+            <div class="slip f2">
+                <div class="both">
+                    <div class="lft flex f-c">
+                        <div><b><%=locals.placedItam[j]._id %></b></div>
+                        <div><b>Date and Time :</b> <%=locals.placedItam[j].date.getDate()%>-<%=(locals.placedItam[j].date.getMonth() + 1) %>-<%=locals.placedItam[j].date.getFullYear()%>  <%=locals.placedItam[j].date.getHours() %>:<%=locals.placedItam[j].date.getMinutes()%>:<%=locals.placedItam[j].date.getSeconds()%></div>
+                        <div><b>Receiver details:</b></div>
+                        <li><span class="bb">Name: </span><%=locals.placedItam[j].fname %>  <%=locals.placedItam[j].lname %></li>
+                        <li><span class="bb">Address: </span><%=locals.placedItam[j].address %>, <%=locals.placedItam[j].city %>, <%=locals.placedItam[j].state %>, <%=locals.placedItam[j].country %> - <%=locals.placedItam[j].zip %>.</li>
+                        <div><b>Contact Detail: </b></div>
+                        <li><span class="bb">Phone No.: </span><%= locals.placedItam[j].phone %></li>
+                        <li><span class="bb">Email id: </span><%= locals.placedItam[j].email %></li>
                     </div>
-                    <div style="margin-bottom: 20px;">
-                        <input class="w1 p" type="Email" name="email" required placeholder="Email address *">
+                    <div class="rit">
+                        <table>
+                            <thead>
+                                <th>Product category</th>
+                                <th>Quantity</th>
+                                <th class="no-right">Sub-Total</th>
+                            </thead>
+                            <tbody>
+                                <% let total =0;%>
+                                <% for(let i=0;i<locals.placedItam[j].product.length;i++){ %>
+                                    <tr>
+                                        <td>
+                                            <% if(placedItam[j].product[i].gender) {%>
+                                                Men
+                                            <% } else { %>
+                                                Women
+                                            <%}%>   
+                                        </td>
+                                        <td><%= placedItam[j].product[i].quantity %></td>
+                                        <td class="no-right"><%= placedItam[j].product[i].quantity * placedItam[j].product[i].prize %></td>
+                                        <% total +=(placedItam[j].product[i].quantity * placedItam[j].product[i].prize) %>
+                                    </tr>
+                                <%}%>
+                                <tr>
+                                    <td colspan="2" class="no-bottom">Paid Amount</td>
+                                    <td class="no-right no-bottom"><b><%= total %></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div style="margin-bottom: 20px;">
-                        <b style="border-bottom: 2px solid black;">Billing details</b>
-                    </div>
-                    <div style="margin-bottom: 20px; text-align: center;">
-                        <input class="w2 p" type="text" name="fname" required placeholder="First name *">             
-                        <input class="w2 p" placeholder="Last name *" type="text" name="lname" required >
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        <input class="w1 p" type="text" name="cname" placeholder="Company name">
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        <input class="w1 p" type="text" name="address" placeholder="Address *">
-                    </div>
-                    <select name="country" required class="country w1 p" style="margin-bottom: 20px;" onchange="loadState()">
-                        <option selected disabled="disabled">--Select country--</option>
-                    </select>
-                    <div style="margin-bottom: 20px;">
-                        <input class="w3 p" type="text" name="city" required placeholder="Town / City *">
-                        <select name="state" required class="state w3 p">
-                            <option selected disabled="disabled">--Select state--</option>
-                        </select>
-                        <input class="w3 p" placeholder="ZIP Code *" type="tel"  pattern="[0-9]+" name="zip" required >
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        <input class="w1 p" type="tel"  pattern="[0-9]+" required name="phone" placeholder="Mobile Number *">
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        <b style="border-bottom: 2px solid black;">Additional information</b>
-                    </div>
-                    <div style="margin-bottom: 20px;">
-                        <input class="w1 p" type="text" name="note" placeholder="Notes about your order, e.g. special notes for delivery.">
-                    </div>
-                    <button class="pro_btn" style="width: 570px;">Place Order $<%= locals.ct %>.00</button>
                 </div>
-            </form>
+                <div class="flex aic jcc">
+                    <form action="pdf" method="post">
+                        <button class="bill_btn" name="itam" value="<%= placedItam[j]._id %>">Show bill</button>
+                    </form>
+                </div>
+            </div>
         </div>
+        <%}%>
+        <%}%>
     </main>
 
     <footer>
         <div class="flex aic jcc">
             <div class="startf flex aic jcc f-c">
                 <div style="text-align: center;">
+
                     <span class="f3 bige" >Subscribe To Get Offers In Your Inbox</span><br>
                     <span class="f3 o7" style="font-size: 15px;" >Enter your registered email and get upto <b>75%</b> discount.</span><br>
                     <span class="f3 o7" style="font-size: 15px;" >Enjoy your shopping with us.</span>
@@ -190,52 +190,4 @@
     </footer>
 </body>
 <script src="JavaScript/script.js"></script>
-<script>
-    let config = {
-        cUrl : "https://api.countrystatecity.in/v1/countries",
-        cKey: "T0k2S0tqcWtsSDdTeURUcWJ4OUJlV1N2WlBqaURFZlU5TnpLdkF5eQ=="
-    }
-
-    let country = document.querySelector(".country"),
-        state = document.querySelector(".state")
-
-
-    const loadCountry = () => {
-        let apiEndPoint = config.cUrl
-
-        fetch(apiEndPoint, {headers : {"X-CSCAPI-KEY" : config.cKey}}).
-        then(res => res.json()).
-        then(data => {
-            data.forEach(ctry => {
-                const option = document.createElement("option")
-                option.value = ctry.iso2
-                option.textContent = ctry.name
-                country.appendChild(option);
-
-            });
-        }).
-        catch(err => console.error(err));
-    }
-
-    const loadState = () => {
-        const countryCode = country.value
-        state.innerHTML = `<option selected disabled="disabled">--Select state--</option>`
-
-        fetch(`${config.cUrl}/${countryCode}/states`, {headers : {"X-CSCAPI-KEY" : config.cKey}}).
-        then(res => res.json()).
-        then(data => {
-            data.forEach(st => {
-                const option = document.createElement("option")
-                option.value = st.iso2
-                option.textContent = st.name
-                state.appendChild(option);
-
-            });
-        }).
-        catch(err => console.error(err));
-
-    }
-
-    window.onload = loadCountry
-</script>
 </html>

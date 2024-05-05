@@ -6,9 +6,11 @@ for(let i=0;i<buyblazer.length;i++){
 }
 
 let time = document.querySelector(".time");
-setTimeout(()=>{
-    time.style.display = "none";
-},5000)
+if(time){
+    setTimeout(()=>{
+        time.style.display = "none";
+    },5000)
+}
 
 let openmen = () => {
     window.open('men' , '_self');

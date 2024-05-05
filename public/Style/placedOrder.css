@@ -1,0 +1,70 @@
+.slip{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    width: 75%; 
+    margin: 0 auto;
+    font-size: 12px;
+    background-color: #99808021;
+}
+table{
+    border-collapse: collapse;
+}
+td,th{
+    text-align: center;
+    padding: 0 10px;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.no-right{
+    border-right: 0px solid black !important;
+}
+.no-bottom{
+    border-bottom: 0px solid black !important;
+}
+.bb{
+    border-bottom: 1px solid black;
+}
+.bill_btn{
+    padding: 7px 18px;
+    border: 0px solid;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 999px;
+}
+.bill_btn:hover{
+    background-color: #9980802b;
+    transition: 0.5s;
+}
+.rit{
+    margin-left: 10px; 
+    width: 50%;
+}
+.lft{
+    width: 50%;
+    margin-bottom: 5px; 
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+.both{
+    width: 100%;
+    display: flex;
+}
+@media (max-width: 566px){
+    .both{
+        flex-direction: column;
+    }
+    .lft{
+        width: 100%;
+        border-right: none;
+        padding-bottom: 10px;
+        border-bottom:  1px solid rgba(0, 0, 0, 0.3);
+    }
+    .rit{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    table{
+        margin-right: 28px
+    }
+}

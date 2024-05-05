@@ -128,11 +128,45 @@ const cart_total = async(req,res) => {
     let total = 0 ;
     let count =0;
     for(let i=0;i<itam.length;i++){
-        total += (itam[i].prize * itam[i].quantity);
-        count += itam[i].quantity;
+        if(! itam[i].paymet){
+            total += (itam[i].prize * itam[i].quantity);
+            count += itam[i].quantity;
+        }
     }
     let cart_data = [total, count];
     return cart_data;
+}
+
+const get_cs = async(ccode, scode) => {
+    let config = {
+        cUrl : "https://api.countrystatecity.in/v1/countries",
+        cKey: "T0k2S0tqcWtsSDdTeURUcWJ4OUJlV1N2WlBqaURFZlU5TnpLdkF5eQ=="
+    }
+
+    let add_info = new Array(2);
+
+    await fetch(config.cUrl, {headers : {"X-CSCAPI-KEY" : config.cKey}}).
+    then(res => res.json()).
+    then(data => {
+        data.forEach(ctry => {
+            if(ccode == ctry.iso2){
+                add_info[0] = ctry.name;
+            }
+        });
+    }).
+    catch(err => console.error(err));
+
+    await fetch(`${config.cUrl}/${ccode}/states`, {headers : {"X-CSCAPI-KEY" : config.cKey}}).
+    then(res => res.json()).
+    then(data => {
+        data.forEach(st => {
+            if(scode == st.iso2) {
+                add_info[1] = st.name;
+            }
+        });
+    }).
+    catch(err => console.error(err));
+    return add_info;
 }
 
 export {
@@ -141,5 +175,6 @@ export {
     data,
     auth,
     OTP,
-    cart_total
+    cart_total,
+    get_cs
 }
