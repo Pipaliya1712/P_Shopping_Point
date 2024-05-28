@@ -46,5 +46,4 @@ router.route("/pdf").post(authnot,Controller.pdfPost);
 router.route("/bill").post(authnot,Controller.bill);
 router.route("*").get(Controller.randomUrl);
 
-
 export {router};

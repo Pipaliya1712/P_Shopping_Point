@@ -1,6 +1,7 @@
 import {User} from "../models/userModel.js"
 import {Cart} from "../models/cartMode.js";
-import {PlaceOrder} from "../models/placeOrderModel.js"
+import {UserMsg} from "../models/messageModel.js";
+import {PlaceOrder} from "../models/placeOrderModel.js";
 import express from "express";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
@@ -119,7 +120,7 @@ const contactPost = async (req,res)=>{
     const profile = await auth(req,res);
     let action = "LOG IN";
     if(profile) action = "LOG OUT";
-    res.render("contact" ,{message:"Message sent successfully",action,profile,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1]});
+    res.render("contact" ,{message:"Message sent successfully",action,email:user.email,profile,file: user ? user.file : "",ct:cart_data[0],cc:cart_data[1]});
 }
 
 const contactGet = async (req,res)=>{
