@@ -468,14 +468,14 @@ const bill = async (req, res) => {
     const placedItam = await PlaceOrder.find({phonef:phone,_id:itam})
 
     const ejsData = await ejs.renderFile(filePathName, { 
-        basePath: 'http://localhost:4000/', 
+        basePath: 'https://p-shopping-point.onrender.com/', 
         email: email,
         phone: phone,
         name: name,
         placedItam: placedItam
     });
 
-    const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="http://localhost:4000/$1"`);
+    const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="https://p-shopping-point.onrender.com/$1"`); // if local then http://localhost:4000/$1
 
     let option = {
         format: 'A4',
