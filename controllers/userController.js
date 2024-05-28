@@ -484,9 +484,22 @@ const bill = async (req, res) => {
         border: "10mm"
     };
     
-    const createdPdf = await pdf.create(modifiedHtml, option, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } });
+    // const createdPdf = await pdf.create(modifiedHtml, option, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } });
 
-    createdPdf.toStream((err, stream) => {
+    // createdPdf.toStream((err, stream) => {
+    //     if (err) {
+    //         console.log(err);
+    //         return res.status(500).send('Could not create PDF');
+    //     }
+    //     const pdf_name = user.name + ".pdf";
+    //     res.setHeader('Content-Type', 'application/pdf');
+    //     res.setHeader('Content-Disposition', `attachment;filename= ${pdf_name}`);
+    //     stream.pipe(res);
+    // });
+
+    pdf.create(modifiedHtml, option, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } })
+    .then(createdPdf => {
+      createdPdf.toStream((err, stream) => {
         if (err) {
             console.log(err);
             return res.status(500).send('Could not create PDF');
@@ -495,6 +508,11 @@ const bill = async (req, res) => {
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', `attachment;filename= ${pdf_name}`);
         stream.pipe(res);
+      });
+    })
+    .catch(error => {
+      console.error(error);
+      return res.status(500).send('Internal Server Error');
     });
 
     // pdf.create(modifiedHtml, option , { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } }).toStream((err, stream) => {
