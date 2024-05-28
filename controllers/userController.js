@@ -468,7 +468,7 @@ const bill = async (req, res) => {
     const placedItam = await PlaceOrder.find({phonef:phone,_id:itam})
 
     const ejsData = await ejs.renderFile(filePathName, { 
-        basePath: 'https://p-shopping-point.onrender.com/opt/render/project/src/', //http://localhost:4000/
+        basePath: 'https://p-shopping-point.onrender.com/', //http://localhost:4000/
         email: email,
         phone: phone,
         name: name,
@@ -483,7 +483,7 @@ const bill = async (req, res) => {
         border: "10mm"
     };
     
-    pdf.create(modifiedHtml, option).toStream((err, stream) => {
+    pdf.create(modifiedHtml, option, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } }).toStream((err, stream) => {
         if (err) {
             console.log(err);
             return res.status(500).send('Could not create PDF');
