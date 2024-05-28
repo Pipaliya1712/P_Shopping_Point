@@ -460,7 +460,7 @@ const pdfPost = async (req,res) => {
 }
 
 const bill = async (req, res) => {
-    const filePathName = path.resolve("E:/Project/P_Shopping_Point/views/pdf.ejs");
+    const filePathName = path.resolve("views/pdf.ejs"); // this is change to "E:/Project/P_Shopping_Point/views/pdf.ejs" for local run and change to views/pdf.ejs in render.com run
 
     const user = await data(req,res);
     const {itam} = req.body;

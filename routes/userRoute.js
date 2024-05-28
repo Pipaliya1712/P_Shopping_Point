@@ -9,7 +9,7 @@ const app = express();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null,path.join(path.resolve(),"public/Uploads"));                   //path name will change
+        cb(null,path.join(path.resolve(),"public/Uploads"));
     },
     filename:async (req,file,cb) => {
         const user = await data(req);
