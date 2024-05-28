@@ -460,7 +460,7 @@ const pdfPost = async (req,res) => {
 }
 
 const bill = async (req, res) => {
-    const filePathName = path.resolve("views/pdf.ejs"); // this is change to "E:/Project/P_Shopping_Point/views/pdf.ejs" for local run and change to views/pdf.ejs in render.com run
+    const filePathName = path.resolve("views/pdf.ejs");
 
     const user = await data(req,res);
     const {itam} = req.body;
@@ -468,22 +468,21 @@ const bill = async (req, res) => {
     const placedItam = await PlaceOrder.find({phonef:phone,_id:itam})
 
     const ejsData = await ejs.renderFile(filePathName, { 
-        basePath: 'https://p-shopping-point.onrender.com/', //http://localhost:4000/
+        basePath: 'https://p-shopping-point.onrender.com/', 
         email: email,
         phone: phone,
         name: name,
         placedItam: placedItam
     });
 
-    const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="https://p-shopping-point.onrender.com/opt/render/project/src/$1"`); // if local then http://localhost:4000/$1
+    const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="https://p-shopping-point.onrender.com/opt/render/project/src/$1"`); 
     // console.log(modifiedHtml + "modifiedHtml");
     let option = {
         format: 'A4',
         orientation: "portrait",
         border: "10mm"
     };
-    pdf.create(modifiedHtml, option, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } });
-    pdf.create(modifiedHtml, option).toStream((err, stream) => {
+    pdf.create(modifiedHtml, option , { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } }).toStream((err, stream) => {
         if (err) {
             console.log(err);
             return res.status(500).send('Could not create PDF');
