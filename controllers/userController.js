@@ -475,15 +475,15 @@ const bill = async (req, res) => {
         placedItam: placedItam
     });
 
-    const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="https://p-shopping-point.onrender.com/$1"`); // if local then http://localhost:4000/$1
+    const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="https://p-shopping-point.onrender.com/opt/render/project/src/$1"`); // if local then http://localhost:4000/$1
     // console.log(modifiedHtml + "modifiedHtml");
     let option = {
         format: 'A4',
         orientation: "portrait",
         border: "10mm"
     };
-    
-    pdf.create(modifiedHtml, option, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } }).toStream((err, stream) => {
+    pdf.create(modifiedHtml, option, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } });
+    pdf.create(modifiedHtml, option).toStream((err, stream) => {
         if (err) {
             console.log(err);
             return res.status(500).send('Could not create PDF');
