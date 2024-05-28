@@ -477,12 +477,16 @@ const bill = async (req, res) => {
 
     const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="https://p-shopping-point.onrender.com/opt/render/project/src/$1"`); 
     // console.log(modifiedHtml + "modifiedHtml");
+    
     let option = {
         format: 'A4',
         orientation: "portrait",
         border: "10mm"
     };
-    pdf.create(modifiedHtml, option , { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } }).toStream((err, stream) => {
+    
+    const createdPdf = await pdf.create(modifiedHtml, option, { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } });
+
+    createdPdf.toStream((err, stream) => {
         if (err) {
             console.log(err);
             return res.status(500).send('Could not create PDF');
@@ -492,6 +496,17 @@ const bill = async (req, res) => {
         res.setHeader('Content-Disposition', `attachment;filename= ${pdf_name}`);
         stream.pipe(res);
     });
+
+    // pdf.create(modifiedHtml, option , { childProcessOptions: { env: { OPENSSL_CONF: '/dev/null' } } }).toStream((err, stream) => {
+    //     if (err) {
+    //         console.log(err);
+    //         return res.status(500).send('Could not create PDF');
+    //     }
+    //     const pdf_name = user.name + ".pdf";
+    //     res.setHeader('Content-Type', 'application/pdf');
+    //     res.setHeader('Content-Disposition', `attachment;filename= ${pdf_name}`);
+    //     stream.pipe(res);
+    // });
 };
 
 export { 
