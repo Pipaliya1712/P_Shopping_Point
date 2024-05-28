@@ -461,6 +461,7 @@ const pdfPost = async (req,res) => {
 
 const bill = async (req, res) => {
     const filePathName = path.resolve("views/pdf.ejs"); // this is change to "E:/Project/P_Shopping_Point/views/pdf.ejs" for local run and change to views/pdf.ejs in render.com run
+    console.log(filePathName + "filepath nmae");
 
     const user = await data(req,res);
     const {itam} = req.body;
@@ -476,7 +477,7 @@ const bill = async (req, res) => {
     });
 
     const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="https://p-shopping-point.onrender.com/$1"`); // if local then http://localhost:4000/$1
-
+    console.log(modifiedHtml + "modifiedHtml");
     let option = {
         format: 'A4',
         orientation: "portrait",
