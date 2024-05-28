@@ -16,7 +16,6 @@ import {sendMail,
     } from "../functions/helper.js"
 import ejs from "ejs";
 import pdf from "html-pdf";
-import fs from "fs";
 import path from "path";
 
 const app = express();

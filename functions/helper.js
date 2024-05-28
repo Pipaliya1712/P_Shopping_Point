@@ -38,8 +38,8 @@ const emailTransporter = () => {
             secure:false,
             requireTLS:true,
             auth:{
-                user:"parthpipaliya1112@gmail.com",
-                pass:"yixtqrmfmuxjfxiq"
+                user:process.env.USERNAME_SMTP,
+                pass:process.env.PASSEORD_SMTP
             }
         },
         otp: OTP
