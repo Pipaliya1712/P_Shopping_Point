@@ -17,12 +17,6 @@ import {sendMail,
 import ejs from "ejs";
 import pdf from "html-pdf";
 import path from "path";
-// import path from 'path';
-import { fileURLToPath } from 'url';
-
-// Convert the current file's URL to a file path
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -466,40 +460,46 @@ const pdfPost = async (req,res) => {
 }
 
 const bill = async (req, res) => {
-    const filePathName = path.resolve('/opt/render/project/src/views/pdf.ejs');
+    try{
 
-    const user = await data(req, res);
-    const { itam } = req.body;
-    const { email, name, phone } = user;
-    const placedItam = await PlaceOrder.find({ phonef: phone, _id: itam });
-
-    const basePath = 'https://p-shopping-point.onrender.com/';
-
-    const ejsData = await ejs.renderFile(filePathName, { 
-        basePath: basePath, 
-        email: email,
-        phone: phone,
-        name: name,
-        placedItam: placedItam
-    });
-
-    const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="${basePath}$1"`); 
-
-    let option = {
-        format: 'A4',
-        orientation: "portrait",
-        border: "10mm"
-    };
-    pdf.create(modifiedHtml, option).toStream((err, stream) => {
-        if (err) {
-            console.log(err);
-            return res.status(500).send('Could not create PDF');
-        }
-        const pdf_name = user.name + ".pdf";
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment;filename= ${pdf_name}`);
-        stream.pipe(res);
-    });
+        const filePathName = path.resolve('/opt/render/project/src/views/pdf.ejs');
+    
+        const user = await data(req, res);
+        const { itam } = req.body;
+        const { email, name, phone } = user;
+        const placedItam = await PlaceOrder.find({ phonef: phone, _id: itam });
+    
+        const basePath = 'https://p-shopping-point.onrender.com/';
+    
+        const ejsData = await ejs.renderFile(filePathName, { 
+            basePath: basePath, 
+            email: email,
+            phone: phone,
+            name: name,
+            placedItam: placedItam
+        });
+    
+        const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="${basePath}$1"`); 
+    
+        let option = {
+            format: 'A4',
+            orientation: "portrait",
+            border: "10mm"
+        };
+        pdf.create(modifiedHtml, option).toStream((err, stream) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send('Could not create PDF');
+            }
+            const pdf_name = user.name + ".pdf";
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', `attachment;filename= ${pdf_name}`);
+            stream.pipe(res);
+        });
+    }catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error lai le le');
+    }
 };
 
 
