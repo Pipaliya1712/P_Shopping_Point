@@ -466,7 +466,7 @@ const pdfPost = async (req,res) => {
 }
 
 const bill = async (req, res) => {
-    const filePathName = path.resolve(__dirname, 'views/pdf.ejs');
+    const filePathName = path.resolve('/opt/render/project/src/views/pdf.ejs');
 
     const user = await data(req, res);
     const { itam } = req.body;
