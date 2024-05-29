@@ -14,7 +14,8 @@ const storage = multer.diskStorage({
     filename:async (req,file,cb) => {
         const user = await data(req);
         const currentdate = new Date();
-        const fileName = currentdate.getDate() + "-"+ (currentdate.getMonth()+1)  + "-" + currentdate.getFullYear() + "-"  + currentdate.getHours() + "-"  + currentdate.getMinutes() + "-" + currentdate.getSeconds()+'-'+user.name;
+        // const fileName = currentdate.getDate() + "-"+ (currentdate.getMonth()+1)  + "-" + currentdate.getFullYear() + "-"  + currentdate.getHours() + "-"  + currentdate.getMinutes() + "-" + currentdate.getSeconds()+'-'+user.name;
+        const fileName = "lol.jpg"
         cb(null,fileName);
     },
 });
