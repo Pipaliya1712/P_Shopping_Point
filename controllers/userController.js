@@ -17,6 +17,12 @@ import {sendMail,
 import ejs from "ejs";
 import pdf from "html-pdf";
 import path from "path";
+// import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Convert the current file's URL to a file path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
