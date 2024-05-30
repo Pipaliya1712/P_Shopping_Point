@@ -630,6 +630,6 @@ export {
     checkoutGet,
     checkoutPost,
     placedOrderGet,
-    bill,
+    // bill,
     pdfPost
     }

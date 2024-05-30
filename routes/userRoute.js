@@ -42,7 +42,7 @@ router.route("/cart").get(authnot,Controller.cartGet).post(Controller.cartPost);
 router.route("/checkout").get(authnot,Controller.checkoutGet).post(Controller.checkoutPost);
 router.route("/placedOrder").get(authnot,Controller.placedOrderGet);
 router.route("/pdf").post(authnot,Controller.pdfPost);
-router.route("/bill").post(authnot,Controller.bill);
+// router.route("/bill").post(authnot,Controller.bill);
 router.route("*").get(Controller.randomUrl);
 
 export {router};
