@@ -460,63 +460,63 @@ const pdfPost = async (req,res) => {
     res.render("pdf",{action:"LOG OUT",profile:true,email,phone,file,name,isverified,ct:cart_data[0],cc:cart_data[1],placedItam})
 }
 
-const bill = async (req, res) => {
-    try{
-        const doc = new PDFDocument();
-        let filename = path.resolve('/opt/render/project/src/views/pdf.ejs');
-        // Remove special characters from the filename
-        filename = encodeURIComponent(filename) + '.pdf';
-        // Setting response headers
-        res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
-        res.setHeader('Content-type', 'application/pdf');
+// const bill = async (req, res) => {
+//     try{
+//         const doc = new PDFDocument();
+
+//         const filePathName = path.resolve('/opt/render/project/src/views/pdf.ejs');
+    
+//         const user = await data(req, res);
+//         const { itam } = req.body;
+//         const { email, name, phone } = user;
+//         const placedItam = await PlaceOrder.find({ phonef: phone, _id: itam });
+    
+//         const basePath = 'https://p-shopping-point.onrender.com/';
+    
+//         const ejsData = await ejs.renderFile(filePathName, { 
+//             basePath: basePath, 
+//             email: email,
+//             phone: phone,
+//             name: name,
+//             placedItam: placedItam
+//         });
+//         const fileName = user.name + ".pdf";
+    
+//         const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="${basePath}$1"`); 
+
+//         res.setHeader('Content-disposition', 'attachment; filename="' + fileName + '"');
+//         res.setHeader('Content-type', 'application/pdf');
         
-        // Pipe its output directly to the response
-        doc.pipe(res);
+//         // Pipe its output directly to the response
+//         doc.pipe(res);
         
-        // Add some content to the PDF
-        doc.text('Hello, this is a dynamically generated PDF document!');
+//         // Add some content to the PDF
+//         doc.text('Hello, this is a dynamically generated PDF document!');
         
-        // Finalize the PDF and end the stream
-        doc.end();
-        // const filePathName = path.resolve('/opt/render/project/src/views/pdf.ejs');
+//         // Finalize the PDF and end the stream
+//         doc.end();
+        
     
-        // const user = await data(req, res);
-        // const { itam } = req.body;
-        // const { email, name, phone } = user;
-        // const placedItam = await PlaceOrder.find({ phonef: phone, _id: itam });
-    
-        // const basePath = 'https://p-shopping-point.onrender.com/';
-    
-        // const ejsData = await ejs.renderFile(filePathName, { 
-        //     basePath: basePath, 
-        //     email: email,
-        //     phone: phone,
-        //     name: name,
-        //     placedItam: placedItam
-        // });
-    
-        // const modifiedHtml = ejsData.replace(/src="([^"]*)"/g, `src="${basePath}$1"`); 
-    
-        // let option = {
-        //     format: 'A4',
-        //     orientation: "portrait",
-        //     border: "10mm"
-        // };
-        // pdf.create(modifiedHtml, option).toStream((err, stream) => {
-        //     if (err) {
-        //         console.log(err);
-        //         return res.status(500).send('Could not create PDF');
-        //     }
-        //     const pdf_name = user.name + ".pdf";
-        //     res.setHeader('Content-Type', 'application/pdf');
-        //     res.setHeader('Content-Disposition', `attachment;filename= ${pdf_name}`);
-        //     stream.pipe(res);
-        // });
-    }catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error lai le le');
-    }
-};
+//         // let option = {
+//         //     format: 'A4',
+//         //     orientation: "portrait",
+//         //     border: "10mm"
+//         // };
+//         // pdf.create(modifiedHtml, option).toStream((err, stream) => {
+//         //     if (err) {
+//         //         console.log(err);
+//         //         return res.status(500).send('Could not create PDF');
+//         //     }
+//         //     
+//         //     res.setHeader('Content-Type', 'application/pdf');
+//         //     res.setHeader('Content-Disposition', `attachment;filename= ${pdf_name}`);
+//         //     stream.pipe(res);
+//         // });
+//     }catch (error) {
+//         console.log(error);
+//         res.status(500).send('Internal Server Error lai le le');
+//     }
+// };
 
 
 // const bill = async (req, res) => {
