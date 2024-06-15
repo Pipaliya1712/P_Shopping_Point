@@ -169,7 +169,7 @@
     background-position: center;
     background-size: 100%;
     background-attachment: fixed ;
-    background-image: url("../Photo/Men_Blazer.jpg");
+    background-image: url("https://i.imgur.com/vqTpKrP.jpg");
     width: 94%;
     color: white;
     background-repeat:no-repeat ;
@@ -396,7 +396,7 @@
 }
 @media(max-width : 476px){
     .container{
-        background-image: url("../Photo/men.jpg");
+        background-image: url("https://i.imgur.com/qZUIT05.jpg");
     }
     .btwoc{
         flex-direction: column;
